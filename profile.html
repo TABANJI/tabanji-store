@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Особистий кабінет</title>
+    <style>body { font-family: sans-serif; padding: 40px; }</style>
+</head>
+<body>
+    <h1>Особистий кабінет</h1>
+    <div id="profileInfo">
+        <p><strong>Ім'я:</strong> Користувач</p>
+        <p><strong>Email:</strong> user@tabanji.com</p>
+    </div>
+    <button onclick="logout()">Вийти</button>
+
+    <script>
+        function logout() {
+            alert("Ви вийшли з системи");
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
