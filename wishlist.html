@@ -2,33 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wishlist - TABANJI</title>
     <style>
-        :root { --primary: #007bff; --bg: #f8f9fa; --text: #333; --nav: #ffffff; --border: #eee; }
+        /* Базові налаштування */
+        * { box-sizing: border-box; }
+        html { overflow-y: scroll; } 
+        :root { --primary: #007bff; --bg: #f4f4f9; --text: #333; --nav: #ffffff; --border: #eee; }
         .dark-mode { --primary: #3795ff; --bg: #121212; --text: #ffffff; --nav: #1e1e1e; --border: #333; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: var(--bg); color: var(--text); padding-bottom: 80px; transition: 0.3s; }
         
-        /* Navigation */
-        nav { background: var(--nav); padding: 12px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-        .nav-content { display: flex; align-items: center; gap: 15px; max-width: 1000px; margin: 0 auto; }
-        .burger { cursor: pointer; display: flex; flex-direction: column; gap: 4px; padding: 5px; }
-        .burger span { width: 22px; height: 2px; background: var(--text); }
-        .logo { color: var(--primary); font-size: 22px; font-weight: 800; text-decoration: none; }
+        body { font-family: -apple-system, system-ui, sans-serif; margin: 0; background-color: var(--bg); color: var(--text); padding-bottom: 100px; transition: 0.3s; }
         
-        .side-menu { height: 100%; width: 0; position: fixed; top: 0; left: 0; background: var(--nav); z-index: 9999; transition: 0.3s; box-shadow: 2px 0 10px rgba(0,0,0,0.2); padding-top: 60px; overflow-x: hidden; }
-        .side-menu a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: var(--text); display: block; border-bottom: 1px solid var(--border); }
-        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; }
-        
-        /* Wishlist content */
-        .wish-container { padding: 20px; max-width: 600px; margin: 0 auto; }
-        .item { background: var(--nav); padding: 15px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .action-btns { display: flex; gap: 10px; }
-        .del-btn { background: #ff4d4d; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; }
-        .buy-btn { background: var(--primary); color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+        /* Обгортка для центрування контенту */
+        .wrapper { max-width: 800px; margin: 0 auto; padding: 0 20px; }
 
-        /* Bottom Nav */
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--nav); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid var(--border); z-index: 1000; }
-        .bottom-nav a { text-decoration: none; color: #777; font-size: 10px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        nav { background: var(--nav); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; }
+        .burger { cursor: pointer; display: flex; flex-direction: column; gap: 6px; }
+        .burger span { width: 28px; height: 3px; background: var(--text); border-radius: 2px; }
+        .logo { color: var(--primary); font-size: 26px; font-weight: 800; text-decoration: none; margin-left: 15px; }
+        
+        .side-menu { height: 100%; width: 0; position: fixed; top: 0; left: 0; background: var(--nav); z-index: 9999; transition: 0.3s; box-shadow: 2px 0 10px rgba(0,0,0,0.2); padding-top: 80px; overflow-x: hidden; }
+        .side-menu a { padding: 20px 30px; text-decoration: none; font-size: 20px; color: var(--text); display: block; border-bottom: 1px solid var(--border); }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 40px; cursor: pointer; }
+        
+        /* Wishlist стилі */
+        .item { background: var(--nav); padding: 20px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-size: 18px; }
+        .empty-msg { background: var(--nav); padding: 40px; text-align: center; border-radius: 16px; border: 1px solid var(--border); font-size: 20px; color: #888; }
+        
+        .action-btns { display: flex; gap: 10px; }
+        .btn { border: none; padding: 12px 18px; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: 600; }
+        .buy-btn { background: var(--primary); color: white; }
+        .del-btn { background: var(--bg); color: #dc3545; border: 1px solid var(--border); }
+        
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--nav); display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid var(--border); z-index: 1000; }
+        .bottom-nav a { text-decoration: none; color: #777; font-size: 14px; display: flex; flex-direction: column; align-items: center; gap: 5px; flex: 1; }
         .bottom-nav a.active { color: var(--primary); }
     </style>
 </head>
@@ -39,22 +46,22 @@
         <a href="index.html">🏠 Home</a>
         <a href="catalog.html">📂 Catalog</a>
         <a href="new.html">✨ New Arrivals</a>
-        <div style="padding: 20px;">
-            <button onclick="toggleTheme()" style="width: 100%; padding: 10px; cursor: pointer; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text);">🌓 Toggle Theme</button>
+        <div style="padding: 30px;">
+            <button onclick="toggleTheme()" style="width: 100%; padding: 15px; cursor: pointer; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 16px;">🌓 Toggle Theme</button>
         </div>
     </div>
 
     <nav>
-        <div class="nav-content">
-            <div class="burger" onclick="toggleMenu(280)"><span></span><span></span><span></span></div>
-            <a href="index.html" class="logo">TABANJI</a>
-        </div>
+        <div class="burger" onclick="toggleMenu(280)"><span></span><span></span><span></span></div>
+        <a href="index.html" class="logo">TABANJI</a>
     </nav>
 
-    <main class="wish-container">
-        <h2>🤍 Wishlist</h2>
-        <div id="wishItems"></div>
-    </main>
+    <div class="wrapper">
+        <main>
+            <h2 style="font-size: 32px; margin: 25px 0;">🤍 Wishlist</h2>
+            <div id="wishItems"></div>
+        </main>
+    </div>
 
     <div class="bottom-nav">
         <a href="index.html"><span>🏠</span> Home</a>
@@ -66,46 +73,48 @@
 
     <script>
         function toggleMenu(w) { document.getElementById("sideNav").style.width = w + "px"; }
-
-        window.onload = function() {
-            let wish = JSON.parse(localStorage.getItem('wish') || '[]');
-            let container = document.getElementById('wishItems');
-            
-            if (wish.length === 0) {
-                container.innerHTML = "<p style='text-align:center; color:#777;'>Your wishlist is empty</p>";
-            } else {
-                wish.forEach((item, i) => {
-                    container.innerHTML += `
-                        <div class="item">
-                            <span>${item}</span>
-                            <div class="action-btns">
-                                <button class="buy-btn" onclick="moveToCart('${item}')">Buy</button>
-                                <button class="del-btn" onclick="removeWish(${i})">Remove</button>
-                            </div>
-                        </div>`;
-                });
-            }
-        };
-
-        function removeWish(i) {
-            let wish = JSON.parse(localStorage.getItem('wish'));
-            wish.splice(i, 1);
-            localStorage.setItem('wish', JSON.stringify(wish));
-            location.reload();
-        }
-
-        function moveToCart(name) {
-            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-            cart.push({name: name, price: 0}); // Price is set to 0 by default
-            localStorage.setItem('cart', JSON.stringify(cart));
-            alert(name + " added to cart!");
-        }
-
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
             localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
         }
         if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
+
+        function renderWish() {
+            let wish = JSON.parse(localStorage.getItem('wish') || '[]');
+            let container = document.getElementById('wishItems');
+            container.innerHTML = "";
+            
+            if (wish.length === 0) {
+                container.innerHTML = "<div class='empty-msg'>Your wishlist is empty</div>";
+            } else {
+                wish.forEach((item, i) => {
+                    container.innerHTML += `
+                        <div class="item">
+                            <span style="font-weight:600;">${item}</span>
+                            <div class="action-btns">
+                                <button class="btn buy-btn" onclick="moveToCart('${item}')">Buy</button>
+                                <button class="btn del-btn" onclick="removeWish(${i})">✕</button>
+                            </div>
+                        </div>`;
+                });
+            }
+        }
+
+        function removeWish(i) {
+            let wish = JSON.parse(localStorage.getItem('wish'));
+            wish.splice(i, 1);
+            localStorage.setItem('wish', JSON.stringify(wish));
+            renderWish();
+        }
+
+        function moveToCart(name) {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            cart.push({name: name, price: 0, quantity: 1});
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(name + " added to cart!");
+        }
+
+        renderWish();
     </script>
 </body>
 </html>

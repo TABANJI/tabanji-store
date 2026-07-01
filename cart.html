@@ -2,123 +2,132 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart - TABANJI</title>
     <style>
-        :root { --main: #221f1f; --accent: #007bff; --border: #eee; --bg: #f8f9fa; --card-bg: #fff; --text: #333; }
-        .dark-mode { --main: #ffffff; --accent: #3795ff; --border: #333; --bg: #121212; --card-bg: #1e1e1e; --text: #ffffff; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 100px; transition: 0.3s; }
+        /* Базові налаштування */
+        * { box-sizing: border-box; }
+        html { overflow-y: scroll; } 
+        :root { --primary: #007bff; --bg: #f4f4f9; --text: #333; --nav: #ffffff; --border: #eee; }
+        .dark-mode { --primary: #3795ff; --bg: #121212; --text: #ffffff; --nav: #1e1e1e; --border: #333; }
         
-        /* Header/Nav */
-        nav { background: var(--card-bg); padding: 12px 20px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; gap: 15px; }
-        .burger { cursor: pointer; display: flex; flex-direction: column; gap: 4px; padding: 5px; }
-        .burger span { width: 22px; height: 2px; background: var(--text); }
-        .logo { font-weight: 800; font-size: 22px; color: var(--accent); text-decoration: none; }
+        body { font-family: -apple-system, system-ui, sans-serif; margin: 0; background-color: var(--bg); color: var(--text); padding-bottom: 100px; transition: 0.3s; }
         
-        .side-menu { height: 100%; width: 0; position: fixed; top: 0; left: 0; background: var(--card-bg); z-index: 9999; transition: 0.3s; box-shadow: 2px 0 10px rgba(0,0,0,0.2); padding-top: 60px; overflow-x: hidden; }
-        .side-menu a, .side-menu button { padding: 15px 25px; display: block; border: none; background: none; color: var(--text); cursor: pointer; width: 100%; text-align: left; border-bottom: 1px solid var(--border); }
+        /* Обгортка для центрування на ПК */
+        .wrapper { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+
+        nav { background: var(--nav); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; }
+        .burger { cursor: pointer; display: flex; flex-direction: column; gap: 6px; }
+        .burger span { width: 28px; height: 3px; background: var(--text); border-radius: 2px; }
+        .logo { color: var(--primary); font-size: 26px; font-weight: 800; text-decoration: none; margin-left: 15px; }
         
-        /* Container & Items */
-        .container { max-width: 600px; margin: 20px auto; padding: 0 10px; }
-        .item { background: var(--card-bg); padding: 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: grid; grid-template-columns: 30px 1fr 120px; align-items: center; gap: 10px; margin-bottom: 15px; }
-        .btn-remove { background: none; border: none; color: #ccc; cursor: pointer; font-size: 18px; font-weight: bold; }
-        .btn-remove:hover { color: #dc3545; }
+        .side-menu { height: 100%; width: 0; position: fixed; top: 0; left: 0; background: var(--nav); z-index: 9999; transition: 0.3s; box-shadow: 2px 0 10px rgba(0,0,0,0.2); padding-top: 80px; overflow-x: hidden; }
+        .side-menu a { padding: 20px 30px; text-decoration: none; font-size: 20px; color: var(--text); display: block; border-bottom: 1px solid var(--border); }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 40px; cursor: pointer; }
         
-        /* Bottom Nav */
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--card-bg); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid var(--border); z-index: 1000; }
-        .bottom-nav a { text-decoration: none; color: #777; font-size: 10px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-        .bottom-nav a.active { color: var(--accent); }
+        /* Кошик */
+        .item { background: var(--nav); padding: 20px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .btn-remove { background: none; border: none; color: #dc3545; cursor: pointer; font-size: 24px; font-weight: bold; }
         
-        .checkout-box { background: var(--card-bg); padding: 20px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-top: 20px; }
-        .btn-order { background: var(--accent); color: #fff; width: 100%; padding: 15px; border: none; font-weight: bold; cursor: pointer; border-radius: 8px; }
-        .qty-block { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
-        .qty-btn { border: 1px solid var(--border); background: var(--bg); color: var(--text); width: 28px; height: 28px; cursor: pointer; border-radius: 4px; }
+        .checkout-box { background: var(--nav); padding: 25px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-top: 20px; text-align: center; }
+        .btn-order { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; width: 100%; font-size: 18px; font-weight: 600; }
+        .qty-block { display: flex; align-items: center; gap: 12px; }
+        .qty-btn { border: 1px solid var(--border); background: var(--bg); color: var(--text); width: 35px; height: 35px; cursor: pointer; border-radius: 8px; font-size: 18px; }
+        
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--nav); display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid var(--border); z-index: 1000; }
+        .bottom-nav a { text-decoration: none; color: #777; font-size: 14px; display: flex; flex-direction: column; align-items: center; gap: 5px; flex: 1; }
+        .bottom-nav a.active { color: var(--primary); }
     </style>
 </head>
 <body>
 
-<div id="sideNav" class="side-menu">
-    <span style="position:absolute; top:15px; right:20px; cursor:pointer;" onclick="toggleMenu(0)">&times;</span>
-    <a href="index.html">🏠 Home</a>
-    <a href="catalog.html">📂 Catalog</a>
-    <a href="new.html">✨ New Arrivals</a>
-    <button onclick="toggleTheme()">🌓 Toggle Theme</button>
-</div>
-
-<nav>
-    <div class="burger" onclick="toggleMenu(280)"><span></span><span></span><span></span></div>
-    <a href="index.html" class="logo">TABANJI</a>
-</nav>
-
-<div class="container">
-    <h2>Cart</h2>
-    <div id="cartItems"></div>
-    <div class="checkout-box">
-        <h3>Total</h3>
-        <div style="font-size: 24px; font-weight: bold; margin: 20px 0; color: var(--accent);" id="totalSum">$0.00</div>
-        <button class="btn-order" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
+    <div id="sideNav" class="side-menu">
+        <span class="close-btn" onclick="toggleMenu(0)">&times;</span>
+        <a href="index.html">🏠 Home</a>
+        <a href="catalog.html">📂 Catalog</a>
+        <a href="new.html">✨ New Arrivals</a>
+        <div style="padding: 30px;">
+            <button onclick="toggleTheme()" style="width: 100%; padding: 15px; cursor: pointer; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 16px;">🌓 Toggle Theme</button>
+        </div>
     </div>
-</div>
 
-<div class="bottom-nav">
-    <a href="index.html"><span>🏠</span> Home</a>
-    <a href="catalog.html"><span>📂</span> Catalog</a>
-    <a href="cart.html" class="active"><span>🛒</span> Cart</a>
-    <a href="wishlist.html"><span>🤍</span> Wishlist</a>
-    <a href="chat.html"><span>💬</span> Chat</a>
-</div>
+    <nav>
+        <div class="burger" onclick="toggleMenu(280)"><span></span><span></span><span></span></div>
+        <a href="index.html" class="logo">TABANJI</a>
+    </nav>
 
-<script>
-    function toggleMenu(w) { document.getElementById("sideNav").style.width = w + "px"; }
-    function toggleTheme() {
-        document.body.classList.toggle('dark-mode');
-        localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-    }
-    if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
+    <div class="wrapper">
+        <h2 style="font-size: 24px; margin: 20px 0;">Your Cart</h2>
+        <div id="cartItems"></div>
+        <div class="checkout-box" id="checkoutSection">
+            <h3 style="margin-top: 0; font-size: 20px;">Total</h3>
+            <div style="font-size: 24px; font-weight: 800; margin: 15px 0; color: var(--primary);" id="totalSum">$0.00</div>
+            <button class="btn-order" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
+        </div>
+    </div>
 
-    function render() {
-        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-        let container = document.getElementById('cartItems');
-        let totalSumEl = document.getElementById('totalSum');
-        
-        container.innerHTML = "";
-        let total = 0;
-        
-        cart.forEach((item, index) => {
-            let qty = item.quantity || 1;
-            total += item.price * qty;
+    <div class="bottom-nav">
+        <a href="index.html"><span>🏠</span> Home</a>
+        <a href="catalog.html"><span>📂</span> Catalog</a>
+        <a href="cart.html" class="active"><span>🛒</span> Cart</a>
+        <a href="wishlist.html"><span>🤍</span> Wishlist</a>
+        <a href="chat.html"><span>💬</span> Chat</a>
+    </div>
+
+    <script>
+        function toggleMenu(w) { document.getElementById("sideNav").style.width = w + "px"; }
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        }
+        if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
+
+        function render() {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            let container = document.getElementById('cartItems');
+            let totalSumEl = document.getElementById('totalSum');
+            let checkoutSection = document.getElementById('checkoutSection');
             
-            container.innerHTML += `
-                <div class="item">
-                    <button class="btn-remove" onclick="removeItem(${index})">✕</button>
-                    <span>${item.name}</span>
-                    <div class="qty-block">
-                        <span style="font-weight:bold; color:var(--accent);">$${item.price}</span>
-                        <button class="qty-btn" onclick="updateQty(${index}, -1)">-</button>
-                        <span>${qty}</span>
-                        <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
-                    </div>
-                </div>`;
-        });
+            container.innerHTML = "";
+            let total = 0;
+            
+            if (cart.length === 0) {
+                container.innerHTML = "<p style='text-align:center;'>Your cart is empty</p>";
+                checkoutSection.style.display = "none";
+            } else {
+                checkoutSection.style.display = "block";
+                cart.forEach((item, index) => {
+                    let qty = item.quantity || 1;
+                    total += item.price * qty;
+                    container.innerHTML += `
+                        <div class="item">
+                            <button class="btn-remove" onclick="removeItem(${index})">✕</button>
+                            <span style="font-weight:600; font-size: 18px;">${item.name}</span>
+                            <div class="qty-block">
+                                <button class="qty-btn" onclick="updateQty(${index}, -1)">-</button>
+                                <span style="font-size: 18px;">${qty}</span>
+                                <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
+                            </div>
+                        </div>`;
+                });
+            }
+            totalSumEl.innerText = "$" + total.toFixed(2);
+        }
 
-        totalSumEl.innerText = "$" + total.toFixed(2);
-        if (cart.length === 0) container.innerHTML = "<p>Your cart is empty</p>";
-    }
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            render();
+        }
 
-    function removeItem(index) {
-        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-        cart.splice(index, 1);
-        localStorage.setItem('cart', JSON.stringify(cart));
+        function updateQty(index, delta) {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            cart[index].quantity = Math.max(1, (cart[index].quantity || 1) + delta);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            render();
+        }
         render();
-    }
-
-    function updateQty(index, delta) {
-        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-        cart[index].quantity = Math.max(1, (cart[index].quantity || 1) + delta);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        render();
-    }
-    
-    render();
-</script>
+    </script>
 </body>
 </html>

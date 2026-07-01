@@ -2,33 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat - TABANJI</title>
     <style>
-        :root { --primary: #007bff; --bg: #f8f9fa; --text: #333; --nav: #ffffff; --border: #eee; }
+        /* Базові налаштування */
+        * { box-sizing: border-box; }
+        html { overflow-y: scroll; } 
+        :root { --primary: #007bff; --bg: #f4f4f9; --text: #333; --nav: #ffffff; --border: #eee; }
         .dark-mode { --primary: #3795ff; --bg: #121212; --text: #ffffff; --nav: #1e1e1e; --border: #333; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: var(--bg); color: var(--text); padding-bottom: 120px; transition: 0.3s; }
         
-        nav { background: var(--nav); padding: 12px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-        .nav-content { display: flex; align-items: center; gap: 15px; max-width: 1000px; margin: 0 auto; }
-        .burger { cursor: pointer; display: flex; flex-direction: column; gap: 4px; padding: 5px; }
-        .burger span { width: 22px; height: 2px; background: var(--text); }
-        .logo { color: var(--primary); font-size: 22px; font-weight: 800; text-decoration: none; }
+        body { font-family: -apple-system, system-ui, sans-serif; margin: 0; background-color: var(--bg); color: var(--text); padding-bottom: 160px; transition: 0.3s; }
         
-        .side-menu { height: 100%; width: 0; position: fixed; top: 0; left: 0; background: var(--nav); z-index: 9999; transition: 0.3s; box-shadow: 2px 0 10px rgba(0,0,0,0.2); padding-top: 60px; overflow-x: hidden; }
-        .side-menu a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: var(--text); display: block; border-bottom: 1px solid var(--border); }
-        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; }
-        
-        .chat-container { padding: 20px; display: flex; flex-direction: column; gap: 10px; max-width: 600px; margin: 0 auto; }
-        .message { background: var(--nav); padding: 10px; border-radius: 10px; border: 1px solid var(--border); width: fit-content; max-width: 80%; }
-        
-        .chat-input-area { display: flex; gap: 10px; position: fixed; bottom: 70px; width: 100%; max-width: 600px; padding: 10px; background: var(--bg); box-sizing: border-box; }
-        .input-wrapper { position: relative; flex-grow: 1; }
-        input { width: 100%; padding: 12px 35px 12px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--nav); color: var(--text); box-sizing: border-box; }
-        .clear-btn { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #888; font-weight: bold; border: none; background: none; font-size: 18px; }
-        button { padding: 10px 20px; border-radius: 8px; border: none; background: var(--primary); color: white; cursor: pointer; }
+        /* Обгортка для центрування */
+        .wrapper { max-width: 600px; margin: 0 auto; width: 100%; }
 
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--nav); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid var(--border); z-index: 1000; }
-        .bottom-nav a { text-decoration: none; color: #777; font-size: 10px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        nav { background: var(--nav); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; }
+        .burger { cursor: pointer; display: flex; flex-direction: column; gap: 6px; }
+        .burger span { width: 28px; height: 3px; background: var(--text); border-radius: 2px; }
+        .logo { color: var(--primary); font-size: 26px; font-weight: 800; text-decoration: none; margin-left: 15px; }
+        
+        .side-menu { height: 100%; width: 0; position: fixed; top: 0; left: 0; background: var(--nav); z-index: 9999; transition: 0.3s; box-shadow: 2px 0 10px rgba(0,0,0,0.2); padding-top: 80px; overflow-x: hidden; }
+        .side-menu a { padding: 20px 30px; text-decoration: none; font-size: 20px; color: var(--text); display: block; border-bottom: 1px solid var(--border); }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 40px; cursor: pointer; }
+        
+        /* Чат */
+        .chat-container { padding: 20px; display: flex; flex-direction: column; gap: 20px; }
+        .message { background: var(--nav); padding: 20px; border-radius: 18px; border: 1px solid var(--border); width: fit-content; max-width: 85%; font-size: 19px; line-height: 1.5; }
+        
+        /* Позиціонування вводу */
+        .chat-input-area { display: flex; gap: 12px; position: fixed; bottom: 80px; width: 100%; max-width: 600px; left: 50%; transform: translateX(-50%); padding: 10px 20px; background: var(--bg); box-sizing: border-box; }
+        .input-wrapper { position: relative; flex-grow: 1; }
+        input { width: 100%; padding: 20px; border-radius: 14px; border: 1px solid var(--border); background: var(--nav); color: var(--text); font-size: 19px; }
+        
+        button { padding: 0 30px; border-radius: 14px; border: none; background: var(--primary); color: white; cursor: pointer; font-weight: 600; font-size: 18px; }
+        .clear-btn { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #888; border: none; background: none; font-size: 24px; padding: 0 10px; }
+
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--nav); display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid var(--border); z-index: 1000; }
+        .bottom-nav a { text-decoration: none; color: #777; font-size: 14px; display: flex; flex-direction: column; align-items: center; gap: 5px; flex: 1; }
         .bottom-nav a.active { color: var(--primary); }
     </style>
 </head>
@@ -39,24 +49,22 @@
         <a href="index.html">🏠 Home</a>
         <a href="catalog.html">📂 Catalog</a>
         <a href="new.html">✨ New Arrivals</a>
-        <div style="padding: 20px; margin-top: 20px;">
-            <button onclick="toggleTheme()" style="width: 100%; padding: 10px; cursor: pointer; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text);">
-                🌓 Toggle Theme
-            </button>
+        <div style="padding: 30px;">
+            <button onclick="toggleTheme()" style="width: 100%; padding: 15px; cursor: pointer; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 16px;">🌓 Toggle Theme</button>
         </div>
     </div>
 
     <nav>
-        <div class="nav-content">
-            <div class="burger" onclick="toggleMenu(280)"><span></span><span></span><span></span></div>
-            <a href="index.html" class="logo">TABANJI</a>
-        </div>
+        <div class="burger" onclick="toggleMenu(280)"><span></span><span></span><span></span></div>
+        <a href="index.html" class="logo">TABANJI</a>
     </nav>
 
-    <main class="chat-container" id="chatArea">
-        <h2>💬 Support Chat</h2>
-        <div class="message">Hello! How can we help you today?</div>
-    </main>
+    <div class="wrapper">
+        <main class="chat-container" id="chatArea">
+            <h2 style="font-size: 32px; margin: 5px 0;">💬 Support Chat</h2>
+            <div class="message">Hello! How can we help you today?</div>
+        </main>
+    </div>
 
     <div class="chat-input-area">
         <div class="input-wrapper">
