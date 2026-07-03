@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icons Gallery - TABANJI</title>
+    <style>
+        :root { --primary: #007bff; --bg: #f4f4f9; --text: #333; }
+        body { font-family: sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
+        
+        .gallery { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
+            gap: 20px; 
+            max-width: 600px; 
+            margin: 0 auto; 
+        }
+        
+        .icon-card { 
+            background: white; 
+            padding: 15px; 
+            border-radius: 12px; 
+            text-align: center; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+        }
+        
+        .icon-card img { 
+            width: 50px; 
+            height: 50px; 
+            object-fit: contain; 
+            margin-bottom: 10px; 
+        }
+        
+        .label { font-size: 12px; color: #666; }
+    </style>
+</head>
+<body>
+
+    <h2 style="text-align: center;">Галерея ваших іконок</h2>
+    
+    <div class="gallery">
+        <div class="icon-card">
+            <img src="icons/home_icon.png" alt="Home">
+            <div class="label">Home</div>
+        </div>
+        <div class="icon-card">
+            <img src="icons/catalog_icon.png" alt="Catalog">
+            <div class="label">Catalog</div>
+        </div>
+        <div class="icon-card">
+            <img src="icons/cart_icon.png" alt="Cart">
+            <div class="label">Cart</div>
+        </div>
+        <div class="icon-card">
+            <img src="icons/wishlist_icon.png" alt="Wishlist">
+            <div class="label">Wishlist</div>
+        </div>
+        <div class="icon-card">
+            <img src="icons/chat_icon.png" alt="Chat">
+            <div class="label">Chat</div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="index.html">Повернутися на головну</a>
+    </div>
+
+</body>
+</html>
