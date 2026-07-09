@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catalog - TABANJI</title>
     <style>
-        /* Базові налаштування для стабільності */
         * { box-sizing: border-box; }
         html { overflow-y: scroll; } 
         :root { --primary: #007bff; --bg: #f4f4f9; --text: #333; --nav: #ffffff; --border: #eee; }
         .dark-mode { --primary: #3795ff; --bg: #121212; --text: #ffffff; --nav: #1e1e1e; --border: #333; }
         
         body { font-family: -apple-system, system-ui, sans-serif; margin: 0; background-color: var(--bg); color: var(--text); padding-bottom: 100px; transition: 0.3s; }
-        
-        /* Обгортка для центрування контенту на ПК */
         .wrapper { max-width: 1000px; margin: 0 auto; }
 
         nav { background: var(--nav); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; }
@@ -25,15 +22,7 @@
         .side-menu a { padding: 20px 30px; text-decoration: none; font-size: 20px; color: var(--text); display: block; border-bottom: 1px solid var(--border); }
         .close-btn { position: absolute; top: 20px; right: 25px; font-size: 40px; cursor: pointer; }
         
-        /* Гнучка сітка товарів */
-        .product-grid { 
-            display: grid; 
-            grid-template-columns: 1fr; 
-            gap: 20px; 
-            padding: 20px; 
-        }
-
-        /* Налаштування колонок для різних екранів */
+        .product-grid { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 20px; }
         @media (min-width: 600px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 900px) { .product-grid { grid-template-columns: repeat(3, 1fr); } }
 
@@ -42,9 +31,10 @@
         .price { font-weight: bold; font-size: 20px; color: var(--primary); display: block; margin: 10px 0; }
         .btn-buy { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; width: 100%; font-size: 18px; font-weight: 600; }
         
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--nav); display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid var(--border); z-index: 1000; }
-        .bottom-nav a { text-decoration: none; color: #777; font-size: 14px; display: flex; flex-direction: column; align-items: center; gap: 5px; flex: 1; }
-        .bottom-nav a.active { color: var(--primary); }
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--nav); display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid var(--border); z-index: 1000; }
+        .bottom-nav a { text-decoration: none; font-size: 11px; display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; color: #777; }
+        .bottom-nav a.active { color: var(--primary); font-weight: 600; }
+        .nav-icon { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; display: block; }
     </style>
 </head>
 <body>
@@ -87,34 +77,55 @@
     </div>
 
     <div class="bottom-nav">
-        <a href="index.html"><span>🏠</span> Home</a>
-        <a href="catalog.html" class="active"><span>📂</span> Catalog</a>
-        <a href="cart.html"><span>🛒</span> Cart</a>
-        <a href="wishlist.html"><span>🤍</span> Wishlist</a>
-        <a href="chat.html"><span>💬</span> Chat</a>
+        <a href="index.html">
+            <svg class="nav-icon" viewBox="0 0 207 182"><path d="M103.5 0L0 91.6667H25.875V181.667H81.1875V127.167H125.812V181.667H181.125V91.6667H207L103.5 0Z"/></svg>
+            Home
+        </a>
+        <a href="catalog.html" class="active">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+                <rect x="3" y="3" width="7" height="7" rx="1"/>
+                <rect x="14" y="3" width="7" height="7" rx="1"/>
+                <rect x="3" y="14" width="7" height="7" rx="1"/>
+                <rect x="14" y="14" width="7" height="7" rx="1"/>
+            </svg>
+            Catalog
+        </a>
+        <a href="cart.html">
+            <svg class="nav-icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Cart
+        </a>
+        <a href="wishlist.html">
+            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Wishlist
+        </a>
+        <a href="chat.html">
+            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Chat
+        </a>
     </div>
 
     <script>
         function toggleMenu(w) { document.getElementById("sideNav").style.width = w + "px"; }
-        function addToCart(name, price) {
-            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-            let existingItem = cart.find(item => item.name === name);
-            if (existingItem) existingItem.quantity = (existingItem.quantity || 1) + 1;
-            else cart.push({ name: name, price: price, quantity: 1 });
-            localStorage.setItem('cart', JSON.stringify(cart));
-            alert(name + " added to cart!");
-        }
-        function addToWish(name) {
-            let wish = JSON.parse(localStorage.getItem('wish') || '[]');
-            if(!wish.includes(name)) wish.push(name);
-            localStorage.setItem('wish', JSON.stringify(wish));
-            alert(name + " added to wishlist!");
-        }
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
             localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
         }
         if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
+        
+        function addToCart(n, p) {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            let existingItem = cart.find(item => item.name === n);
+            if (existingItem) existingItem.quantity = (existingItem.quantity || 1) + 1;
+            else cart.push({ name: n, price: p, quantity: 1 });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(n + " added to cart!");
+        }
+        function addToWish(n) {
+            let wish = JSON.parse(localStorage.getItem('wish') || '[]');
+            if(!wish.includes(n)) wish.push(n);
+            localStorage.setItem('wish', JSON.stringify(wish));
+            alert(n + " added to wishlist!");
+        }
     </script>
 </body>
 </html>
