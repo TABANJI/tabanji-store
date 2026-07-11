@@ -16,49 +16,53 @@
         .burger { cursor: pointer; display: flex; flex-direction: column; gap: 5px; margin-right: 10px; }
         .burger span { width: 22px; height: 2px; background: var(--text); }
         .logo { color: var(--primary); font-size: 20px; font-weight: 800; text-decoration: none; white-space: nowrap; margin-right: 10px; }
-        
         .btn-catalog-nav { background: var(--primary); color: #fff; padding: 8px 15px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
 
-        .search-wrapper { flex-grow: 1; display: flex; align-items: center; background: #f8f8f8; border: 1px solid #ccc; border-radius: 6px; height: 38px; overflow: hidden; }
-        .search-icon-fixed { width: 20px; height: 20px; stroke: var(--primary); stroke-width: 2.5; fill: none; margin-left: 10px; }
-        .search-bar { width: 100%; height: 100%; padding: 0 10px; border: none; background: transparent; outline: none; }
-        .btn-search { background: var(--primary); color: white; border: none; padding: 0 20px; height: 100%; cursor: pointer; font-weight: 600; }
-
+        /* ПОШУК */
+        .search-wrapper { flex-grow: 1; max-width: 20cm; display: flex; align-items: center; background: #f8f8f8; border: 1px solid #ccc; border-radius: 6px; height: 38px; overflow: hidden; }
+        .search-icon-fixed { width: 20px; height: 20px; stroke: var(--primary); stroke-width: 2.5; fill: none; margin-left: 10px; flex-shrink: 0; }
+        .search-bar { width: 100%; height: 100%; padding: 0 10px; border: none; background: transparent; outline: none; min-width: 0; }
+        .clear-btn { background: none; border: none; cursor: pointer; font-size: 20px; color: #999; padding: 0 10px; display: none; align-items: center; justify-content: center; height: 100%; flex-shrink: 0; }
+        .clear-btn:hover { color: #333; }
+        .btn-search { background: var(--primary); color: white; border: none; padding: 0 20px; height: 100%; cursor: pointer; font-weight: 600; flex-shrink: 0; }
         .user-icon { width: 28px; height: 28px; stroke: var(--text); stroke-width: 2; fill: none; cursor: pointer; margin-left: 10px; }
 
         /* МЕНЮ */
-        .side-menu { height: 100%; width: 0; position: fixed; top: 0; left: 50%; margin-left: -18cm; max-width: 36cm; background: var(--nav); z-index: 9999; transition: 0.3s; box-shadow: 2px 0 10px rgba(0,0,0,0.2); padding-top: 80px; overflow-x: hidden; }
+        .side-menu { height: 100%; width: 0; position: fixed; top: 0; left: 0; max-width: 36cm; background: var(--nav); z-index: 9999; transition: 0.3s; box-shadow: 2px 0 10px rgba(0,0,0,0.2); padding-top: 80px; overflow-x: hidden; }
         .side-menu a { padding: 20px 30px; text-decoration: none; font-size: 20px; color: var(--text); display: flex; align-items: center; gap: 15px; border-bottom: 1px solid var(--border); }
         .close-btn { position: absolute; top: 20px; right: 25px; font-size: 40px; cursor: pointer; }
-        
         .menu-dropdown-trigger { padding: 20px 30px; font-size: 20px; display: flex; align-items: center; gap: 15px; cursor: pointer; border-bottom: 1px solid var(--border); color: var(--text); }
         .dropdown-container { display: none; background: rgba(0,0,0,0.03); }
         .dropdown-container a { padding: 15px 30px 15px 65px !important; font-size: 18px; border-bottom: none !important; }
         .arrow { margin-left: auto; transition: transform 0.3s; font-size: 12px; }
         .rotate { transform: rotate(180deg); }
-
         .new-badge { font-size: 10px; font-weight: 800; color: var(--primary); border: 1.5px solid var(--primary); padding: 2px 5px; border-radius: 4px; margin-left: auto; }
         .btn-catalog { background: var(--primary) !important; color: #ffffff !important; padding: 12px 30px !important; width: calc(100% - 60px) !important; margin: 10px 30px !important; border-radius: 10px !important; display: flex; align-items: center; justify-content: center; gap: 10px !important; text-decoration: none !important; font-weight: 600 !important; }
         .theme-btn { background: var(--bg); color: var(--text); border: 1px solid var(--border); padding: 12px; width: calc(100% - 60px); margin: 10px 30px; cursor: pointer; border-radius: 10px; font-size: 16px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .menu-divider { padding: 20px 30px 10px 30px; text-align: center; }
         .menu-title { color: var(--primary); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-
+        
         .wrapper { max-width: 36cm; margin: 0 auto; padding: 20px; }
         .card { background: var(--nav); padding: 25px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
         .price { font-weight: bold; font-size: 20px; color: var(--primary); display: block; margin: 10px 0; }
         .btn-buy { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; width: 100%; font-size: 18px; font-weight: 600; }
         
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9998; }
+        
+        /* НИЖНЯ НАВІГАЦІЯ */
         .bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 36cm; left: 50%; transform: translateX(-50%); background: var(--nav); display: flex; justify-content: space-around; padding: 8px 0; border-top: 1px solid var(--border); z-index: 1000; }
         .bottom-nav a { text-decoration: none; font-size: 10px; display: flex; flex-direction: column; align-items: center; gap: 4px; color: #777; }
         .nav-icon { width: 22px; height: 22px; stroke: #007BFF; stroke-width: 2; fill: none; }
     </style>
 </head>
 <body>
-
+    <div id="overlay" class="overlay" onclick="toggleMenu(0)"></div>
     <div id="sideNav" class="side-menu">
         <span class="close-btn" onclick="toggleMenu(0)">&times;</span>
         <a href="catalog.html" class="btn-catalog"><svg class="nav-icon" viewBox="0 0 24 24" style="stroke: #ffffff; width: 20px; height: 20px;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> Catalog</a>
+        
         <a href="index.html"><svg class="nav-icon" viewBox="0 0 207 182" style="stroke-width: 16px;"><path d="M103.5 0L0 91.6667H25.875V181.667H81.1875V127.167H125.812V181.667H181.125V91.6667H207L103.5 0Z"/></svg> Home</a>
+        
         <a href="new-arrivals.html"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> New Arrivals <span class="new-badge">NEW</span></a>
         <a href="cart.html"><svg class="nav-icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Cart</a>
         <a href="track-order.html"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> Track Order</a>
@@ -72,9 +76,7 @@
         <a href="shipping.html"><svg class="nav-icon" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Shipping & Payment</a>
         <a href="warranty.html"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Warranty</a>
         <a href="returns.html"><svg class="nav-icon" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Returns Policy</a>
-        <div class="menu-dropdown-trigger" onclick="toggleDropdown()">
-            <span>Services</span> <span class="arrow">▼</span>
-        </div>
+        <div class="menu-dropdown-trigger" onclick="toggleDropdown()"><span>Services</span> <span class="arrow">▼</span></div>
         <div id="servicesDropdown" class="dropdown-container">
             <a href="bonus.html">Bonus Account</a>
             <a href="card.html">Tabanji Card</a>
@@ -85,17 +87,15 @@
     </div>
 
     <nav>
-        <div class="burger" onclick="toggleMenu(280)"><span></span><span></span><span></span></div>
+        <div class="burger" onclick="toggleMenu(300)"><span></span><span></span><span></span></div>
         <a href="index.html" class="logo">TABANJI</a>
         <a href="catalog.html" class="btn-catalog-nav">
-            <svg viewBox="0 0 24 24" style="stroke: #ffffff; width: 16px; height: 16px; fill: none; stroke-width: 2;">
-                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-                <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
-            </svg> Catalog
+            <svg viewBox="0 0 24 24" style="stroke: #ffffff; width: 16px; height: 16px; fill: none; stroke-width: 2;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> Catalog
         </a>
         <div class="search-wrapper">
             <svg class="search-icon-fixed" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input type="text" class="search-bar" placeholder="Search...">
+            <input type="text" id="searchInput" class="search-bar" placeholder="Search..." oninput="toggleClearBtn()">
+            <button id="clearBtn" class="clear-btn" onclick="clearSearch()">&times;</button>
             <button class="btn-search">Search</button>
         </div>
         <a href="login.html"><svg class="user-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
@@ -114,7 +114,23 @@
     </div>
 
     <script>
-        function toggleMenu(w) { document.getElementById("sideNav").style.width = w + "px"; }
+        const sideNav = document.getElementById("sideNav");
+        const overlay = document.getElementById("overlay");
+        function toggleMenu(w) { 
+            sideNav.style.width = w + "px"; 
+            overlay.style.display = w > 0 ? "block" : "none";
+        }
+        function toggleClearBtn() {
+            const input = document.getElementById("searchInput");
+            const btn = document.getElementById("clearBtn");
+            btn.style.display = input.value.length > 0 ? "flex" : "none";
+        }
+        function clearSearch() {
+            const input = document.getElementById("searchInput");
+            input.value = "";
+            toggleClearBtn();
+            input.focus();
+        }
         function toggleDropdown() {
             const drop = document.getElementById("servicesDropdown");
             const arrow = document.querySelector(".arrow");
