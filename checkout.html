@@ -1,156 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout - TABANJI</title>
-    <style>
-        * { box-sizing: border-box; }
-        html { overflow-y: scroll; } 
-        :root { --primary: #007bff; --bg: #f4f4f9; --text: #333; --nav: #ffffff; --border: #eee; }
-        .dark-mode { --primary: #3795ff; --bg: #121212; --text: #ffffff; --nav: #1e1e1e; --border: #333; }
-        
-        body { font-family: -apple-system, system-ui, sans-serif; margin: 0; background-color: var(--bg); color: var(--text); padding-bottom: 100px; transition: 0.3s; }
-        
-        .wrapper { max-width: 800px; margin: 0 auto; padding: 0 20px; }
-
-        nav { background: var(--nav); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; }
-        .burger { cursor: pointer; display: flex; flex-direction: column; gap: 6px; }
-        .burger span { width: 28px; height: 3px; background: var(--text); border-radius: 2px; }
-        .logo { color: var(--primary); font-size: 26px; font-weight: 800; text-decoration: none; margin-left: 15px; }
-        
-        .side-menu { height: 100%; width: 0; position: fixed; top: 0; left: 0; background: var(--nav); z-index: 9999; transition: 0.3s; box-shadow: 2px 0 10px rgba(0,0,0,0.2); padding-top: 80px; overflow-x: hidden; }
-        .side-menu a { padding: 20px 30px; text-decoration: none; font-size: 20px; color: var(--text); display: block; border-bottom: 1px solid var(--border); }
-        .close-btn { absolute; top: 20px; right: 25px; font-size: 40px; cursor: pointer; }
-        
-        .card { background: var(--nav); padding: 20px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; }
-        .grid-row-cart { display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 15px; padding: 15px 0; border-bottom: 1px solid var(--border); }
-        
-        input, select, textarea { width: 100%; padding: 15px; margin: 8px 0; border: 1px solid var(--border); border-radius: 10px; background: var(--bg); color: var(--text); font-size: 16px; box-sizing: border-box; }
-        .btn-order { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; width: 100%; font-size: 18px; font-weight: 600; }
-        .btn-qty { border: 1px solid var(--border); background: var(--bg); color: var(--text); width: 35px; height: 35px; cursor: pointer; border-radius: 8px; font-size: 18px; }
-        .btn-remove { background: none; border: none; color: #888; cursor: pointer; font-size: 24px; font-weight: bold; }
-        
-        /* Виправлення вирівнювання платежів */
-        .payment-option { display: flex; align-items: center; gap: 15px; padding: 10px 0; font-size: 16px; cursor: pointer; }
-        .payment-option input[type="radio"] { width: 20px; height: 20px; margin: 0; }
-        
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--nav); display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid var(--border); z-index: 1000; }
-        .bottom-nav a { text-decoration: none; color: #777; font-size: 14px; display: flex; flex-direction: column; align-items: center; gap: 5px; flex: 1; }
-        .bottom-nav a.active { color: var(--primary); }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Complete your TABANJI order.">
+  <title>Checkout | TABANJI</title>
+  <link rel="stylesheet" href="css/checkout.css">
+  <script src="data/categories.js" defer></script>
+  <script src="data/products.js" defer></script>
+  <script src="js/store.js" defer></script>
+  <script src="js/checkout.js" defer></script>
 </head>
 <body>
-
-    <div id="sideNav" class="side-menu">
-        <span class="close-btn" onclick="toggleMenu(0)">&times;</span>
-        <a href="index.html">🏠 Home</a>
-        <a href="catalog.html">📂 Catalog</a>
-        <a href="new.html">✨ New Arrivals</a>
-        <div style="padding: 30px;">
-            <button onclick="toggleTheme()" style="width: 100%; padding: 15px; cursor: pointer; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 16px;">🌓 Toggle Theme</button>
+  <a class="skip" href="#main">Skip to checkout</a>
+  <div class="overlay" id="overlay" hidden></div>
+  <aside class="drawer" id="drawer" aria-hidden="true" aria-label="Main navigation"><div><a class="logo" href="index.html">TABANJI</a><button id="closeMenu" type="button" aria-label="Close menu">×</button></div><nav><a href="index.html">⌂ Home</a><a href="catalog.html">▦ Catalog</a><a href="products.html">Products</a><a href="cart.html">🛒 Cart</a><a href="track-order.html">⌖ Track Order</a><a href="shipping.html">Delivery</a></nav><button id="drawerTheme" type="button">☾ Dark theme</button></aside>
+  <header><div class="header-inner"><button class="burger" id="openMenu" type="button" aria-label="Open menu" aria-controls="drawer" aria-expanded="false">☰</button><a class="logo" href="index.html">TABANJI</a><a class="catalog" href="catalog.html">Catalog</a><form class="search" id="searchForm" role="search"><label class="sr-only" for="search">Search products</label><input id="search" type="search" placeholder="Search products, brands or SKU" autocomplete="off" aria-expanded="false" aria-controls="suggestions"><div id="suggestions" role="listbox" hidden></div></form><nav class="actions" aria-label="Shopping actions"><button id="theme" type="button" aria-label="Switch theme">☾</button><a href="login.html">◯</a><a href="compare.html">⇄<b data-counter="compare">0</b></a><a href="favorites.html">♡<b data-counter="favorites">0</b></a><a href="cart.html">🛒<b data-counter="cart">0</b></a></nav></div></header>
+  <main id="main"><div class="container"><nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><a href="cart.html">Cart</a><span>/</span><span>Checkout</span></nav><div class="heading"><p>TABANJI marketplace</p><h1>Checkout</h1></div>
+    <ol class="progress" aria-label="Checkout progress"><li class="done"><span>1</span>Cart</li><li class="active" aria-current="step"><span>2</span>Delivery</li><li class="active"><span>3</span>Payment</li><li><span>4</span>Confirmation</li></ol>
+    <section class="empty" id="emptyState" hidden><span>🛒</span><h2>Your checkout is empty</h2><p>Add products to your cart before placing an order.</p><div><a class="primary" href="cart.html">Return to cart</a><a class="secondary" href="products.html">Browse products</a></div></section>
+    <section class="confirmation" id="confirmation" hidden tabindex="-1"><span>✓</span><h2>Thank you for your order!</h2><p>Your TABANJI order has been created.</p><dl><div><dt>Order number</dt><dd id="confirmNumber"></dd></div><div><dt>Total</dt><dd id="confirmTotal"></dd></div><div><dt>Delivery</dt><dd id="confirmDelivery"></dd></div><div><dt>Payment</dt><dd id="confirmPayment"></dd></div><div><dt>Estimated delivery</dt><dd id="confirmEstimate"></dd></div></dl><div><a class="primary" href="products.html">Continue shopping</a><a class="secondary" id="viewOrder">View order</a></div></section>
+    <div class="checkout-layout" id="checkoutLayout" hidden>
+      <form id="checkoutForm" novalidate>
+        <div class="global-warning" id="blockingWarning" role="alert" hidden></div>
+        <fieldset><legend><span>1</span> Contact information</legend><div class="form-grid"><label>First name<input id="firstName" name="firstName" autocomplete="given-name" required minlength="2" aria-describedby="firstNameError"><small id="firstNameError" class="error"></small></label><label>Last name<input id="lastName" name="lastName" autocomplete="family-name" required minlength="2" aria-describedby="lastNameError"><small id="lastNameError" class="error"></small></label><label>Email<input id="email" name="email" type="email" autocomplete="email" required aria-describedby="emailError"><small id="emailError" class="error"></small></label><label>Phone<input id="phone" name="phone" type="tel" autocomplete="tel" required inputmode="tel" aria-describedby="phoneError"><small id="phoneError" class="error"></small></label></div></fieldset>
+        <fieldset><legend><span>2</span> Delivery</legend><div class="radio-cards" id="deliveryMethods">
+          <label><input type="radio" name="deliveryMethod" value="courier" checked><span><b>Courier delivery</b><small>To your door · 1–3 business days</small></span><strong data-delivery-price="courier"></strong></label>
+          <label><input type="radio" name="deliveryMethod" value="pickup"><span><b>Pickup point</b><small>Collect nearby · 2–4 business days</small></span><strong data-delivery-price="pickup">$10</strong></label>
+          <label><input type="radio" name="deliveryMethod" value="store"><span><b>Store pickup</b><small>Collect at TABANJI · Ready tomorrow</small></span><strong data-delivery-price="store">Free</strong></label>
         </div>
+        <div id="courierFields" class="conditional form-grid"><label class="wide">Address line 1<input id="address1" autocomplete="address-line1" data-required="courier" aria-describedby="address1Error"><small id="address1Error" class="error"></small></label><label class="wide">Address line 2 <i>Optional</i><input id="address2" autocomplete="address-line2"></label><label>City<input id="courierCity" autocomplete="address-level2" data-required="courier" aria-describedby="courierCityError"><small id="courierCityError" class="error"></small></label><label>Region<input id="region" autocomplete="address-level1" data-required="courier" aria-describedby="regionError"><small id="regionError" class="error"></small></label><label>Postal code<input id="postalCode" autocomplete="postal-code" data-required="courier" aria-describedby="postalCodeError"><small id="postalCodeError" class="error"></small></label><label>Country<select id="country" autocomplete="country-name" data-required="courier" aria-describedby="countryError"><option value="">Choose country</option><option>United States</option><option>Canada</option><option>United Kingdom</option><option>Ukraine</option></select><small id="countryError" class="error"></small></label></div>
+        <div id="pickupFields" class="conditional form-grid" hidden><label>City<input id="pickupCity" autocomplete="address-level2" data-required="pickup" aria-describedby="pickupCityError"><small id="pickupCityError" class="error"></small></label><label>Pickup location<select id="pickupLocation" data-required="pickup" aria-describedby="pickupLocationError"><option value="">Choose a point</option><option>Central Station — 12 Main St</option><option>Riverside Hub — 48 River Rd</option><option>North Point — 7 Market Ave</option></select><small id="pickupLocationError" class="error"></small></label></div>
+        <div id="storeFields" class="conditional" hidden><label>Store<select id="storeLocation" data-required="store" aria-describedby="storeLocationError"><option value="">Choose a store</option><option>TABANJI Downtown — 101 Commerce St</option><option>TABANJI West — 25 Sunset Blvd</option><option>TABANJI North — 88 Lake Ave</option></select><small id="storeLocationError" class="error"></small></label></div></fieldset>
+        <fieldset><legend><span>3</span> Payment</legend><div class="radio-cards compact"><label><input type="radio" name="paymentMethod" value="card" checked><span><b>Card</b><small>Demo payment form</small></span></label><label><input type="radio" name="paymentMethod" value="cash"><span><b>Cash on delivery</b><small>Pay when received</small></span></label><label><input type="radio" name="paymentMethod" value="bank"><span><b>Bank transfer</b><small>Details after order</small></span></label></div>
+        <div id="cardFields" class="conditional form-grid"><p class="demo-note wide">Demo only — no payment is processed or stored.</p><label class="wide">Cardholder name<input id="cardholder" autocomplete="cc-name" data-required="card" aria-describedby="cardholderError"><small id="cardholderError" class="error"></small></label><label class="wide">Card number<input id="cardNumber" autocomplete="cc-number" inputmode="numeric" maxlength="19" placeholder="1234 5678 9012 3456" data-required="card" aria-describedby="cardNumberError"><small id="cardNumberError" class="error"></small></label><label>Expiry<input id="expiry" autocomplete="cc-exp" inputmode="numeric" maxlength="5" placeholder="MM/YY" data-required="card" aria-describedby="expiryError"><small id="expiryError" class="error"></small></label><label>CVV<input id="cvv" autocomplete="cc-csc" inputmode="numeric" maxlength="4" data-required="card" aria-describedby="cvvError"><small id="cvvError" class="error"></small></label></div><div id="cashFields" class="conditional note" hidden>Pay the courier or pickup representative when your order arrives.</div><div id="bankFields" class="conditional note" hidden>Demo bank details will be provided after the order is created.</div></fieldset>
+        <fieldset><legend><span>4</span> Additional options</legend><label>Order comment <i>Optional</i><textarea id="comment" rows="4" maxlength="500"></textarea></label><label class="check"><input id="callBefore" type="checkbox"> Call me before delivery</label><label class="check"><input id="saveProfile" type="checkbox"> Save contact and address for next time</label></fieldset>
+        <div class="agreement"><label class="check"><input id="agreement" type="checkbox" required aria-describedby="agreementError"> I agree to the <button class="legal" type="button" disabled>Terms</button> and <button class="legal" type="button" disabled>Privacy Policy</button>.</label><small id="agreementError" class="error"></small></div>
+        <button class="primary place-order" id="placeOrder" type="submit">Place order</button>
+      </form>
+      <aside class="summary" aria-labelledby="summaryTitle"><div class="summary-head"><h2 id="summaryTitle">Order summary</h2><a href="cart.html">Edit cart</a></div><div class="summary-items" id="summaryItems"></div><dl><div><dt>Subtotal</dt><dd id="subtotal"></dd></div><div><dt>Product discount</dt><dd id="productDiscount"></dd></div><div><dt>Promo discount</dt><dd id="promoDiscount"></dd></div><div><dt>Delivery</dt><dd id="deliveryPrice"></dd></div><div class="total"><dt>Estimated total</dt><dd id="total"></dd></div></dl><p id="promoText"></p></aside>
     </div>
-
-    <nav>
-        <div class="burger" onclick="toggleMenu(280)"><span></span><span></span><span></span></div>
-        <a href="index.html" class="logo">TABANJI</a>
-    </nav>
-
-    <div class="wrapper">
-        <h2 style="font-size: 24px; margin: 20px 0;">Checkout</h2>
-        <div class="card" id="cartSummary"></div>
-        
-        <div class="card">
-            <h3>Shipping Method</h3>
-            <select id="shipMethod" onchange="renderCheckout()">
-                <option value="3">TOPSPEED LEBANON ($ 3.00)</option>
-                <option value="0">FREE SHIPPING BEIRUT</option>
-            </select>
-        </div>
-
-        <div class="card" id="totalsDisplay">
-            <div style="display:flex; justify-content:space-between; margin-bottom: 5px;"><span>Subtotal:</span> <span id="subTotal">$0.00</span></div>
-            <div style="display:flex; justify-content:space-between; font-weight:bold; color: var(--primary);"><span>Total:</span> <span id="finalTotal">$0.00</span></div>
-        </div>
-
-        <div class="card">
-            <h3>Billing Details</h3>
-            <input type="text" placeholder="First Name *">
-            <input type="text" placeholder="Last Name *">
-            <input type="text" placeholder="Company (optional)">
-            <select><option>Lebanon</option></select>
-            <input type="text" placeholder="House number and street name *">
-            <input type="text" placeholder="Apartment, suite, unit, etc. (optional)">
-            <input type="text" placeholder="Town / City *">
-            <input type="text" placeholder="Postcode / ZIP *">
-            <input type="tel" placeholder="Phone Number *">
-            <input type="email" placeholder="Email Address *">
-            <textarea placeholder="Order notes (optional)"></textarea>
-        </div>
-
-        <div class="card">
-            <h3>Payment</h3>
-            <label class="payment-option"><input type="radio" name="pay" checked> Cash on delivery</label>
-            <label class="payment-option"><input type="radio" name="pay"> Pay By USDT</label>
-            <label class="payment-option"><input type="radio" name="pay"> Pay By Wish Money</label>
-        </div>
-
-        <button class="btn-order" onclick="alert('Order placed!')">Place Order</button>
-    </div>
-
-    <div class="bottom-nav">
-        <a href="index.html"><span>🏠</span> Home</a>
-        <a href="catalog.html"><span>📂</span> Catalog</a>
-        <a href="cart.html" class="active"><span>🛒</span> Cart</a>
-        <a href="wishlist.html"><span>🤍</span> Wishlist</a>
-        <a href="chat.html"><span>💬</span> Chat</a>
-    </div>
-
-    <script>
-        function toggleMenu(w) { document.getElementById("sideNav").style.width = w + "px"; }
-        function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
-            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-        }
-        if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
-
-        function renderCheckout() {
-            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-            let container = document.getElementById('cartSummary');
-            let shipCost = parseFloat(document.getElementById('shipMethod').value);
-            
-            container.innerHTML = cart.map((item, index) => `
-                <div class="grid-row-cart">
-                    <button class="btn-remove" onclick="removeItem(${index})">✕</button>
-                    <span style="font-weight:600;">${item.name}</span>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <button class="btn-qty" onclick="updateQty(${index}, -1)">-</button>
-                        <span>${item.quantity || 1}</span>
-                        <button class="btn-qty" onclick="updateQty(${index}, 1)">+</button>
-                    </div>
-                </div>`).join('');
-
-            let sub = cart.reduce((acc, item) => acc + (item.price * (item.quantity || 1)), 0);
-            document.getElementById('subTotal').innerText = "$" + sub.toFixed(2);
-            document.getElementById('finalTotal').innerText = "$" + (sub + shipCost).toFixed(2);
-        }
-        
-        function removeItem(index) {
-            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-            cart.splice(index, 1);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            renderCheckout();
-        }
-
-        function updateQty(index, change) {
-            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-            cart[index].quantity = Math.max(1, (cart[index].quantity || 1) + change);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            renderCheckout();
-        }
-        
-        renderCheckout();
-    </script>
-</body>
-</html>
+  </div></main>
+  <footer><div class="container footer"><div><a class="logo" href="index.html">TABANJI</a><p>Everything you need, thoughtfully organized.</p></div><div><a href="catalog.html">Catalog</a><a href="shipping.html">Shipping</a><a href="returns.html">Returns</a></div><div><a href="about.html">About</a><a href="contacts.html">Contacts</a></div></div></footer>
+  <nav class="mobile" aria-label="Mobile navigation"><a href="index.html">⌂<small>Home</small></a><a href="catalog.html">▦<small>Catalog</small></a><a href="cart.html">🛒<small>Cart</small></a><a href="chat.html">○<small>Chat</small></a></nav><div class="toast" id="status" role="status" aria-live="polite" aria-atomic="true"></div>
+</body></html>
