@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shop products across the TABANJI marketplace.">
+  <title>Products | TABANJI</title>
+  <link rel="stylesheet" href="css/products.css">
+  <script src="data/categories.js" defer></script>
+  <script src="data/products.js" defer></script>
+  <script src="js/store.js" defer></script>
+  <script src="js/products.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#productsMain">Skip to products</a>
+  <div class="overlay" id="menuOverlay" hidden></div>
+  <aside class="site-drawer" id="siteDrawer" aria-label="Main navigation" aria-hidden="true">
+    <div class="drawer-head"><a class="logo" href="index.html">TABANJI</a><button class="icon-btn" id="closeMenu" type="button" aria-label="Close menu">×</button></div>
+    <nav>
+      <a href="index.html">🏠 Home</a><a href="catalog.html">📦 Catalog</a><a href="new-arrivals.html">🆕 New Arrivals</a>
+      <a href="cart.html">🛒 Cart</a><a href="track-order.html">📍 Track Order</a><a href="chat.html">💬 Chat with TABANJI</a>
+      <a href="contacts.html">☎ Contacts</a><a href="about.html">ℹ About Us</a><a href="shipping.html">🚚 Shipping & Payment</a>
+      <a href="returns.html">↩ Returns Policy</a><a href="compare.html">⇄ Compare</a><a href="login.html">👤 Account</a>
+    </nav>
+    <button class="drawer-theme" id="drawerTheme" type="button">🌙 Dark theme</button>
+  </aside>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <button class="burger" id="openMenu" type="button" aria-label="Open menu" aria-controls="siteDrawer" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="logo" href="index.html">TABANJI</a>
+      <a class="catalog-btn" href="catalog.html">Catalog</a>
+      <form class="header-search" id="headerSearch" role="search">
+        <label class="sr-only" for="productSearch">Search products</label>
+        <span aria-hidden="true">⌕</span>
+        <input id="productSearch" type="search" placeholder="Search products, brands or SKU" autocomplete="off" aria-controls="searchSuggestions" aria-expanded="false">
+        <div class="suggestions" id="searchSuggestions" role="listbox" hidden></div>
+      </form>
+      <nav class="header-actions" aria-label="Shopping actions">
+        <button class="header-icon theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" aria-pressed="false">☾</button>
+        <a class="header-icon" href="login.html"><span>◯</span><small>Account</small></a>
+        <a class="header-icon counted" href="compare.html"><span>⇄</span><small>Compare</small><b class="counter" data-counter="compare">0</b></a>
+        <a class="header-icon counted" href="favorites.html"><span>♡</span><small>Favorites</small><b class="counter" data-counter="favorites">0</b></a>
+        <a class="header-icon counted" href="cart.html"><span>🛒</span><small>Cart</small><b class="counter" data-counter="cart">0</b></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="productsMain">
+    <div class="container">
+      <nav class="breadcrumb" id="breadcrumb" aria-label="Breadcrumb"></nav>
+      <section class="page-heading">
+        <div><p class="eyebrow">TABANJI marketplace</p><h1 id="pageTitle">All products</h1><p id="pageDescription">Browse the complete TABANJI selection.</p></div>
+        <button class="mobile-filter-btn" id="openFilters" type="button" aria-controls="filtersPanel" aria-expanded="false">☷ Filters <span id="mobileFilterCount"></span></button>
+      </section>
+      <div class="active-filters" id="activeFilters" aria-label="Active filters"></div>
+
+      <div class="catalog-layout">
+        <div class="filter-overlay" id="filterOverlay" hidden></div>
+        <aside class="filters" id="filtersPanel" aria-label="Product filters" aria-hidden="false">
+          <div class="filters-head"><div><strong>Filters</strong><small id="filterResultCount"></small></div><button class="icon-btn filters-close" id="closeFilters" type="button" aria-label="Close filters">×</button></div>
+          <form id="filtersForm">
+            <fieldset><legend>Price</legend><div class="price-row"><label>From<input id="minPrice" name="minPrice" type="number" min="0" inputmode="decimal"></label><label>To<input id="maxPrice" name="maxPrice" type="number" min="0" inputmode="decimal"></label></div></fieldset>
+            <fieldset><legend>Brand</legend><div class="check-list" id="brandFilters"></div></fieldset>
+            <fieldset><legend>Rating</legend><div class="radio-list" id="ratingFilters"></div></fieldset>
+            <fieldset><legend>Availability & offers</legend><label class="check"><input id="inStockFilter" name="inStock" type="checkbox"><span>In stock</span><small id="inStockCount"></small></label><label class="check"><input id="discountFilter" name="discount" type="checkbox"><span>Discounted</span><small id="discountCount"></small></label></fieldset>
+            <fieldset><legend>Badge</legend><div class="check-list" id="badgeFilters"></div></fieldset>
+            <fieldset><legend>Seller</legend><div class="check-list" id="sellerFilters"></div></fieldset>
+            <div class="filter-actions"><button class="secondary-btn" id="clearFilters" type="button">Clear all</button><button class="primary-btn" id="applyFilters" type="submit">Apply filters</button></div>
+          </form>
+        </aside>
+
+        <section class="results" aria-labelledby="resultsHeading">
+          <h2 class="sr-only" id="resultsHeading">Product results</h2>
+          <div class="results-toolbar">
+            <p><strong id="resultCount">0</strong> products found</p>
+            <div class="toolbar-controls">
+              <label>Sort<select id="sortSelect" aria-label="Sort products"><option value="popular">Popular</option><option value="newest">Newest</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="rating">Rating</option><option value="discount">Biggest discount</option></select></label>
+              <div class="view-toggle" role="group" aria-label="Product view"><button id="gridView" type="button" aria-label="Grid view" aria-pressed="true">▦</button><button id="listView" type="button" aria-label="List view" aria-pressed="false">☷</button></div>
+            </div>
+          </div>
+          <div class="product-grid" id="productGrid" aria-live="polite">
+            <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+          </div>
+          <section class="empty-state" id="emptyState" hidden><span aria-hidden="true">⌕</span><h2>No products found</h2><p>Try clearing filters or using a broader search.</p><button class="primary-btn" id="emptyClear" type="button">Clear filters</button></section>
+          <div class="pagination-wrap"><label>Show<select id="pageSize"><option>12</option><option>24</option><option>48</option></select></label><nav class="pagination" id="pagination" aria-label="Product pages"></nav></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <nav class="mobile-bottom-nav" aria-label="Mobile navigation"><a href="index.html"><span>⌂</span>Home</a><a class="active" href="catalog.html"><span>▦</span>Catalog</a><a href="cart.html"><span>🛒</span>Cart</a><a href="chat.html"><span>◌</span>Chat</a></nav>
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>

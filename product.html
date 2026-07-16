@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View product details on TABANJI.">
+  <title>Product | TABANJI</title>
+  <link rel="stylesheet" href="css/product.css">
+  <script src="data/categories.js" defer></script>
+  <script src="data/products.js" defer></script>
+  <script src="js/store.js" defer></script>
+  <script src="js/product.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to product</a>
+  <div class="overlay" id="menuOverlay" hidden></div>
+  <aside class="drawer" id="drawer" aria-hidden="true" aria-label="Main navigation">
+    <div class="drawer-head"><a class="logo" href="index.html">TABANJI</a><button class="icon-btn" id="closeMenu" type="button" aria-label="Close menu">×</button></div>
+    <nav><a href="index.html">🏠 Home</a><a href="catalog.html">📦 Catalog</a><a href="new-arrivals.html">🆕 New Arrivals</a><a href="cart.html">🛒 Cart</a><a href="track-order.html">📍 Track Order</a><a href="chat.html">💬 Chat</a><a href="contacts.html">☎ Contacts</a><a href="about.html">ℹ About Us</a><a href="shipping.html">🚚 Shipping & Payment</a><a href="returns.html">↩ Returns</a><a href="compare.html">⇄ Compare</a><a href="login.html">👤 Account</a></nav>
+    <button class="drawer-theme" id="drawerTheme" type="button">🌙 Dark theme</button>
+  </aside>
+  <header class="site-header">
+    <div class="header-inner">
+      <button class="burger" id="openMenu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>
+      <a class="logo" href="index.html">TABANJI</a><a class="catalog-btn" href="catalog.html">Catalog</a>
+      <form class="search" id="searchForm" role="search"><span aria-hidden="true">⌕</span><label class="sr-only" for="searchInput">Search products</label><input id="searchInput" type="search" autocomplete="off" placeholder="Search products, brands or SKU" aria-expanded="false" aria-controls="suggestions"><div class="suggestions" id="suggestions" role="listbox" hidden></div></form>
+      <nav class="header-actions" aria-label="Shopping actions"><button class="header-icon" id="themeToggle" type="button" aria-label="Switch theme" aria-pressed="false">☾</button><a class="header-icon" href="login.html"><span>◯</span><small>Account</small></a><a class="header-icon counted" href="compare.html"><span>⇄</span><small>Compare</small><b data-counter="compare">0</b></a><a class="header-icon counted" href="favorites.html"><span>♡</span><small>Favorites</small><b data-counter="favorites">0</b></a><a class="header-icon counted" href="cart.html"><span>🛒</span><small>Cart</small><b data-counter="cart">0</b></a></nav>
+    </div>
+  </header>
+
+  <main id="main"><div class="container">
+    <nav class="breadcrumb" id="breadcrumb" aria-label="Breadcrumb"></nav>
+    <section class="empty-state" id="emptyState" hidden><span>📦</span><h1>Product not found</h1><p>The product ID is missing or no longer available.</p><a class="primary-btn" href="catalog.html">Back to catalog</a></section>
+    <div id="productContent" hidden>
+      <section class="product-hero">
+        <div class="gallery" aria-label="Product gallery"><button class="main-image-btn" id="openLightbox" type="button" aria-label="Open image gallery"><img id="mainImage" alt=""></button><button class="gallery-arrow prev" id="galleryPrev" type="button" aria-label="Previous image">‹</button><button class="gallery-arrow next" id="galleryNext" type="button" aria-label="Next image">›</button><div class="thumbnails" id="thumbnails" role="listbox" aria-label="Product images"></div></div>
+        <article class="buy-panel">
+          <div class="product-topline"><span class="badge" id="badge"></span><button class="share-btn" id="shareButton" type="button">↗ Share</button></div>
+          <h1 id="productTitle"></h1><div class="meta-line"><a id="brandLink"></a><span id="sku"></span><span id="seller"></span></div>
+          <div class="rating-line"><span id="rating"></span><button id="reviewsLink" type="button"></button></div>
+          <p class="stock" id="stock"></p><p class="description" id="shortDescription"></p>
+          <div class="price-row"><div><span class="old-price" id="oldPrice"></span><strong id="price"></strong><span class="discount" id="discount"></span></div></div>
+          <p class="delivery" id="delivery"></p><p class="low-stock" id="lowStock"></p>
+          <div class="purchase-row"><div class="quantity" aria-label="Quantity selector"><button id="quantityMinus" type="button" aria-label="Decrease quantity">−</button><input id="quantity" type="number" value="1" min="1" aria-label="Quantity"><button id="quantityPlus" type="button" aria-label="Increase quantity">+</button></div><button class="primary-btn" id="addToCart" type="button">Add to cart</button><button class="buy-now" id="buyNow" type="button">Buy now</button></div>
+          <div class="secondary-actions"><button id="favoriteButton" type="button" aria-pressed="false">♡ Add to favorites</button><button id="compareButton" type="button" aria-pressed="false">⇄ Add to compare</button></div>
+          <div class="service-grid" id="serviceGrid"></div>
+        </article>
+      </section>
+
+      <section class="details">
+        <div class="tabs" role="tablist" aria-label="Product information"><button role="tab" aria-selected="true" aria-controls="panel-description" id="tab-description">Description</button><button role="tab" aria-selected="false" aria-controls="panel-specifications" id="tab-specifications">Specifications</button><button role="tab" aria-selected="false" aria-controls="panel-delivery" id="tab-delivery">Delivery & Payment</button><button role="tab" aria-selected="false" aria-controls="panel-reviews" id="tab-reviews">Reviews</button><button role="tab" aria-selected="false" aria-controls="panel-questions" id="tab-questions">Questions</button></div>
+        <div class="tab-panel" role="tabpanel" id="panel-description" aria-labelledby="tab-description"></div><div class="tab-panel" role="tabpanel" id="panel-specifications" aria-labelledby="tab-specifications" hidden></div><div class="tab-panel" role="tabpanel" id="panel-delivery" aria-labelledby="tab-delivery" hidden></div><div class="tab-panel" role="tabpanel" id="panel-reviews" aria-labelledby="tab-reviews" hidden></div><div class="tab-panel" role="tabpanel" id="panel-questions" aria-labelledby="tab-questions" hidden></div>
+      </section>
+      <section class="recommend-section" id="similarSection"><div class="section-head"><h2>Similar products</h2></div><div class="recommend-grid" id="similarProducts"></div></section>
+      <section class="recommend-section"><div class="section-head"><h2>Customers also viewed</h2></div><div class="recommend-grid" id="alsoViewed"></div></section>
+      <section class="recommend-section" id="recentSection" hidden><div class="section-head"><h2>Recently viewed</h2></div><div class="recommend-grid" id="recentProducts"></div></section>
+    </div>
+  </div></main>
+
+  <nav class="mobile-bottom-nav" aria-label="Mobile navigation"><a href="index.html"><span>⌂</span>Home</a><a href="catalog.html"><span>▦</span>Catalog</a><a href="cart.html"><span>🛒</span>Cart</a><a href="chat.html"><span>◌</span>Chat</a></nav>
+  <div class="modal-backdrop" id="lightbox" hidden><div class="lightbox-dialog" role="dialog" aria-modal="true" aria-label="Product image viewer"><button class="modal-close" data-close="lightbox" type="button" aria-label="Close image viewer">×</button><button class="lightbox-arrow prev" id="lightboxPrev" type="button" aria-label="Previous image">‹</button><img id="lightboxImage" alt=""><button class="lightbox-arrow next" id="lightboxNext" type="button" aria-label="Next image">›</button></div></div>
+  <div class="modal-backdrop" id="formModal" hidden><div class="form-modal" role="dialog" aria-modal="true" aria-labelledby="formModalTitle"><button class="modal-close" data-close="formModal" type="button" aria-label="Close form">×</button><h2 id="formModalTitle"></h2><form id="demoForm"><label>Name<input name="name" required minlength="2"></label><label>Email<input name="email" type="email" required></label><label id="ratingField">Rating<select name="rating" required><option value="">Choose</option><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select></label><label>Message<textarea name="message" required minlength="10" rows="5"></textarea></label><button class="primary-btn" type="submit">Submit</button></form></div></div>
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>
