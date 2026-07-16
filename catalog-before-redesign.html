@@ -1,0 +1,540 @@
+Добре,  ось мій нинішній код catalog.html:  <!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TABANJI - Catalog</title>
+
+<link rel="stylesheet" href="css/catalog.css">
+
+</head>
+
+<body>
+
+
+<!-- ================= OVERLAY ================= -->
+
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+
+
+<!-- ================= SIDE MENU ================= -->
+
+<div class="side-menu" id="sideMenu">
+
+<div class="close" onclick="closeMenu()">×</div>
+
+
+<a href="index.html">
+🏠 Home
+</a>
+
+
+<a href="catalog.html">
+📦 Catalog
+</a>
+
+
+<a href="new-arrivals.html">
+🆕 New Arrivals
+</a>
+
+
+<a href="cart.html">
+🛒 Cart
+</a>
+
+
+<a href="track-order.html">
+📍 Track Order
+</a>
+
+
+<a href="chat.html">
+💬 Chat with TABANJI
+</a>
+
+
+<a href="contacts.html">
+☎ Contacts
+</a>
+
+
+<a href="about.html">
+ℹ About Us
+</a>
+
+
+<a href="shipping.html">
+🚚 Shipping & Payment
+</a>
+
+
+<a href="returns.html">
+↩ Returns Policy
+</a>
+
+
+<button class="theme-button" onclick="toggleTheme()">
+🌙 Night Mode
+</button>
+
+
+</div>
+
+
+
+
+<!-- ================= HEADER ================= -->
+
+
+<nav>
+
+
+<div class="burger" onclick="openMenu()">
+
+<span></span>
+<span></span>
+<span></span>
+
+</div>
+
+
+
+<a href="index.html" class="logo">
+TABANJI
+</a>
+
+
+
+<a href="catalog.html" class="catalog-button">
+
+▦ Catalog
+
+</a>
+
+
+
+
+<div class="search-area">
+
+<input 
+type="text"
+placeholder="Search products..."
+>
+
+
+<button>
+Search
+</button>
+
+</div>
+
+
+
+
+<div class="header-icons">
+
+<a href="login.html">
+♙
+</a>
+
+
+<a href="compare.html">
+☆ 
+</a>
+
+
+<a href="cart.html">
+🛒
+</a>
+
+
+</div>
+
+
+</nav>
+
+
+
+
+
+<!-- ================= CATALOG AREA ================= -->
+
+
+<div class="catalog-container">
+
+
+<div class="catalog-layout">
+
+
+
+<!-- LEFT CATEGORY MENU -->
+
+
+<div class="category-list">
+
+
+<div class="category-title">
+All Categories
+</div>
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('computers')"
+onclick="mobileCategory('computers')">
+
+💻 Laptops & Computers
+
+<span>›</span>
+
+</div>
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('electronics')"
+onclick="mobileCategory('electronics')">
+
+📱 Smartphones & Electronics
+
+<span>›</span>
+
+</div>
+
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('gaming')"
+onclick="mobileCategory('gaming')">
+
+🎮 Gaming
+
+<span>›</span>
+
+</div>
+
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('appliances')"
+onclick="mobileCategory('appliances')">
+
+❄ Home Appliances
+
+<span>›</span>
+
+</div>
+
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('home')"
+onclick="mobileCategory('home')">
+
+🏠 Home & Living
+
+<span>›</span>
+
+</div>
+
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('auto')"
+onclick="mobileCategory('auto')">
+
+🚗 Auto & Moto
+
+<span>›</span>
+
+</div>
+
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('tools')"
+onclick="mobileCategory('tools')">
+
+🛠 Tools & Equipment
+
+<span>›</span>
+
+</div>
+
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('garden')"
+onclick="mobileCategory('garden')">
+
+🌿 Garden & Outdoors
+
+<span>›</span>
+
+</div>
+
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('fashion')"
+onclick="mobileCategory('fashion')">
+
+👕 Clothing & Accessories
+
+<span>›</span>
+
+</div>
+
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('beauty')"
+onclick="mobileCategory('beauty')">
+
+💄 Health & Beauty
+
+<span>›</span>
+
+</div>
+
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('food')"
+onclick="mobileCategory('food')">
+
+🍷 Food & Beverages
+
+<span>›</span>
+
+</div>
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('energy')"
+onclick="mobileCategory('energy')">
+
+⚡ Energy Solutions
+
+<span>›</span>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<!-- RIGHT MEGA MENU -->
+
+
+<div class="mega-container">
+
+
+<div class="mega-header" id="megaTitle">
+
+Welcome to TABANJI Catalog
+
+</div>
+
+
+
+<div class="mega-grid" id="megaContent">
+
+
+
+<div class="mega-column">
+
+<h3>
+🔥 Popular Categories
+</h3>
+
+
+<div class="mega-group">
+
+<h4>
+Recommended
+</h4>
+
+
+<a href="#">
+Best Sellers
+</a>
+
+
+<a href="#">
+New Arrivals
+</a>
+
+
+<a href="#">
+Special Offers
+</a>
+
+
+<a href="#">
+Discounts
+</a>
+
+
+</div>
+
+
+</div>
+
+
+
+<div class="mega-column">
+
+<h3>
+⭐ TABANJI
+</h3>
+
+
+<div class="mega-group">
+
+<h4>
+Store
+</h4>
+
+
+<a href="#">
+Premium Products
+</a>
+
+
+<a href="#">
+Verified Brands
+</a>
+
+
+<a href="#">
+Exclusive Deals
+</a>
+
+
+<a href="#">
+Gift Cards
+</a>
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+<!-- ================= MOBILE BOTTOM NAV ================= -->
+
+
+<div class="bottom-nav">
+
+
+<a href="index.html">
+🏠
+<br>
+Home
+</a>
+
+
+<a href="catalog.html">
+📦
+<br>
+Catalog
+</a>
+
+
+<a href="cart.html">
+🛒
+<br>
+Cart
+</a>
+
+
+<a href="compare.html">
+⭐
+<br>
+Favorite
+</a>
+
+
+<a href="chat.html">
+💬
+<br>
+Chat
+</a>
+
+
+</div>
+
+
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+
+
+
+<!-- ================= FINAL MOBILE OPTIMIZATION ================= -->
+
+
+
+
+
+
+
+
+
+
+
+<script src="data/categories.js"></script>
+<script src="js/catalog.js"></script>
+
+</body>
+
+</html>
+
+
+   
+

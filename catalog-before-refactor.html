@@ -1,0 +1,2119 @@
+Добре,  ось мій нинішній код catalog.html:  <!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TABANJI - Catalog</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+:root{
+    --primary:#007bff;
+    --bg:#f4f4f9;
+    --text:#333;
+    --nav:#ffffff;
+    --border:#e5e5e5;
+    --hover:#eaf4ff;
+}
+
+.dark-mode{
+    --primary:#3795ff;
+    --bg:#121212;
+    --text:#ffffff;
+    --nav:#1e1e1e;
+    --border:#333;
+    --hover:#252525;
+}
+
+
+body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    padding-bottom:80px;
+}
+
+
+/* ================= HEADER ================= */
+
+
+nav{
+
+    height:64px;
+    background:var(--nav);
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:10px 20px;
+
+    max-width:36cm;
+    margin:auto;
+
+    position:sticky;
+    top:0;
+
+    z-index:5000;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.12);
+
+}
+
+
+.burger{
+
+    width:28px;
+    cursor:pointer;
+
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+
+}
+
+
+.burger span{
+
+    height:3px;
+    width:24px;
+
+    background:var(--text);
+
+    border-radius:3px;
+
+}
+
+
+
+.logo{
+
+    color:var(--primary);
+
+    font-size:23px;
+    font-weight:900;
+
+    text-decoration:none;
+
+    white-space:nowrap;
+
+}
+
+
+
+.catalog-button{
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:10px 18px;
+
+    border-radius:8px;
+
+    font-weight:700;
+
+    text-decoration:none;
+
+    display:flex;
+    align-items:center;
+    gap:7px;
+
+}
+
+
+
+.search-area{
+
+    flex:1;
+
+    height:40px;
+
+    display:flex;
+
+    border:1px solid #ccc;
+
+    background:var(--nav);
+
+    border-radius:8px;
+
+    overflow:hidden;
+
+}
+
+
+
+.search-area input{
+
+    flex:1;
+
+    border:0;
+
+    outline:none;
+
+    padding:0 15px;
+
+    background:transparent;
+
+    color:var(--text);
+
+    font-size:15px;
+
+}
+
+
+
+.search-area button{
+
+    border:0;
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:0 25px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+}
+
+
+
+.header-icons{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+
+
+.header-icons a{
+
+    color:var(--primary);
+
+    font-size:25px;
+
+    text-decoration:none;
+
+}
+
+
+
+/* ================= SIDE MENU ================= */
+
+
+.overlay{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.55);
+
+    z-index:9000;
+
+}
+
+
+
+.overlay.active{
+
+    display:block;
+
+}
+
+
+
+.side-menu{
+
+    position:fixed;
+
+    top:0;
+
+    left:-330px;
+
+    width:330px;
+
+    height:100%;
+
+    background:var(--nav);
+
+    z-index:9999;
+
+    transition:.3s;
+
+    overflow-y:auto;
+
+    box-shadow:5px 0 15px rgba(0,0,0,.25);
+
+}
+
+
+
+.side-menu.active{
+
+    left:0;
+
+}
+
+
+
+.side-menu .close{
+
+    text-align:right;
+
+    font-size:40px;
+
+    padding:10px 25px;
+
+    cursor:pointer;
+
+}
+
+
+
+.side-menu a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:17px 25px;
+
+    text-decoration:none;
+
+    color:var(--text);
+
+    border-bottom:1px solid var(--border);
+
+    font-size:16px;
+
+}
+
+
+
+.side-menu a:hover{
+
+    background:var(--hover);
+
+    color:var(--primary);
+
+}
+
+
+
+.theme-button{
+
+    margin:20px;
+
+    width:calc(100% - 40px);
+
+    padding:14px;
+
+    border-radius:10px;
+
+    border:1px solid var(--border);
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+
+
+
+
+/* ================= CATALOG ================= */
+
+
+.catalog-container{
+
+    max-width:36cm;
+
+    margin:auto;
+
+    padding:20px;
+
+}
+
+
+
+.catalog-layout{
+
+    display:flex;
+
+    gap:20px;
+
+    align-items:flex-start;
+
+}
+
+
+
+/* LEFT SIDE */
+
+
+.category-list{
+
+    width:280px;
+
+    flex-shrink:0;
+
+    background:var(--nav);
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+}
+
+
+
+.category-title{
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:16px;
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+
+
+.category-item{
+
+    position:relative;
+
+    padding:14px 18px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    border-bottom:1px solid var(--border);
+
+    font-size:14px;
+
+}
+
+
+
+.category-item:hover{
+
+    background:var(--hover);
+
+    color:var(--primary);
+
+}
+
+
+
+.category-item span{
+
+    font-size:18px;
+
+}
+
+
+
+/* RIGHT MEGA MENU */
+
+
+.mega-container{
+
+    flex:1;
+
+    background:var(--nav);
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    padding:25px;
+
+    min-height:600px;
+
+}
+
+
+
+.mega-header{
+
+    font-size:26px;
+
+    font-weight:800;
+
+    color:var(--primary);
+
+    margin-bottom:25px;
+
+}
+
+
+
+.mega-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:25px;
+
+}
+
+
+
+.mega-column h3{
+
+    color:var(--primary);
+
+    margin:0 0 15px;
+
+    font-size:17px;
+
+}
+
+
+
+.mega-group{
+
+    margin-bottom:20px;
+
+}
+
+
+
+.mega-group h4{
+
+    margin:0 0 8px;
+
+    font-size:15px;
+
+}
+
+
+
+.mega-group a{
+
+    display:block;
+
+    text-decoration:none;
+
+    color:var(--text);
+
+    font-size:14px;
+
+    padding:5px 0;
+
+}
+
+
+
+.mega-group a:hover{
+
+    color:var(--primary);
+
+}
+
+
+
+/* MOBILE BOTTOM MENU */
+
+
+.bottom-nav{
+
+    position:fixed;
+
+    bottom:0;
+
+    left:0;
+
+    width:100%;
+
+    height:65px;
+
+    background:var(--nav);
+
+    border-top:1px solid var(--border);
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    z-index:6000;
+
+}
+
+
+
+.bottom-nav a{
+
+    color:var(--text);
+
+    text-decoration:none;
+
+    font-size:11px;
+
+    text-align:center;
+
+}
+
+
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- ================= OVERLAY ================= -->
+
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+
+
+<!-- ================= SIDE MENU ================= -->
+
+<div class="side-menu" id="sideMenu">
+
+<div class="close" onclick="closeMenu()">×</div>
+
+
+<a href="index.html">
+🏠 Home
+</a>
+
+
+<a href="catalog.html">
+📦 Catalog
+</a>
+
+
+<a href="new-arrivals.html">
+🆕 New Arrivals
+</a>
+
+
+<a href="cart.html">
+🛒 Cart
+</a>
+
+
+<a href="track-order.html">
+📍 Track Order
+</a>
+
+
+<a href="chat.html">
+💬 Chat with TABANJI
+</a>
+
+
+<a href="contacts.html">
+☎ Contacts
+</a>
+
+
+<a href="about.html">
+ℹ About Us
+</a>
+
+
+<a href="shipping.html">
+🚚 Shipping & Payment
+</a>
+
+
+<a href="returns.html">
+↩ Returns Policy
+</a>
+
+
+<button class="theme-button" onclick="toggleTheme()">
+🌙 Night Mode
+</button>
+
+
+</div>
+
+
+
+
+<!-- ================= HEADER ================= -->
+
+
+<nav>
+
+
+<div class="burger" onclick="openMenu()">
+
+<span></span>
+<span></span>
+<span></span>
+
+</div>
+
+
+
+<a href="index.html" class="logo">
+TABANJI
+</a>
+
+
+
+<a href="catalog.html" class="catalog-button">
+
+▦ Catalog
+
+</a>
+
+
+
+
+<div class="search-area">
+
+<input 
+type="text"
+placeholder="Search products..."
+>
+
+
+<button>
+Search
+</button>
+
+</div>
+
+
+
+
+<div class="header-icons">
+
+<a href="login.html">
+♙
+</a>
+
+
+<a href="compare.html">
+☆ 
+</a>
+
+
+<a href="cart.html">
+🛒
+</a>
+
+
+</div>
+
+
+</nav>
+
+
+
+
+
+<!-- ================= CATALOG AREA ================= -->
+
+
+<div class="catalog-container">
+
+
+<div class="catalog-layout">
+
+
+
+<!-- LEFT CATEGORY MENU -->
+
+
+<div class="category-list">
+
+
+<div class="category-title">
+All Categories
+</div>
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('computers')"
+onclick="mobileCategory('computers')">
+
+💻 Laptops & Computers
+
+<span>›</span>
+
+</div>
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('electronics')"
+onclick="mobileCategory('electronics')">
+
+📱 Smartphones & Electronics
+
+<span>›</span>
+
+</div>
+
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('gaming')"
+onclick="mobileCategory('gaming')">
+
+🎮 Gaming
+
+<span>›</span>
+
+</div>
+
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('appliances')"
+onclick="mobileCategory('appliances')">
+
+❄ Home Appliances
+
+<span>›</span>
+
+</div>
+
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('home')"
+onclick="mobileCategory('home')">
+
+🏠 Home & Living
+
+<span>›</span>
+
+</div>
+
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('auto')"
+onclick="mobileCategory('auto')">
+
+🚗 Auto & Moto
+
+<span>›</span>
+
+</div>
+
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('tools')"
+onclick="mobileCategory('tools')">
+
+🛠 Tools & Equipment
+
+<span>›</span>
+
+</div>
+
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('garden')"
+onclick="mobileCategory('garden')">
+
+🌿 Garden & Outdoors
+
+<span>›</span>
+
+</div>
+
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('fashion')"
+onclick="mobileCategory('fashion')">
+
+👕 Clothing & Accessories
+
+<span>›</span>
+
+</div>
+
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('beauty')"
+onclick="mobileCategory('beauty')">
+
+💄 Health & Beauty
+
+<span>›</span>
+
+</div>
+
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('food')"
+onclick="mobileCategory('food')">
+
+🍷 Food & Beverages
+
+<span>›</span>
+
+</div>
+
+
+
+
+<div class="category-item"
+onmouseenter="desktopCategory('energy')"
+onclick="mobileCategory('energy')">
+
+⚡ Energy Solutions
+
+<span>›</span>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<!-- RIGHT MEGA MENU -->
+
+
+<div class="mega-container">
+
+
+<div class="mega-header" id="megaTitle">
+
+Welcome to TABANJI Catalog
+
+</div>
+
+
+
+<div class="mega-grid" id="megaContent">
+
+
+
+<div class="mega-column">
+
+<h3>
+🔥 Popular Categories
+</h3>
+
+
+<div class="mega-group">
+
+<h4>
+Recommended
+</h4>
+
+
+<a href="#">
+Best Sellers
+</a>
+
+
+<a href="#">
+New Arrivals
+</a>
+
+
+<a href="#">
+Special Offers
+</a>
+
+
+<a href="#">
+Discounts
+</a>
+
+
+</div>
+
+
+</div>
+
+
+
+<div class="mega-column">
+
+<h3>
+⭐ TABANJI
+</h3>
+
+
+<div class="mega-group">
+
+<h4>
+Store
+</h4>
+
+
+<a href="#">
+Premium Products
+</a>
+
+
+<a href="#">
+Verified Brands
+</a>
+
+
+<a href="#">
+Exclusive Deals
+</a>
+
+
+<a href="#">
+Gift Cards
+</a>
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+<!-- ================= MOBILE BOTTOM NAV ================= -->
+
+
+<div class="bottom-nav">
+
+
+<a href="index.html">
+🏠
+<br>
+Home
+</a>
+
+
+<a href="catalog.html">
+📦
+<br>
+Catalog
+</a>
+
+
+<a href="cart.html">
+🛒
+<br>
+Cart
+</a>
+
+
+<a href="compare.html">
+⭐
+<br>
+Favorite
+</a>
+
+
+<a href="chat.html">
+💬
+<br>
+Chat
+</a>
+
+
+</div>
+
+
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+
+<script>
+
+
+/* ================= SIDE MENU ================= */
+
+
+function openMenu(){
+
+document.getElementById("sideMenu").classList.add("active");
+
+document.getElementById("overlay").classList.add("active");
+
+}
+
+
+
+function closeMenu(){
+
+document.getElementById("sideMenu").classList.remove("active");
+
+document.getElementById("overlay").classList.remove("active");
+
+}
+
+
+
+
+/* ================= DARK MODE ================= */
+
+
+function toggleTheme(){
+
+document.body.classList.toggle("dark-mode");
+
+
+localStorage.setItem(
+
+"theme",
+
+document.body.classList.contains("dark-mode")
+
+? "dark"
+
+: "light"
+
+);
+
+}
+
+
+
+if(localStorage.getItem("theme") === "dark"){
+
+document.body.classList.add("dark-mode");
+
+}
+
+
+
+
+
+/* ================= CATEGORY DATABASE ================= */
+
+
+const categories = {
+
+
+computers:{
+
+title:"💻 Laptops & Computers",
+
+groups:[
+
+
+["Computers",
+[
+"Laptops",
+"Gaming Laptops",
+"Ultrabooks",
+"Desktop PC",
+"Mini PC",
+"Workstations"
+]],
+
+
+["Components",
+[
+"Processors",
+"Video Cards",
+"RAM Memory",
+"Motherboards",
+"SSD Drives",
+"HDD Drives"
+]],
+
+
+["Accessories",
+[
+"Keyboards",
+"Mouses",
+"Webcams",
+"Headsets",
+"Microphones"
+]]
+
+]
+
+},
+
+
+
+
+
+electronics:{
+
+title:"📱 Smartphones & Electronics",
+
+groups:[
+
+
+["Smartphones",
+[
+"iPhone",
+"Android Phones",
+"Samsung",
+"Phone Cases",
+"Chargers",
+"Power Banks"
+]],
+
+
+["TV & Audio",
+[
+"Smart TV",
+"LED TV",
+"Projectors",
+"Speakers",
+"Headphones"
+]],
+
+
+["Smart Devices",
+[
+"Smart Watches",
+"Smart Home",
+"Security Cameras"
+]]
+
+]
+
+},
+
+
+
+
+
+gaming:{
+
+title:"🎮 Gaming",
+
+groups:[
+
+
+["Gaming Devices",
+[
+"Gaming PC",
+"Gaming Laptop",
+"PlayStation",
+"Xbox",
+"Nintendo"
+]],
+
+
+["Gaming Accessories",
+[
+"Gaming Keyboard",
+"Gaming Mouse",
+"Gaming Headsets",
+"Gaming Chairs",
+"Mouse Pads"
+]],
+
+
+["Streaming",
+[
+"Webcams",
+"Microphones",
+"Capture Cards"
+]]
+
+]
+
+},
+
+
+
+
+
+appliances:{
+
+title:"❄ Home Appliances",
+
+groups:[
+
+
+["Large Appliances",
+[
+"Refrigerators",
+"Washing Machines",
+"Dryers",
+"Dishwashers",
+"Freezers"
+]],
+
+
+["Climate",
+[
+"Air Conditioners",
+"Fans",
+"Heaters",
+"Air Purifiers"
+]],
+
+
+["Kitchen Appliances",
+[
+"Coffee Machines",
+"Microwaves",
+"Blenders",
+"Kettles"
+]]
+
+]
+
+},
+
+
+
+
+
+home:{
+
+title:"🏠 Home & Living",
+
+groups:[
+
+
+["Furniture",
+[
+"Sofas",
+"Beds",
+"Tables",
+"Chairs",
+"Wardrobes"
+]],
+
+
+["Home Decor",
+[
+"Lighting",
+"Mirrors",
+"Pictures",
+"Carpets",
+"Curtains"
+]],
+
+
+["Kitchen",
+[
+"Cookware",
+"Dishes",
+"Storage",
+"Kitchen Tools"
+]]
+
+]
+
+},
+
+
+
+
+
+auto:{
+
+title:"🚗 Auto & Moto",
+
+groups:[
+
+
+["Car Accessories",
+[
+"Car Electronics",
+"Phone Holders",
+"Seat Covers",
+"Floor Mats"
+]],
+
+
+["Car Care",
+[
+"Cleaning Products",
+"Polishes",
+"Oils",
+"Fluids"
+]],
+
+
+["Moto",
+[
+"Helmets",
+"Motorcycle Gear",
+"Moto Parts"
+]]
+
+]
+
+},
+
+
+
+
+
+tools:{
+
+title:"🛠 Tools & Equipment",
+
+groups:[
+
+
+["Power Tools",
+[
+"Drills",
+"Grinders",
+"Saws",
+"Screwdrivers"
+]],
+
+
+["Hand Tools",
+[
+"Wrenches",
+"Hammers",
+"Pliers",
+"Measuring Tools"
+]],
+
+
+["Workshop",
+[
+"Tool Boxes",
+"Workbenches",
+"Storage Systems"
+]]
+
+]
+
+},
+
+
+
+
+
+garden:{
+
+title:"🌿 Garden & Outdoors",
+
+groups:[
+
+
+["Garden Tools",
+[
+"Shovels",
+"Rakes",
+"Pruning Tools"
+]],
+
+
+["Outdoor",
+[
+"Camping",
+"BBQ",
+"Pools",
+"Garden Furniture"
+]],
+
+
+["Growing",
+[
+"Seeds",
+"Fertilizers",
+"Greenhouses"
+]]
+
+]
+
+},
+
+
+
+
+
+fashion:{
+
+title:"👕 Clothing & Accessories",
+
+groups:[
+
+
+["Men",
+[
+"T-Shirts",
+"Jeans",
+"Jackets",
+"Suits"
+]],
+
+
+["Women",
+[
+"Dresses",
+"Blouses",
+"Lingerie",
+"Sportswear"
+]],
+
+
+["Accessories",
+[
+"Bags",
+"Watches",
+"Jewelry",
+"Belts"
+]]
+
+]
+
+},
+
+
+
+
+
+beauty:{
+
+title:"💄 Health & Beauty",
+
+groups:[
+
+
+["Beauty",
+[
+"Cosmetics",
+"Perfumes",
+"Makeup",
+"Skin Care"
+]],
+
+
+["Personal Care",
+[
+"Hair Care",
+"Shavers",
+"Body Care"
+]],
+
+
+["Health",
+[
+"Vitamins",
+"Massage",
+"Fitness Products"
+]]
+
+]
+
+},
+
+
+
+
+
+food:{
+
+title:"🍷 Food & Beverages",
+
+groups:[
+
+
+["Coffee & Tea",
+[
+"Coffee Beans",
+"Tea",
+"Capsules",
+"Accessories"
+]],
+
+
+["Food",
+[
+"Snacks",
+"Sweets",
+"Pasta",
+"Spices"
+]],
+
+
+["Drinks",
+[
+"Juices",
+"Water",
+"Soft Drinks"
+]]
+
+]
+
+},
+
+
+
+
+
+energy:{
+
+title:"⚡ Energy Solutions",
+
+groups:[
+
+
+["Solar Energy",
+[
+"Solar Panels",
+"Controllers",
+"Cables"
+]],
+
+
+["Power",
+[
+"Generators",
+"Power Stations",
+"UPS"
+]],
+
+
+["Storage",
+[
+"Lithium Batteries",
+"AGM Batteries",
+"Chargers"
+]]
+
+]
+
+}
+
+
+};
+
+
+
+
+
+/* ================= SHOW CATEGORY ================= */
+
+
+function showCategory(name){
+
+
+let data = categories[name];
+
+
+if(!data) return;
+
+
+
+document.getElementById("megaTitle").innerHTML=data.title;
+
+
+
+let content="";
+
+
+
+data.groups.forEach(group=>{
+
+
+content += `
+
+<div class="mega-column">
+
+
+<h3>${group[0]}</h3>
+
+
+<div class="mega-group">
+
+${
+
+group[1].map(item=>`
+
+<a href="#">
+${item}
+</a>
+
+`).join("")
+
+}
+
+</div>
+
+
+</div>
+
+`;
+
+
+});
+
+
+
+document.getElementById("megaContent").innerHTML=content;
+
+
+}
+
+
+
+
+/* PC HOVER */
+
+
+function desktopCategory(name){
+
+
+if(window.innerWidth > 900){
+
+showCategory(name);
+
+}
+
+
+}
+
+
+
+
+/* PHONE CLICK */
+
+
+function mobileCategory(name){
+
+
+if(window.innerWidth <= 900){
+
+showCategory(name);
+
+}
+
+
+}
+
+
+
+</script>
+
+<!-- ================= FINAL MOBILE OPTIMIZATION ================= -->
+
+
+<style>
+
+
+/* ================= TABLET ================= */
+
+
+@media(max-width:1200px){
+
+
+.mega-grid{
+
+grid-template-columns:repeat(3,1fr);
+
+}
+
+
+.category-list{
+
+width:250px;
+
+}
+
+
+}
+
+
+
+
+
+/* ================= MOBILE ================= */
+
+
+@media(max-width:900px){
+
+
+
+body{
+
+padding-bottom:75px;
+
+}
+
+
+
+/* HEADER */
+
+
+nav{
+
+height:60px;
+
+padding:10px;
+
+gap:8px;
+
+}
+
+
+
+.logo{
+
+font-size:20px;
+
+}
+
+
+
+.catalog-button{
+
+display:none;
+
+}
+
+
+
+.search-area{
+
+height:38px;
+
+}
+
+
+
+.search-area button{
+
+padding:0 12px;
+
+font-size:12px;
+
+}
+
+
+
+.header-icons{
+
+display:none;
+
+}
+
+
+
+
+/* CATALOG */
+
+
+.catalog-container{
+
+padding:10px;
+
+}
+
+
+
+.catalog-layout{
+
+display:block;
+
+}
+
+
+
+.category-list{
+
+width:100%;
+
+}
+
+
+
+.category-title{
+
+font-size:17px;
+
+}
+
+
+
+.category-item{
+
+font-size:15px;
+
+padding:16px;
+
+}
+
+
+
+
+
+.mega-container{
+
+margin-top:15px;
+
+padding:15px;
+
+min-height:auto;
+
+}
+
+
+
+.mega-header{
+
+font-size:22px;
+
+}
+
+
+
+
+
+.mega-grid{
+
+grid-template-columns:1fr;
+
+gap:15px;
+
+}
+
+
+
+
+
+.mega-column{
+
+background:var(--bg);
+
+border-radius:10px;
+
+padding:12px;
+
+}
+
+
+
+
+
+.mega-column h3{
+
+font-size:18px;
+
+}
+
+
+
+
+
+.mega-group a{
+
+font-size:15px;
+
+padding:8px 0;
+
+}
+
+
+
+
+
+}
+
+
+
+
+
+/* ================= SMALL PHONES ================= */
+
+
+@media(max-width:500px){
+
+
+
+.logo{
+
+font-size:18px;
+
+}
+
+
+
+.burger span{
+
+width:22px;
+
+}
+
+
+
+.search-area input{
+
+font-size:13px;
+
+}
+
+
+
+.search-area button{
+
+display:none;
+
+}
+
+
+
+.category-item{
+
+padding:15px;
+
+}
+
+
+
+
+
+.bottom-nav a{
+
+font-size:10px;
+
+}
+
+
+
+.side-menu{
+
+width:290px;
+
+}
+
+
+
+}
+
+
+
+
+
+</style>
+
+
+
+
+<script>
+
+
+/* CLOSE MENU AFTER CLICK */
+
+
+document.querySelectorAll(".side-menu a").forEach(link=>{
+
+
+link.addEventListener("click",()=>{
+
+
+closeMenu();
+
+
+});
+
+
+});
+
+
+
+
+/* DEFAULT CATEGORY */
+
+
+window.onload=function(){
+
+
+showCategory("computers");
+
+
+};
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
+
+
+   
+

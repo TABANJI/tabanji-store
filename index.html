@@ -1,162 +1,1928 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TABANJI - Home</title>
-    <style>
-        * { box-sizing: border-box; }
-        :root { --primary: #007bff; --bg: #f4f4f9; --text: #333; --nav: #ffffff; --border: #eee; }
-        .dark-mode { --primary: #3795ff; --bg: #121212; --text: #ffffff; --nav: #1e1e1e; --border: #333; }
-        
-        body { font-family: -apple-system, system-ui, sans-serif; margin: 0; background-color: var(--bg); color: var(--text); padding-bottom: 80px; }
-        
-        nav { background: var(--nav); padding: 10px 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; max-width: 36cm; margin: 0 auto; gap: 10px; }
-        .page-container { max-width: 36cm; margin: 0 auto; display: flex; align-items: flex-start; gap: 20px; padding: 0 20px 20px 20px; }
-        
-        .sidebar-desktop { width: 265px; background: var(--nav); border: 1px solid var(--border); border-radius: 0 0 10px 10px; padding: 10px 0; flex-shrink: 0; position: sticky; top: 0; align-self: flex-start; margin-left: -20px; }
-        .sidebar-desktop a { padding: 12px 20px 12px 25px; text-decoration: none; color: var(--text); display: flex; align-items: center; gap: 10px; font-size: 14px; }
-        .sidebar-desktop a:first-child { width: 7cm; }
-        
-        .burger { cursor: pointer; display: flex; flex-direction: column; gap: 5px; margin-right: 10px; }
-        .burger span { width: 22px; height: 2px; background: var(--text); }
-        .logo { color: var(--primary); font-size: 20px; font-weight: 800; text-decoration: none; white-space: nowrap; margin-right: 10px; }
-        
-        .btn-catalog-nav { background: var(--primary); color: #fff; padding: 8px 15px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
-        .search-wrapper { flex-grow: 1; max-width: 20cm; display: flex; align-items: center; background: #f8f8f8; border: 1px solid #ccc; border-radius: 6px; height: 38px; overflow: hidden; }
-        .search-icon-fixed { width: 20px; height: 20px; stroke: var(--primary); stroke-width: 2.5; fill: none; margin-left: 10px; flex-shrink: 0; }
-        .search-bar { width: 100%; height: 100%; padding: 0 10px; border: none; background: transparent; outline: none; min-width: 0; }
-        .clear-btn { background: none; border: none; cursor: pointer; font-size: 20px; color: #999; padding: 0 10px; display: none; align-items: center; justify-content: center; height: 100%; flex-shrink: 0; }
-        .btn-search { background: var(--primary); color: white; border: none; padding: 0 20px; height: 100%; cursor: pointer; font-weight: 600; flex-shrink: 0; }
-        
-        .nav-right-icons { display: flex; align-items: center; width: 3.6cm; justify-content: space-between; margin-left: auto; }
-        .nav-icon-top { width: 26px; height: 26px; stroke: var(--primary); stroke-width: 2; fill: none; cursor: pointer; }
-        
-        .side-menu { height: 100%; width: 0; position: fixed; top: 0; left: 0; max-width: 36cm; background: var(--nav); z-index: 9999; transition: 0.3s; box-shadow: 2px 0 10px rgba(0,0,0,0.2); padding-top: 80px; overflow-x: hidden; }
-        .side-menu a { padding: 20px 30px; text-decoration: none; font-size: 20px; color: var(--text); display: flex; align-items: center; gap: 15px; border-bottom: 1px solid var(--border); }
-        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 40px; cursor: pointer; }
-        .menu-dropdown-trigger { padding: 20px 30px; font-size: 20px; display: flex; align-items: center; gap: 15px; cursor: pointer; border-bottom: 1px solid var(--border); color: var(--text); border-top: 5px solid var(--primary); }
-        .dropdown-container { display: none; background: rgba(0,0,0,0.03); }
-        .dropdown-container a { padding: 15px 30px 15px 65px !important; font-size: 18px; border-bottom: none !important; }
-        .arrow { margin-left: auto; transition: transform 0.3s; font-size: 12px; }
-        .rotate { transform: rotate(180deg); }
-        .new-badge { font-size: 10px; font-weight: 800; color: var(--primary); border: 1.5px solid var(--primary); padding: 2px 5px; border-radius: 4px; margin-left: auto; }
-        .btn-catalog { background: var(--primary) !important; color: #ffffff !important; padding: 12px 30px !important; width: calc(100% - 60px) !important; margin: 10px 30px !important; border-radius: 10px !important; display: flex; align-items: center; justify-content: center; gap: 10px !important; text-decoration: none !important; font-weight: 600 !important; }
-        .theme-btn { background: var(--bg); color: var(--text); border: 1px solid var(--border); padding: 12px; width: calc(100% - 60px); margin: 10px 30px; cursor: pointer; border-radius: 10px; font-size: 16px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .menu-divider { padding: 20px 30px 10px 30px; text-align: center; }
-        .menu-title { color: var(--primary); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-        
-        .wrapper { flex-grow: 1; padding-top: 20px; margin-left: 10px; }
-        .card { background: var(--nav); padding: 25px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
-        .price { font-weight: bold; font-size: 20px; color: var(--primary); display: block; margin: 10px 0; }
-        .btn-buy { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; width: 100%; font-size: 18px; font-weight: 600; }
-        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9998; }
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 36cm; left: 50%; transform: translateX(-50%); background: var(--nav); display: flex; justify-content: space-around; padding: 8px 0; border-top: 1px solid var(--border); z-index: 1000; }
-        .bottom-nav a { text-decoration: none; font-size: 10px; display: flex; flex-direction: column; align-items: center; gap: 4px; color: #777; }
-        .nav-icon { width: 22px; height: 22px; stroke: var(--primary); stroke-width: 2; fill: none; }
-        
-        @media (max-width: 900px) { 
-            .sidebar-desktop, .btn-catalog-nav, .nav-right-icons a:not(:first-child) { display: none; }
-            .nav-right-icons { width: auto; }
-        }
-    </style>
-</head>
-<body>
-    <div id="overlay" class="overlay" onclick="toggleMenu(0)"></div>
-    <div id="sideNav" class="side-menu">
-        <span class="close-btn" onclick="toggleMenu(0)">&times;</span>
-        <a href="catalog.html" class="btn-catalog"><svg class="nav-icon" viewBox="0 0 24 24" style="stroke: #ffffff; width: 20px; height: 20px;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> Catalog</a>
-        <a href="index.html"><svg class="nav-icon" viewBox="0 0 207 182" style="stroke-width: 12;"><path d="M103.5 0L0 91.6667H25.875V181.667H81.1875V127.167H125.812V181.667H181.125V91.6667H207L103.5 0Z"/></svg> Home</a>
-        <a href="new-arrivals.html"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> New Arrivals <span class="new-badge">NEW</span></a>
-        <a href="cart.html"><svg class="nav-icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Cart</a>
-        <a href="track-order.html"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> Track Order</a>
-        <a href="chat.html"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Chat with TABANJI</a>
-        <div class="menu-divider"><hr style="border: 0; border-top: 1px solid var(--primary); margin-bottom: 10px;"><div class="menu-title">Company Information</div></div>
-        <a href="about.html"><svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg> About Us</a>
-        <a href="terms.html"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Terms of Use</a>
-        <a href="contacts.html"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Contacts</a>
-        <a href="categories.html"><svg class="nav-icon" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg> All Categories</a>
-        <div class="menu-divider"><hr style="border: 0; border-top: 1px solid var(--primary); margin-bottom: 10px;"><div class="menu-title">Help</div></div>
-        <a href="shipping.html"><svg class="nav-icon" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Shipping & Payment</a>
-        <a href="warranty.html"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Warranty</a>
-        <a href="returns.html"><svg class="nav-icon" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Returns Policy</a>
-        <div class="menu-dropdown-trigger" onclick="toggleDropdown()"><span>Services</span> <span class="arrow">▼</span></div>
-        <div id="servicesDropdown" class="dropdown-container">
-            <a href="bonus.html">Bonus Account</a>
-            <a href="card.html">Tabanji Card</a>
-            <a href="gift.html">Gift Certificates</a>
-            <a href="corporate.html">Corporate Clients</a>
-        </div>
-        <button onclick="toggleTheme()" class="theme-btn"><span>🌙</span> Night Mode</button>
+Ось що у мене вийшло в фіналі:  <!DOCTYPE html>
+
+<html lang="en"><head><meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TABANJI - Home</title>
+
+<style>
+
+    * { box-sizing: border-box; }
+
+    :root { --primary: #007bff; --bg: #f4f4f9; --text: #333; --nav: #ffffff; --border: #eee; }
+
+    .dark-mode { --primary: #3795ff; --bg: #121212; --text: #ffffff; --nav: #1e1e1e; --border: #333; }
+
+    
+
+    body { font-family: -apple-system, system-ui, sans-serif; margin: 0; background-color: var(--bg); color: var(--text); padding-bottom: 80px; }
+
+    
+
+    nav { background: var(--nav); padding: 10px 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; max-width: 36cm; margin: 0 auto; gap: 10px; }
+
+    .page-container { max-width: 36cm; margin: 0 auto; display: flex; align-items: flex-start; gap: 20px; padding: 0 20px 20px 20px; }
+
+    
+
+    .sidebar-desktop { width: 265px; background: var(--nav); border: 1px solid var(--border); border-radius: 0 0 10px 10px; padding: 10px 0; flex-shrink: 0; position: sticky; top: 0; align-self: flex-start; margin-left: -20px; }
+
+    .sidebar-desktop a { padding: 12px 20px 12px 25px; text-decoration: none; color: var(--text); display: flex; align-items: center; gap: 10px; font-size: 14px; }
+
+    .sidebar-desktop a:first-child { width: 7cm; }
+
+    
+
+    .burger { cursor: pointer; display: flex; flex-direction: column; gap: 5px; margin-right: 10px; }
+
+    .burger span { width: 22px; height: 2px; background: var(--text); }
+
+    .logo { color: var(--primary); font-size: 20px; font-weight: 800; text-decoration: none; white-space: nowrap; margin-right: 10px; }
+
+    
+
+    .btn-catalog-nav { background: var(--primary); color: #fff; padding: 8px 15px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+
+    .search-wrapper { flex-grow: 1; max-width: 20cm; display: flex; align-items: center; background: #f8f8f8; border: 1px solid #ccc; border-radius: 6px; height: 38px; overflow: hidden; }
+
+    .search-icon-fixed { width: 20px; height: 20px; stroke: var(--primary); stroke-width: 2.5; fill: none; margin-left: 10px; flex-shrink: 0; }
+
+    .search-bar { width: 100%; height: 100%; padding: 0 10px; border: none; background: transparent; outline: none; min-width: 0; }
+
+    .clear-btn { background: none; border: none; cursor: pointer; font-size: 20px; color: #999; padding: 0 10px; display: none; align-items: center; justify-content: center; height: 100%; flex-shrink: 0; }
+
+    .btn-search { background: var(--primary); color: white; border: none; padding: 0 20px; height: 100%; cursor: pointer; font-weight: 600; flex-shrink: 0; }
+
+    
+
+    .nav-right-icons { display: flex; align-items: center; width: 3.6cm; justify-content: space-between; margin-left: auto; }
+
+    .nav-icon-top { width: 26px; height: 26px; stroke: var(--primary); stroke-width: 2; fill: none; cursor: pointer; }
+
+    
+
+    .side-menu { height: 100%; width: 0; position: fixed; top: 0; left: 0; max-width: 36cm; background: var(--nav); z-index: 9999; transition: 0.3s; box-shadow: 2px 0 10px rgba(0,0,0,0.2); padding-top: 80px; overflow-x: hidden; }
+
+    .side-menu a { padding: 20px 30px; text-decoration: none; font-size: 20px; color: var(--text); display: flex; align-items: center; gap: 15px; border-bottom: 1px solid var(--border); }
+
+    .close-btn { position: absolute; top: 20px; right: 25px; font-size: 40px; cursor: pointer; }
+
+    .menu-dropdown-trigger { padding: 20px 30px; font-size: 20px; display: flex; align-items: center; gap: 15px; cursor: pointer; border-bottom: 1px solid var(--border); color: var(--text); border-top: 5px solid var(--primary); }
+
+    .dropdown-container { display: none; background: rgba(0,0,0,0.03); }
+
+    .dropdown-container a { padding: 15px 30px 15px 65px !important; font-size: 18px; border-bottom: none !important; }
+
+    .arrow { margin-left: auto; transition: transform 0.3s; font-size: 12px; }
+
+    .rotate { transform: rotate(180deg); }
+
+    .new-badge { font-size: 10px; font-weight: 800; color: var(--primary); border: 1.5px solid var(--primary); padding: 2px 5px; border-radius: 4px; margin-left: auto; }
+
+    .btn-catalog { background: var(--primary) !important; color: #ffffff !important; padding: 12px 30px !important; width: calc(100% - 60px) !important; margin: 10px 30px !important; border-radius: 10px !important; display: flex; align-items: center; justify-content: center; gap: 10px !important; text-decoration: none !important; font-weight: 600 !important; }
+
+    .theme-btn { background: var(--bg); color: var(--text); border: 1px solid var(--border); padding: 12px; width: calc(100% - 60px); margin: 10px 30px; cursor: pointer; border-radius: 10px; font-size: 16px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; }
+
+    .menu-divider { padding: 20px 30px 10px 30px; text-align: center; }
+
+    .menu-title { color: var(--primary); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    
+
+    .wrapper { flex-grow: 1; padding-top: 20px; margin-left: 10px; }
+
+    .card { background: var(--nav); padding: 25px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+
+    .price { font-weight: bold; font-size: 20px; color: var(--primary); display: block; margin: 10px 0; }
+
+    .btn-buy { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; width: 100%; font-size: 18px; font-weight: 600; }
+
+    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9998; }
+
+    .bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 36cm; left: 50%; transform: translateX(-50%); background: var(--nav); display: flex; justify-content: space-around; padding: 8px 0; border-top: 1px solid var(--border); z-index: 1000; }
+
+    .bottom-nav a { text-decoration: none; font-size: 10px; display: flex; flex-direction: column; align-items: center; gap: 4px; color: #777; }
+
+    .nav-icon { width: 22px; height: 22px; stroke: var(--primary); stroke-width: 2; fill: none; }
+
+    
+
+    @media (max-width: 900px) { 
+
+        .sidebar-desktop, .btn-catalog-nav, .nav-right-icons a:not(:first-child) { display: none; }
+
+        .nav-right-icons { width: auto; }
+
+    }
+
+</style>
+
+</head><body><div id="overlay" class="overlay" onclick="toggleMenu(0)"></div>
+
+<div id="sideNav" class="side-menu">
+
+    <span class="close-btn" onclick="toggleMenu(0)">&times;</span>
+
+    <a href="catalog.html" class="btn-catalog"><svg class="nav-icon" viewBox="0 0 24 24" style="stroke: #ffffff; width: 20px; height: 20px;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> Catalog</a>
+
+    <a href="index.html"><svg class="nav-icon" viewBox="0 0 207 182" style="stroke-width: 12;"><path d="M103.5 0L0 91.6667H25.875V181.667H81.1875V127.167H125.812V181.667H181.125V91.6667H207L103.5 0Z"/></svg> Home</a>
+
+    <a href="new-arrivals.html"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> New Arrivals <span class="new-badge">NEW</span></a>
+
+    <a href="cart.html"><svg class="nav-icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Cart</a>
+
+    <a href="track-order.html"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> Track Order</a>
+
+    <a href="chat.html"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Chat with TABANJI</a>
+
+    <div class="menu-divider"><hr style="border: 0; border-top: 1px solid var(--primary); margin-bottom: 10px;"><div class="menu-title">Company Information</div></div>
+
+    <a href="about.html"><svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg> About Us</a>
+
+    <a href="terms.html"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Terms of Use</a>
+
+    <a href="contacts.html"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Contacts</a>
+
+    <a href="categories.html"><svg class="nav-icon" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg> All Categories</a>
+
+    <div class="menu-divider"><hr style="border: 0; border-top: 1px solid var(--primary); margin-bottom: 10px;"><div class="menu-title">Help</div></div>
+
+    <a href="shipping.html"><svg class="nav-icon" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Shipping & Payment</a>
+
+    <a href="warranty.html"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Warranty</a>
+
+    <a href="returns.html"><svg class="nav-icon" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Returns Policy</a>
+
+    <div class="menu-dropdown-trigger" onclick="toggleDropdown()"><span>Services</span> <span class="arrow">▼</span></div>
+
+    <div id="servicesDropdown" class="dropdown-container">
+
+        <a href="bonus.html">Bonus Account</a>
+
+        <a href="card.html">Tabanji Card</a>
+
+        <a href="gift.html">Gift Certificates</a>
+
+        <a href="corporate.html">Corporate Clients</a>
+
     </div>
 
-    <nav>
-        <div class="burger" onclick="toggleMenu(300)"><span></span><span></span><span></span></div>
-        <a href="index.html" class="logo">TABANJI</a>
-        <a href="catalog.html" class="btn-catalog-nav">
-            <svg class="nav-icon" viewBox="0 0 24 24" style="stroke: #ffffff; width: 16px; height: 16px;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-            Catalog
-        </a>
-        <div class="search-wrapper">
-            <svg class="search-icon-fixed" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input type="text" id="searchInput" class="search-bar" placeholder="Search..." oninput="toggleClearBtn()">
-            <button id="clearBtn" class="clear-btn" onclick="clearSearch()">&times;</button>
-            <button class="btn-search">Search</button>
-        </div>
-        <div class="nav-right-icons">
-            <a href="login.html"><svg class="nav-icon-top" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
-            <a href="compare.html"><svg class="nav-icon-top" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></a>
-            <a href="cart.html"><svg class="nav-icon-top" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></a>
-        </div>
-    </nav>
+    <button onclick="toggleTheme()" class="theme-btn"><span>🌙</span> Night Mode</button>
 
-    <div class="page-container">
-        <div class="sidebar-desktop">
-            <a href="laptops-computers.html">💻 Laptops & Computers</a>
-            <a href="electronics.html">📱 Smartphones, TV & Electronics</a>
-            <a href="gaming.html">🎮 Gaming</a>
-            <a href="home-appliances.html">❄️ Home Appliances</a>
-            <a href="home-living.html">🏠 Home & Living</a>
-            <a href="auto-moto.html">🚗 Auto & Moto</a>
-            <a href="tools.html">🛠 Tools & Equipment</a>
-            <a href="plumbing.html">🔧 Plumbing & Renovation</a>
-            <a href="garden.html">🌿 Garden & Outdoors</a>
-            <a href="sports.html">🏀 Sports & Hobbies</a>
-            <a href="clothing.html">👕 Clothing, Footwear & Accessories</a>
-            <a href="health-beauty.html">💄 Health & Beauty</a>
-            <a href="kids.html">🧸 Baby & Kids</a>
-            <a href="pets.html">🐾 Pet Supplies</a>
-            <a href="office.html">📚 Office, School & Books</a>
-            <a href="food.html">🍷 Food & Beverages</a>
-            <a href="household.html">🧼 Household Supplies</a>
-            <a href="energy.html">⚡ Energy Solutions</a>
-            <a href="gifts.html">🎁 Gifts & Souvenirs</a>
-            <a href="sale.html">🔥 Clearance Sale up to –60%</a>
-            <a href="best-sellers.html">⭐ Best Sellers</a>
-            <a href="promotions.html">🏷 All Promotions</a>
-        </div>
-        <div class="wrapper">
-            <div class="card"><h3>iPhone 16 Pro</h3><span class="price">$1,199</span><button class="btn-buy">Buy</button></div>
-        </div>
+</div>
+
+
+
+<nav>
+
+    <div class="burger" onclick="toggleMenu(300)"><span></span><span></span><span></span></div>
+
+    <a href="index.html" class="logo">TABANJI</a>
+
+    <a href="catalog.html" class="btn-catalog-nav">
+
+        <svg class="nav-icon" viewBox="0 0 24 24" style="stroke: #ffffff; width: 16px; height: 16px;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+
+        Catalog
+
+    </a>
+
+    <div class="search-wrapper">
+
+        <svg class="search-icon-fixed" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search..." oninput="toggleClearBtn()">
+
+        <button id="clearBtn" class="clear-btn" onclick="clearSearch()">&times;</button>
+
+        <button class="btn-search">Search</button>
+
     </div>
 
-    <div class="bottom-nav">
-        <a href="index.html"><svg class="nav-icon" viewBox="0 0 207 182" style="stroke-width: 12;"><path d="M103.5 0L0 91.6667H25.875V181.667H81.1875V127.167H125.812V181.667H181.125V91.6667H207L103.5 0Z"/></svg> Home</a>
-        <a href="catalog.html"><svg class="nav-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> Catalog</a>
-        <a href="cart.html"><svg class="nav-icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Cart</a>
-        <a href="compare.html"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Favorite</a>
-        <a href="chat.html"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Chat</a>
+    <div class="nav-right-icons">
+
+        <a href="login.html"><svg class="nav-icon-top" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+
+        <a href="compare.html"><svg class="nav-icon-top" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></a>
+
+        <a href="cart.html"><svg class="nav-icon-top" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></a>
+
     </div>
 
-    <script>
-        const sideNav = document.getElementById("sideNav");
-        const overlay = document.getElementById("overlay");
-        function toggleMenu(w) { sideNav.style.width = w + "px"; overlay.style.display = w > 0 ? "block" : "none"; }
-        function toggleClearBtn() { const input = document.getElementById("searchInput"); const btn = document.getElementById("clearBtn"); btn.style.display = input.value.length > 0 ? "flex" : "none"; }
-        function clearSearch() { const input = document.getElementById("searchInput"); input.value = ""; toggleClearBtn(); input.focus(); }
-        function toggleDropdown() { const drop = document.getElementById("servicesDropdown"); const arrow = document.querySelector(".arrow"); drop.style.display = (drop.style.display === "block") ? "none" : "block"; arrow.classList.toggle("rotate"); }
-        function toggleTheme() { document.body.classList.toggle('dark-mode'); localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light'); }
-        if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
-    </script>
+</nav>
+
+
+
+<div class="page-container">
+
+    <div class="sidebar-desktop">
+
+        <a href="laptops-computers.html">💻 Laptops & Computers</a>
+
+        <a href="electronics.html">📱 Smartphones, TV & Electronics</a>
+
+        <a href="gaming.html">🎮 Gaming</a>
+
+        <a href="home-appliances.html">❄️ Home Appliances</a>
+
+        <a href="home-living.html">🏠 Home & Living</a>
+
+        <a href="auto-moto.html">🚗 Auto & Moto</a>
+
+        <a href="tools.html">🛠 Tools & Equipment</a>
+
+        <a href="plumbing.html">🔧 Plumbing & Renovation</a>
+
+        <a href="garden.html">🌿 Garden & Outdoors</a>
+
+        <a href="sports.html">🏀 Sports & Hobbies</a>
+
+        <a href="clothing.html">👕 Clothing, Footwear & Accessories</a>
+
+        <a href="health-beauty.html">💄 Health & Beauty</a>
+
+        <a href="kids.html">🧸 Baby & Kids</a>
+
+        <a href="pets.html">🐾 Pet Supplies</a>
+
+        <a href="office.html">📚 Office, School & Books</a>
+
+        <a href="food.html">🍷 Food & Beverages</a>
+
+        <a href="household.html">🧼 Household Supplies</a>
+
+        <a href="energy.html">⚡ Energy Solutions</a>
+
+        <a href="gifts.html">🎁 Gifts & Souvenirs</a>
+
+        <a href="sale.html">🔥 Clearance Sale up to –60%</a>
+
+        <a href="best-sellers.html">⭐ Best Sellers</a>
+
+        <a href="promotions.html">🏷 All Promotions</a>
+
+    </div>
+
+<div class="wrapper">
+
+
+<!-- ================= HERO BANNER ================= -->
+
+
+<section class="hero-banner">
+
+
+<div class="hero-content">
+
+
+<h1>
+Welcome to TABANJI
+</h1>
+
+
+<p>
+Technology, Electronics, Home & Lifestyle
+</p>
+
+
+<button>
+Shop Now
+</button>
+
+
+</div>
+
+
+
+<div class="hero-image">
+
+<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800"
+alt="Technology">
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<!-- ================= QUICK CATEGORIES ================= -->
+
+
+<section class="home-section">
+
+
+<h2>
+Popular Categories
+</h2>
+
+
+
+<div class="category-cards">
+
+
+
+<a href="laptops-computers.html" class="home-category">
+
+<div class="category-icon">
+
+<svg viewBox="0 0 24 24">
+
+<rect x="3" y="4" width="18" height="12" rx="2"/>
+
+<line x1="2" y1="20" x2="22" y2="20"/>
+
+</svg>
+
+</div>
+
+
+<span>
+Laptops & Computers
+</span>
+
+
+</a>
+
+
+
+
+
+<a href="electronics.html" class="home-category">
+
+
+<div class="category-icon">
+
+<svg viewBox="0 0 24 24">
+
+<rect x="6" y="2" width="12" height="20" rx="2"/>
+
+<circle cx="12" cy="18" r="1"/>
+
+</svg>
+
+</div>
+
+
+<span>
+Smartphones
+</span>
+
+
+</a>
+
+
+
+
+
+<a href="gaming.html" class="home-category">
+
+
+<div class="category-icon">
+
+<svg viewBox="0 0 24 24">
+
+<circle cx="12" cy="12" r="10"/>
+
+<path d="M8 12h8"/>
+
+<path d="M12 8v8"/>
+
+</svg>
+
+
+</div>
+
+
+<span>
+Gaming
+</span>
+
+
+</a>
+
+
+
+
+
+
+<a href="home-appliances.html" class="home-category">
+
+
+<div class="category-icon">
+
+
+<svg viewBox="0 0 24 24">
+
+<path d="M6 2h12v20H6z"/>
+
+<line x1="8" y1="6" x2="16" y2="6"/>
+
+</svg>
+
+
+</div>
+
+
+<span>
+Appliances
+</span>
+
+
+</a>
+
+
+
+
+
+<a href="clothing.html" class="home-category">
+
+
+<div class="category-icon">
+
+
+<svg viewBox="0 0 24 24">
+
+<path d="M20 7l-5-4-3 3-3-3-5 4 3 4v10h10V11z"/>
+
+</svg>
+
+
+</div>
+
+
+<span>
+Fashion
+</span>
+
+
+</a>
+
+
+
+
+<a href="tools.html" class="home-category">
+
+
+<div class="category-icon">
+
+
+<svg viewBox="0 0 24 24">
+
+<path d="M14.7 6.3a5 5 0 0 0-6.4 6.4L3 18l3 3 5.3-5.3a5 5 0 0 0 6.4-6.4z"/>
+
+</svg>
+
+
+</div>
+
+
+<span>
+Tools
+</span>
+
+
+</a>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<!-- ================= SPECIAL OFFER ================= -->
+
+
+<section class="offer-box">
+
+
+<div>
+
+
+<h2>
+🔥 Special Offers
+</h2>
+
+
+<p>
+Discover the best deals from TABANJI
+</p>
+
+
+</div>
+
+
+
+<a href="sale.html">
+
+View All
+
+</a>
+
+
+
+</section>
+
+<!-- ================= FEATURED PRODUCTS ================= -->
+
+
+<section class="home-section">
+
+
+<h2>
+⭐ Featured Products
+</h2>
+
+
+
+<div class="products-grid">
+
+
+
+
+
+<div class="product-card">
+
+
+<div class="product-image">
+
+<img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600"
+alt="Smartphone">
+
+</div>
+
+
+<h3>
+Smartphone Pro Max
+</h3>
+
+
+<div class="rating">
+★★★★★
+</div>
+
+
+<span class="price">
+$899
+</span>
+
+
+<button class="btn-buy">
+Add to Cart
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="product-card">
+
+
+<div class="product-image">
+
+<img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600"
+alt="Laptop">
+
+</div>
+
+
+<h3>
+Gaming Laptop RTX
+</h3>
+
+
+<div class="rating">
+★★★★★
+</div>
+
+
+<span class="price">
+$1299
+</span>
+
+
+<button class="btn-buy">
+Add to Cart
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="product-card">
+
+
+<div class="product-image">
+
+<img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600"
+alt="Watch">
+
+</div>
+
+
+<h3>
+Smart Watch
+</h3>
+
+
+<div class="rating">
+★★★★☆
+</div>
+
+
+<span class="price">
+$199
+</span>
+
+
+<button class="btn-buy">
+Add to Cart
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="product-card">
+
+
+<div class="product-image">
+
+<img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=600"
+alt="Computer">
+
+</div>
+
+
+<h3>
+Professional PC
+</h3>
+
+
+<div class="rating">
+★★★★★
+</div>
+
+
+<span class="price">
+$1899
+</span>
+
+
+<button class="btn-buy">
+Add to Cart
+</button>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- ================= NEW ARRIVALS ================= -->
+
+
+<section class="home-section">
+
+
+<h2>
+🆕 New Arrivals
+</h2>
+
+
+
+<div class="products-grid">
+
+
+
+
+
+<div class="product-card">
+
+
+<div class="product-image">
+
+<img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600">
+
+</div>
+
+
+<h3>
+Premium Sneakers
+</h3>
+
+
+<div class="rating">
+★★★★★
+</div>
+
+
+<span class="price">
+$120
+</span>
+
+
+<button class="btn-buy">
+Add to Cart
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="product-card">
+
+
+<div class="product-image">
+
+<img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=600">
+
+</div>
+
+
+<h3>
+Fashion Jacket
+</h3>
+
+
+<div class="rating">
+★★★★☆
+</div>
+
+
+<span class="price">
+$150
+</span>
+
+
+<button class="btn-buy">
+Add to Cart
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="product-card">
+
+
+<div class="product-image">
+
+<img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600">
+
+</div>
+
+
+<h3>
+Modern Sofa
+</h3>
+
+
+<div class="rating">
+★★★★★
+</div>
+
+
+<span class="price">
+$700
+</span>
+
+
+<button class="btn-buy">
+Add to Cart
+</button>
+
+
+</div>
+
+
+
+
+
+
+<div class="product-card">
+
+
+<div class="product-image">
+
+<img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600">
+
+</div>
+
+
+<h3>
+Mechanical Keyboard
+</h3>
+
+
+<div class="rating">
+★★★★★
+</div>
+
+
+<span class="price">
+$90
+</span>
+
+
+<button class="btn-buy">
+Add to Cart
+</button>
+
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
+
+<!-- ================= HOT DEALS ================= -->
+
+
+<section class="home-section">
+
+
+<h2>
+🔥 Hot Deals
+</h2>
+
+
+
+<div class="deals-container">
+
+
+
+<div class="deal-card">
+
+
+<div class="discount">
+-40%
+</div>
+
+
+<h3>
+Gaming Laptop RTX 5070
+</h3>
+
+
+<p>
+High performance gaming laptop
+</p>
+
+
+<div class="old-price">
+$2200
+</div>
+
+
+<div class="deal-price">
+$1320
+</div>
+
+
+<button class="btn-buy">
+Buy Now
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="deal-card">
+
+
+<div class="discount">
+-30%
+</div>
+
+
+<h3>
+Smart TV 65"
+</h3>
+
+
+<p>
+4K Ultra HD Smart Television
+</p>
+
+
+<div class="old-price">
+$900
+</div>
+
+
+<div class="deal-price">
+$630
+</div>
+
+
+<button class="btn-buy">
+Buy Now
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="deal-card">
+
+
+<div class="discount">
+-50%
+</div>
+
+
+<h3>
+Wireless Headphones
+</h3>
+
+
+<p>
+Premium sound quality
+</p>
+
+
+<div class="old-price">
+$200
+</div>
+
+
+<div class="deal-price">
+$100
+</div>
+
+
+<button class="btn-buy">
+Buy Now
+</button>
+
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- ================= TABANJI ADVANTAGES ================= -->
+
+
+<section class="advantages">
+
+
+
+<div class="advantage-card">
+
+
+<div class="adv-icon">
+🚚
+</div>
+
+
+<h3>
+Fast Delivery
+</h3>
+
+
+<p>
+Worldwide shipping and quick delivery
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="advantage-card">
+
+
+<div class="adv-icon">
+🛡
+</div>
+
+
+<h3>
+Warranty
+</h3>
+
+
+<p>
+Official warranty for products
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="advantage-card">
+
+
+<div class="adv-icon">
+💳
+</div>
+
+
+<h3>
+Secure Payment
+</h3>
+
+
+<p>
+Safe and protected transactions
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="advantage-card">
+
+
+<div class="adv-icon">
+💬
+</div>
+
+
+<h3>
+24/7 Support
+</h3>
+
+
+<p>
+TABANJI customer service
+</p>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- ================= POPULAR BRANDS ================= -->
+
+
+<section class="home-section">
+
+
+<h2>
+🏢 Popular Brands
+</h2>
+
+
+
+<div class="brands-grid">
+
+
+
+<div class="brand-card">
+Apple
+</div>
+
+
+<div class="brand-card">
+Samsung
+</div>
+
+
+<div class="brand-card">
+ASUS
+</div>
+
+
+<div class="brand-card">
+Lenovo
+</div>
+
+
+<div class="brand-card">
+Sony
+</div>
+
+
+<div class="brand-card">
+LG
+</div>
+
+
+<div class="brand-card">
+Bosch
+</div>
+
+
+<div class="brand-card">
+Xiaomi
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- ================= CUSTOMER REVIEWS ================= -->
+
+
+<section class="home-section">
+
+
+<h2>
+⭐ Customer Reviews
+</h2>
+
+
+
+<div class="reviews-grid">
+
+
+
+
+
+<div class="review-card">
+
+
+<div class="rating">
+★★★★★
+</div>
+
+
+<p>
+"Excellent store! Fast delivery and great products."
+</p>
+
+
+<strong>
+Alex
+</strong>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="review-card">
+
+
+<div class="rating">
+★★★★★
+</div>
+
+
+<p>
+"Very beautiful website design and good service."
+</p>
+
+
+<strong>
+Michael
+</strong>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="review-card">
+
+
+<div class="rating">
+★★★★☆
+</div>
+
+
+<p>
+"Quality products, I will order again."
+</p>
+
+
+<strong>
+David
+</strong>
+
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
+
+<style>
+
+
+/* ================= HOME SECTIONS ================= */
+
+
+.home-section{
+
+    max-width:36cm;
+
+    margin:25px auto;
+
+    padding:0 20px;
+
+}
+
+
+
+.home-section h2{
+
+    font-size:26px;
+
+    margin-bottom:20px;
+
+    color:var(--primary);
+
+    font-weight:800;
+
+}
+
+
+
+
+
+/* ================= PRODUCTS ================= */
+
+
+.products-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
+
+}
+
+
+
+.product-card{
+
+    background:var(--nav);
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:15px;
+
+    transition:.3s;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.08);
+
+}
+
+
+
+.product-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+
+}
+
+
+
+.product-image{
+
+    width:100%;
+
+    height:180px;
+
+    overflow:hidden;
+
+    border-radius:12px;
+
+}
+
+
+
+.product-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+
+.product-card h3{
+
+    margin:15px 0 8px;
+
+    font-size:17px;
+
+}
+
+
+
+.rating{
+
+    color:#ffb400;
+
+    font-size:18px;
+
+    margin:5px 0;
+
+}
+
+
+
+.price{
+
+    display:block;
+
+    font-size:22px;
+
+    color:var(--primary);
+
+    font-weight:800;
+
+    margin:10px 0;
+
+}
+
+
+
+.btn-buy{
+
+    width:100%;
+
+    background:var(--primary);
+
+    color:white;
+
+    border:none;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    transition:.3s;
+
+}
+
+
+
+.btn-buy:hover{
+
+    opacity:.85;
+
+}
+
+
+
+
+
+/* ================= HOT DEALS ================= */
+
+
+
+.deals-container{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+}
+
+
+
+.deal-card{
+
+    background:var(--nav);
+
+    border-radius:15px;
+
+    padding:25px;
+
+    border:1px solid var(--border);
+
+    position:relative;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.1);
+
+}
+
+
+
+.discount{
+
+    position:absolute;
+
+    top:15px;
+
+    right:15px;
+
+    background:#ff3b30;
+
+    color:white;
+
+    padding:8px 12px;
+
+    border-radius:20px;
+
+    font-weight:800;
+
+}
+
+
+
+.old-price{
+
+    text-decoration:line-through;
+
+    color:#999;
+
+    font-size:16px;
+
+}
+
+
+
+.deal-price{
+
+    color:var(--primary);
+
+    font-size:28px;
+
+    font-weight:900;
+
+    margin:10px 0 20px;
+
+}
+
+
+
+
+
+/* ================= ADVANTAGES ================= */
+
+
+.advantages{
+
+    max-width:36cm;
+
+    margin:30px auto;
+
+    padding:20px;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
+
+}
+
+
+
+.advantage-card{
+
+    background:var(--nav);
+
+    border-radius:15px;
+
+    padding:25px;
+
+    text-align:center;
+
+    border:1px solid var(--border);
+
+}
+
+
+
+.adv-icon{
+
+    font-size:40px;
+
+    margin-bottom:10px;
+
+}
+
+
+
+.advantage-card h3{
+
+    color:var(--primary);
+
+}
+
+
+
+
+
+/* ================= BRANDS ================= */
+
+
+
+.brands-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(8,1fr);
+
+    gap:15px;
+
+}
+
+
+
+.brand-card{
+
+    background:var(--nav);
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    padding:20px 10px;
+
+    text-align:center;
+
+    font-weight:800;
+
+    transition:.3s;
+
+}
+
+
+
+.brand-card:hover{
+
+    background:var(--hover);
+
+    color:var(--primary);
+
+}
+
+
+
+
+
+/* ================= REVIEWS ================= */
+
+
+
+.reviews-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+}
+
+
+
+.review-card{
+
+    background:var(--nav);
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:25px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+
+}
+
+
+
+
+
+/* ================= MOBILE ================= */
+
+
+
+@media(max-width:1200px){
+
+
+.products-grid{
+
+grid-template-columns:repeat(3,1fr);
+
+}
+
+
+.brands-grid{
+
+grid-template-columns:repeat(4,1fr);
+
+}
+
+
+}
+
+
+
+@media(max-width:900px){
+
+
+
+.home-section{
+
+padding:0 10px;
+
+}
+
+
+
+.home-section h2{
+
+font-size:22px;
+
+}
+
+
+
+
+.products-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+gap:12px;
+
+}
+
+
+
+.product-image{
+
+height:140px;
+
+}
+
+
+
+
+.product-card{
+
+padding:10px;
+
+}
+
+
+
+
+.deals-container{
+
+grid-template-columns:1fr;
+
+}
+
+
+
+.advantages{
+
+grid-template-columns:repeat(2,1fr);
+
+padding:10px;
+
+}
+
+
+
+.brands-grid{
+
+grid-template-columns:repeat(3,1fr);
+
+}
+
+
+
+.reviews-grid{
+
+grid-template-columns:1fr;
+
+}
+
+
+
+}
+
+
+
+
+
+@media(max-width:500px){
+
+
+
+.products-grid{
+
+grid-template-columns:1fr;
+
+}
+
+
+
+.product-image{
+
+height:200px;
+
+}
+
+
+
+.advantages{
+
+grid-template-columns:1fr;
+
+}
+
+
+
+.brand-card{
+
+padding:15px 5px;
+
+font-size:14px;
+
+}
+
+
+
+.deal-card{
+
+padding:20px;
+
+}
+
+
+
+}
+
+
+
+</style>
+
+
+</div>
+
+
+
+<div class="bottom-nav">
+
+    <a href="index.html"><svg class="nav-icon" viewBox="0 0 207 182" style="stroke-width: 12;"><path d="M103.5 0L0 91.6667H25.875V181.667H81.1875V127.167H125.812V181.667H181.125V91.6667H207L103.5 0Z"/></svg> Home</a>
+
+    <a href="catalog.html"><svg class="nav-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> Catalog</a>
+
+    <a href="cart.html"><svg class="nav-icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Cart</a>
+
+    <a href="compare.html"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Favorite</a>
+
+    <a href="chat.html"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Chat</a>
+
+</div>
+
+
+
+<script>
+
+    const sideNav = document.getElementById("sideNav");
+
+    const overlay = document.getElementById("overlay");
+
+    function toggleMenu(w) { sideNav.style.width = w + "px"; overlay.style.display = w > 0 ? "block" : "none"; }
+
+    function toggleClearBtn() { const input = document.getElementById("searchInput"); const btn = document.getElementById("clearBtn"); btn.style.display = input.value.length > 0 ? "flex" : "none"; }
+
+    function clearSearch() { const input = document.getElementById("searchInput"); input.value = ""; toggleClearBtn(); input.focus(); }
+
+    function toggleDropdown() { const drop = document.getElementById("servicesDropdown"); const arrow = document.querySelector(".arrow"); drop.style.display = (drop.style.display === "block") ? "none" : "block"; arrow.classList.toggle("rotate"); }
+
+    function toggleTheme() { document.body.classList.toggle('dark-mode'); localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light'); }
+
+    if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
+
+</script>
+
 </body>
 </html>
+
