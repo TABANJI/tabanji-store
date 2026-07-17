@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   "use strict";
-  const data = typeof products !== "undefined" && Array.isArray(products) ? products : [];
-  const categoryData = typeof categories !== "undefined" && Array.isArray(categories) ? categories : [];
+  const data = window.TabanjiCatalog?.getProducts() || [];
+  const categoryData = window.TabanjiCatalog?.getCategories() || [];
   const store = window.TabanjiStore;
   const $ = (id) => document.getElementById(id);
   const els = {
@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function themeToggle(){const dark=!document.body.classList.contains("dark-mode");themeApply(dark);try{localStorage.setItem("theme",dark?"dark":"light")}catch{}}
   function initTheme(){let saved=null;try{saved=localStorage.getItem("theme")}catch{}themeApply(saved?saved==="dark":matchMedia("(prefers-color-scheme: dark)").matches);els.theme.addEventListener("click",themeToggle);els.drawerTheme.addEventListener("click",themeToggle)}
 
-  fillForm();renderFilterOptions();renderHeading();setTimeout(renderAll,40);initTheme();if(store)store.updateHeaderCounters();
+  fillForm();renderFilterOptions();renderHeading();initTheme();if(store)store.updateHeaderCounters();
   els.form.addEventListener("change",()=>{if(innerWidth>900){readForm();renderAll()}});
   els.form.addEventListener("submit",event=>{event.preventDefault();readForm();renderAll();closeLayer(els.panel,els.filterOverlay,els.openFilters)});
   els.clear.addEventListener("click",clearFilters);els.emptyClear.addEventListener("click",clearFilters);

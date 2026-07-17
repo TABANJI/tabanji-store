@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   "use strict";
 
-  const categoryList = typeof categories !== "undefined" && Array.isArray(categories) ? categories : [];
+  const categoryList = window.TabanjiCatalog?.getCategories() || [];
   const desktopList = document.getElementById("desktopCategoryList");
   const megaPanel = document.getElementById("megaPanel");
   const mobileList = document.getElementById("mobileCategoryList");
@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let selectedSearchIndex = -1;
   let currentSearchItems = [];
   let lastFocusedBeforeDrawer = null;
+  const debounce = (callback, delay = 160) => { let timer; return (...args) => { clearTimeout(timer); timer = window.setTimeout(() => callback(...args), delay); }; };
 
   const slugify = (value) => String(value)
     .normalize("NFD")
@@ -382,7 +383,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function initializeSearch() {
-    searchInput.addEventListener("input", () => renderSearchResults(searchInput.value));
+    searchInput.addEventListener("input", debounce(() => renderSearchResults(searchInput.value)));
     searchInput.addEventListener("focus", () => {
       if (searchInput.value.trim()) renderSearchResults(searchInput.value);
     });

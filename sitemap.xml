@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- TODO: Replace https://example.invalid with the production origin. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://example.invalid/index.html</loc></url>
+  <url><loc>https://example.invalid/catalog.html</loc></url>
+  <url><loc>https://example.invalid/products.html</loc></url>
+  <url><loc>https://example.invalid/about.html</loc></url>
+  <url><loc>https://example.invalid/contact.html</loc></url>
+  <url><loc>https://example.invalid/shipping.html</loc></url>
+  <url><loc>https://example.invalid/returns.html</loc></url>
+  <url><loc>https://example.invalid/faq.html</loc></url>
+  <url><loc>https://example.invalid/privacy.html</loc></url>
+  <url><loc>https://example.invalid/terms.html</loc></url>
+</urlset>

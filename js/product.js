@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   "use strict";
-  const allProducts=typeof products!=="undefined"&&Array.isArray(products)?products:[];
-  const allCategories=typeof categories!=="undefined"&&Array.isArray(categories)?categories:[];
+  const allProducts=window.TabanjiCatalog?.getProducts()||[];
+  const allCategories=window.TabanjiCatalog?.getCategories()||[];
   const store=window.TabanjiStore||null,$=id=>document.getElementById(id),id=new URLSearchParams(location.search).get("id"),product=allProducts.find(item=>item.id===id);
   const els={content:$("productContent"),empty:$("emptyState"),breadcrumb:$("breadcrumb"),title:$("productTitle"),badge:$("badge"),brand:$("brandLink"),sku:$("sku"),seller:$("seller"),rating:$("rating"),reviewsLink:$("reviewsLink"),stock:$("stock"),desc:$("shortDescription"),old:$("oldPrice"),price:$("price"),discount:$("discount"),delivery:$("delivery"),low:$("lowStock"),qty:$("quantity"),minus:$("quantityMinus"),plus:$("quantityPlus"),cart:$("addToCart"),buy:$("buyNow"),favorite:$("favoriteButton"),compare:$("compareButton"),mainImage:$("mainImage"),thumbs:$("thumbnails"),prev:$("galleryPrev"),next:$("galleryNext"),lightbox:$("lightbox"),lightboxImage:$("lightboxImage"),toast:$("toast"),drawer:$("drawer"),menuOverlay:$("menuOverlay"),openMenu:$("openMenu"),closeMenu:$("closeMenu"),theme:$("themeToggle"),drawerTheme:$("drawerTheme"),search:$("searchInput"),searchForm:$("searchForm"),suggestions:$("suggestions"),formModal:$("formModal"),demoForm:$("demoForm")};
   let gallery=[],galleryIndex=0,suggestionItems=[],suggestionIndex=-1,toastTimer,lastFocus=null,activeModal=null;

@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",()=>{"use strict";let theme="light";try{theme=localStorage.getItem("theme")==="dark"?"dark":"light"}catch{}document.body.classList.toggle("dark",theme==="dark");document.getElementById("retry").addEventListener("click",()=>location.reload())});

@@ -1,0 +1,19 @@
+{
+  "name": "TABANJI",
+  "short_name": "TABANJI",
+  "description": "A modern demo marketplace for technology, home and lifestyle products.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f5f7fb",
+  "theme_color": "#007bff",
+  "lang": "en",
+  "categories": ["shopping", "lifestyle"],
+  "icons": [
+    { "src": "icons/tabanji-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/tabanji-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/tabanji-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/tabanji-512.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

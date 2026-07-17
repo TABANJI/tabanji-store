@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /account.html
+Disallow: /login.html
+Disallow: /cart.html
+Disallow: /checkout.html
+Disallow: /compare.html
+Disallow: /favorites.html
+Disallow: /search.html
+Disallow: /offline.html
+Disallow: /*-before-*.html
+
+# TODO: replace example.invalid after selecting the production domain.
+Sitemap: https://example.invalid/sitemap.xml
