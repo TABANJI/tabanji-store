@@ -1,5 +1,5 @@
 "use strict";
-const VERSION = "v2";
+const VERSION = "v3";
 const STATIC_CACHE = `tabanji-static-${VERSION}`;
 const PAGES_CACHE = `tabanji-pages-${VERSION}`;
 const RUNTIME_CACHE = `tabanji-runtime-${VERSION}`;
