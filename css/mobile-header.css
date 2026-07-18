@@ -16,6 +16,7 @@
   .header-inner a[href="cart.html"] small,.header-inner a.header-action[href="cart.html"]>span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
   .header-inner a[href="cart.html"] [data-counter]{position:absolute;z-index:2;top:-2px;right:-2px;min-width:19px;max-width:30px;height:19px;padding:0 4px;border-radius:10px;background:#dc2626;color:#fff;font-size:.65rem;line-height:19px;text-align:center;white-space:nowrap;overflow:hidden}
   .category-rail,.product-row,.recommend-grid,.recommendations,.product-scroller{width:100%;max-width:100%;min-width:0;overscroll-behavior-inline:contain;scroll-padding-inline:1px;-webkit-overflow-scrolling:touch}
+  .shop-card{min-width:0}
   .category-rail>*:first-child,.product-row>*:first-child,.recommend-grid>*:first-child{margin-inline-start:1px}
   .category-rail>*:last-child,.product-row>*:last-child,.recommend-grid>*:last-child{margin-inline-end:1px}
   body{padding-bottom:calc(68px + env(safe-area-inset-bottom))}
