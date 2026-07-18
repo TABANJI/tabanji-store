@@ -1,5 +1,5 @@
 @media (max-width:768px){
-  .mobile-nav,.mobile,.mobile-bottom-nav{position:fixed!important;z-index:200;right:0;bottom:0;left:0;width:100%;max-width:100%;min-height:calc(64px + env(safe-area-inset-bottom));display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;padding:0 0 env(safe-area-inset-bottom);border-top:1px solid var(--border);background:#101827;color:#cbd5e1;box-shadow:0 -5px 20px #0003}
+  .mobile-nav,.mobile,.mobile-bottom-nav{position:fixed!important;z-index:200;right:0;bottom:0;left:0;width:100%;max-width:100%;min-height:calc(64px + env(safe-area-inset-bottom));display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;padding:0 0 env(safe-area-inset-bottom);border-top:1px solid var(--border);background:#101827;color:#cbd5e1;box-shadow:0 -5px 20px #0003}
   .mobile-nav a,.mobile a,.mobile-bottom-nav a{position:relative;min-width:0;min-height:64px;display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:5px 2px;color:#cbd5e1;font-size:.7rem;text-align:center;overflow:visible}
   .mobile-nav a>span,.mobile a>span,.mobile-bottom-nav a>span{font-size:1.15rem;line-height:1}
   .mobile-nav a>small,.mobile a>small,.mobile-bottom-nav a>small{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
