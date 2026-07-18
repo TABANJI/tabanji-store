@@ -1,6 +1,6 @@
 @media (max-width:768px){
   .mobile-nav,.mobile,.mobile-bottom-nav{position:fixed!important;z-index:200;right:0;bottom:0;left:0;width:100%;max-width:100%;min-height:calc(64px + env(safe-area-inset-bottom));display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;padding:0 0 env(safe-area-inset-bottom);border-top:1px solid var(--border);background:#101827;color:#cbd5e1;box-shadow:0 -5px 20px #0003}
-  .mobile-nav a,.mobile a,.mobile-bottom-nav a{position:relative;min-width:0;min-height:64px;display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:5px 2px;color:inherit;font-size:11px;text-align:center;text-decoration:none;overflow:visible}
+  .mobile-nav a,.mobile a,.mobile-bottom-nav a{position:relative;min-width:44px;min-height:54px;display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:5px 2px;color:inherit;font-size:11px;line-height:1.15;text-align:center;text-decoration:none;overflow:visible}
   .mobile-nav a>small,.mobile a>small,.mobile-bottom-nav a>small{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .mobile-nav a[aria-current="page"],.mobile a[aria-current="page"],.mobile-bottom-nav a[aria-current="page"]{color:var(--primary,#3795ff);font-weight:800}
   .mobile-nav [data-counter],.mobile [data-counter],.mobile-bottom-nav [data-counter]{position:absolute;top:4px;left:calc(50% + 6px);min-width:18px;max-width:30px;height:18px;padding:0 4px;border-radius:9px;background:#dc2626;color:#fff;font-size:.62rem;line-height:18px;text-align:center;white-space:nowrap;overflow:hidden}
@@ -9,12 +9,14 @@
 @media (min-width:769px){.mobile-nav,.mobile,.mobile-bottom-nav{display:none!important}}
 
 .nav-icon{
-  width:22px;
-  height:22px;
+  width:29px;
+  height:29px;
+  display:block;
+  flex:0 0 auto;
+  overflow:visible;
+  color:currentColor;
   stroke:currentColor;
-  stroke-width:2;
   fill:none;
   stroke-linecap:round;
   stroke-linejoin:round;
-  flex-shrink:0;
 }
