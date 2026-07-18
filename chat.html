@@ -8,12 +8,16 @@
   <title>Support Chat | TABANJI</title>
   <link rel="icon" href="icons/tabanji-192.png" type="image/png">
   <link rel="stylesheet" href="css/chat.css">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/mobile-navigation.css">
+  <script src="js/store.js" defer></script>
   <script src="js/chat.js" defer></script>
+  <script src="js/mobile-navigation.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#chatArea">Skip to conversation</a>
   <div class="menu-overlay" id="menuOverlay" hidden></div>
-  <aside id="sideNav" class="side-menu" aria-hidden="true" aria-label="Store navigation">
+  <aside id="sideNav" class="side-menu site-drawer" aria-hidden="true" aria-label="Store navigation">
     <div class="drawer-head"><a href="index.html" class="logo" aria-label="TABANJI home">TABANJI</a><button id="closeMenu" class="close-btn" type="button" aria-label="Close menu">×</button></div>
     <nav><a href="index.html">Home</a><a href="catalog.html">Catalog</a><a href="new.html">New Arrivals</a></nav>
     <button id="drawerTheme" class="drawer-theme" type="button">Toggle theme</button>
@@ -24,6 +28,7 @@
       <button class="burger" id="openMenu" type="button" aria-label="Open menu" aria-controls="sideNav" aria-expanded="false"><span></span><span></span><span></span></button>
       <a href="index.html" class="logo" aria-label="TABANJI home">TABANJI</a>
       <div class="support-title"><strong>Support Chat</strong><small><span aria-hidden="true"></span>We're here to help</small></div>
+      <a class="header-cart" href="cart.html" aria-label="Shopping cart"><span aria-hidden="true">&#128722;</span><b data-counter="cart">0</b></a>
       <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch theme" aria-pressed="false">☾</button>
     </div>
   </header>
@@ -51,12 +56,11 @@
     </div>
   </main>
 
-  <nav class="bottom-nav" aria-label="Mobile navigation">
+  <nav class="bottom-nav mobile-bottom-nav" aria-label="Mobile navigation">
     <a href="index.html"><span aria-hidden="true">⌂</span><small>Home</small></a>
     <a href="catalog.html"><span aria-hidden="true">▦</span><small>Catalog</small></a>
-    <a href="cart.html"><span aria-hidden="true">🛒</span><small>Cart</small></a>
-    <a href="wishlist.html"><span aria-hidden="true">♡</span><small>Wishlist</small></a>
-    <a href="chat.html" class="active" aria-current="page"><span aria-hidden="true">◌</span><small>Chat</small></a>
+    <a href="compare.html"><span aria-hidden="true">⇄</span><small>Compare</small><b data-counter="compare">0</b></a>
+    <a href="favorites.html"><span aria-hidden="true">♡</span><small>Favorites</small><b data-counter="favorites">0</b></a>
   </nav>
 </body>
 </html>
