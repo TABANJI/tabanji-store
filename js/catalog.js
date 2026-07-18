@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   "use strict";
 
+  window.TabanjiStore?.updateHeaderCounters?.();
+
   const categoryList = window.TabanjiCatalog?.getCategories() || [];
   const desktopList = document.getElementById("desktopCategoryList");
   const megaPanel = document.getElementById("megaPanel");

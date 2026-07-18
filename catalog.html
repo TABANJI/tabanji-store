@@ -50,9 +50,10 @@
 
       <nav class="header-actions" aria-label="Account actions">
         <button class="icon-button theme-toggle" id="themeButton" type="button" aria-label="Switch to dark theme" aria-pressed="false">☾</button>
-        <a class="header-action" href="compare.html" aria-label="Compare products">⇄<span>Compare</span></a>
+        <a class="header-action" href="compare.html" aria-label="Compare products">⇄<span>Compare</span><b data-counter="compare">0</b></a>
+        <a class="header-action" href="favorites.html" aria-label="Favorites">♡<span>Favorites</span><b data-counter="favorites">0</b></a>
         <a class="header-action" href="login.html" aria-label="Your account">◯<span>Account</span></a>
-        <a class="header-action cart-action" href="cart.html" aria-label="Shopping cart">🛒<span>Cart</span></a>
+        <a class="header-action cart-action" href="cart.html" aria-label="Shopping cart">🛒<span>Cart</span><b data-counter="cart">0</b></a>
       </nav>
     </div>
   </header>
@@ -135,6 +136,7 @@
 
   <script src="data/categories.js"></script>
 <script src="js/catalog-repository.js"></script>
+<script src="js/store.js"></script>
 <script src="js/catalog.js"></script>
 </body>
 </html>
