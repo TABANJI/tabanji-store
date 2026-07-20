@@ -37,17 +37,6 @@
     .replace(/^-+|-+$/g, "");
   const categoryUrl = (id) => `products.html?category=${encodeURIComponent(id)}`;
   const subcategoryUrl = (id, name) => `${categoryUrl(id)}&subcategory=${encodeURIComponent(slugify(name))}`;
-  const catalogAnchor = (target) => {
-    const anchor = target.closest?.("a[href]");
-    if (!anchor || anchor.closest(".catalog-browser-overlay")) return null;
-    try {
-      const url = new URL(anchor.href, location.href);
-      return url.origin === location.origin && url.pathname.split("/").pop() === CATALOG_PATH ? anchor : null;
-    } catch {
-      return null;
-    }
-  };
-
   function ensureScript(src, ready) {
     if (ready()) return Promise.resolve();
     const existing = [...document.scripts].find((script) => new URL(script.src || "", location.href).pathname.endsWith(`/${src}`));
@@ -275,14 +264,6 @@
     state.opener = null;
     if (opener?.isConnected && !opener.inert) opener.focus();
   }
-
-  document.addEventListener("click", (event) => {
-    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    const anchor = catalogAnchor(event.target);
-    if (!anchor || anchor.target === "_blank" || anchor.hasAttribute("download")) return;
-    event.preventDefault();
-    openCatalog(anchor);
-  }, true);
 
   window.addEventListener("keydown", (event) => {
     if (!state.overlay || state.overlay.hidden) return;

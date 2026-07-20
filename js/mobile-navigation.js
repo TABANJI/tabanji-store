@@ -20,5 +20,27 @@ document.querySelectorAll("[data-counter]").forEach(capCounter);
 const counterObserver=new MutationObserver(records=>records.forEach(record=>{const badge=record.target;if(badge.matches?.("[data-counter]"))capCounter(badge)}));
 document.querySelectorAll("[data-counter]").forEach(badge=>counterObserver.observe(badge,{childList:true,characterData:true,subtree:true}));
 mobileMedia.addEventListener("change",event=>document.querySelectorAll("[data-counter]").forEach(badge=>{if(event.matches)capCounter(badge);else if(badge.textContent.trim().endsWith("+")&&badge.dataset.actualCount)badge.textContent=badge.dataset.actualCount}));
-import("./catalog-browser.js").catch(()=>{});
+const catalogBrowserModule=import("./catalog-browser.js");
+if(!window.__tabanjiCatalogActivationBound){
+  window.__tabanjiCatalogActivationBound=true;
+  document.addEventListener("click",event=>{
+    if(event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+    const link=event.target.closest?.("a[href]");
+    if(!link||link.target==="_blank"||link.hasAttribute("download"))return;
+    let url;
+    try{url=new URL(link.getAttribute("href"),window.location.href)}catch{return}
+    const isCatalogLink=url.origin===window.location.origin&&url.pathname.replace(/\/+$/,"").endsWith("/catalog.html");
+    if(!isCatalogLink)return;
+    event.preventDefault();
+    link.setAttribute("aria-busy","true");
+    link.classList.add("is-loading-catalog");
+    catalogBrowserModule.then(()=>{
+      if(!window.TabanjiCatalogBrowser?.open)throw new Error("Catalog browser unavailable");
+      return window.TabanjiCatalogBrowser.open(link);
+    }).catch(()=>window.location.assign(url.href)).finally(()=>{
+      link.removeAttribute("aria-busy");
+      link.classList.remove("is-loading-catalog");
+    });
+  },true);
+}
 import("./search-browser.js").catch(()=>{});
