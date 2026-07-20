@@ -210,35 +210,20 @@ export function mount({ items, card, action, e, a }) {
     control.replaceChildren(socialIcon(label));
     social.append(control);
   });
-  community.append(social, e("h2", "", "Get the TABANJI app"));
+  const installHeading = e("h2", "", "Get the TABANJI app");
+  community.append(social, installHeading);
   const installButton = e("button", "mobile-install-button");
   installButton.type = "button";
-  installButton.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 19h14"/></svg><span>Install option unavailable</span>';
-  const installLabel = installButton.querySelector("span"), installHelp = e("div", "mobile-install-help");
-  installHelp.id = "mobileInstallHelp";
-  installHelp.hidden = true;
-  installHelp.setAttribute("role", "region");
-  installHelp.setAttribute("aria-label", "How to install TABANJI");
-  installButton.setAttribute("aria-controls", installHelp.id);
-  installButton.setAttribute("aria-expanded", "false");
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-  const helpSteps = isIOS ? ["Tap the Share button.", "Choose “Add to Home Screen”.", "Confirm."] : ["Open your browser menu.", "Choose “Add to Home screen” or “Install app”.", "Confirm installation."];
-  const helpList = e("ol");
-  helpSteps.forEach(step => helpList.append(e("li", "", step)));
-  const closeInstallHelp = e("button", "mobile-install-help-close", "Close");
-  closeInstallHelp.type = "button";
-  installHelp.append(helpList, closeInstallHelp);
-  const setInstallHelp = open => { installHelp.hidden = !open; installButton.setAttribute("aria-expanded", String(open)); if (open) closeInstallHelp.focus(); };
-  closeInstallHelp.addEventListener("click", () => { setInstallHelp(false); installButton.focus(); });
-  installHelp.addEventListener("keydown", event => { if (event.key === "Escape") { setInstallHelp(false); installButton.focus(); } });
-  let installState = "unavailable";
+  installButton.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 19h14"/></svg><span>Install TABANJI</span>';
+  const installLabel = installButton.querySelector("span");
   const updateInstallButton = state => {
-    installState = state;
+    const unavailable = state === "unavailable";
+    installHeading.hidden = unavailable;
+    installButton.hidden = unavailable;
     installButton.disabled = state === "installed";
-    installLabel.textContent = state === "available" ? "Install TABANJI" : state === "installed" ? "TABANJI is installed" : "How to install TABANJI";
-    if (state !== "unavailable") setInstallHelp(false);
+    installLabel.textContent = state === "installed" ? "TABANJI is installed" : "Install TABANJI";
   };
-  installButton.addEventListener("click", () => installState === "available" ? window.TabanjiPWAInstall?.install() : setInstallHelp(installHelp.hidden));
+  installButton.addEventListener("click", () => window.TabanjiPWAInstall?.install());
   let unsubscribeInstall;
   const connectInstall = () => { if (!unsubscribeInstall) unsubscribeInstall = window.TabanjiPWAInstall?.subscribe(updateInstallButton); };
   connectInstall();
@@ -246,7 +231,7 @@ export function mount({ items, card, action, e, a }) {
     updateInstallButton(matchMedia("(display-mode: standalone)").matches ? "installed" : "unavailable");
     addEventListener("tabanji:pwa-install-ready", connectInstall, { once: true });
   }
-  community.append(installButton, installHelp);
+  community.append(installButton);
 
   const footer = e("div", "mobile-info-footer");
   footer.append(
