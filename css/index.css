@@ -22,8 +22,8 @@ section{padding-top:60px}.section-head{display:flex;align-items:end;justify-cont
   .dots button::before{position:absolute;top:50%;left:50%;width:10px;height:10px;border:2px solid #fff;border-radius:50%;background:transparent;content:"";transform:translate(-50%,-50%);transition:background-color .2s ease,opacity .2s ease;opacity:.62}
   .dots button.active::before{background:#fff;opacity:1}
   #mobileHomeExtras .mobile-benefits{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding-top:14px}
-  #mobileHomeExtras .mobile-benefit-card{min-width:0;min-height:70px;display:flex;align-items:center;gap:9px;padding:10px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}
-  #mobileHomeExtras .mobile-benefit-card svg{width:28px;height:28px;flex:0 0 28px;color:var(--primary)}
+  #mobileHomeExtras .mobile-benefit-card{min-width:0;min-height:62px;display:flex;align-items:center;gap:7px;padding:8px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}
+  #mobileHomeExtras .mobile-benefit-card svg{width:25px;height:25px;flex:0 0 25px;color:var(--primary)}
   #mobileHomeExtras .mobile-benefit-card>span{min-width:0;display:grid;gap:2px}
   #mobileHomeExtras .mobile-benefit-card strong,#mobileHomeExtras .mobile-benefit-card small{overflow:hidden;text-overflow:ellipsis}
   #mobileHomeExtras .mobile-benefit-card strong{display:-webkit-box;font-size:.78rem;line-height:1.15;white-space:normal;-webkit-box-orient:vertical;-webkit-line-clamp:2}
@@ -39,5 +39,35 @@ section{padding-top:60px}.section-head{display:flex;align-items:end;justify-cont
   #mobileHomeExtras .mobile-view-recommendations .price{font-size:1rem}
   #mobileHomeExtras .mobile-view-recommendations .card-actions button{width:32px;height:32px}
   #mobileHomeExtras .mobile-view-recommendations .cart{min-height:36px;margin:0 9px 9px;font-size:.72rem}
+  #mobileHomeExtras [data-action="compare"]{display:none!important}
+  #mobileHomeExtras .mobile-best-offers{padding-top:28px}
+  #mobileHomeExtras .mobile-best-offers .section-head{margin-bottom:12px}
+  #mobileHomeExtras .mobile-best-offers .section-head h2{margin:0;font-size:1.35rem}
+  #mobileHomeExtras .mobile-offers-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  #mobileHomeExtras .mobile-offers-grid .product-card{min-width:0}
+  #mobileHomeExtras .mobile-offers-grid .product-body{padding:10px}
+  #mobileHomeExtras .mobile-offers-grid .product-body strong{min-height:38px;display:-webkit-box;overflow:hidden;font-size:.8rem;line-height:1.25;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+  #mobileHomeExtras .mobile-offers-grid .rating{font-size:.68rem}
+  #mobileHomeExtras .mobile-offers-grid .price{font-size:1rem}
+  #mobileHomeExtras .mobile-offers-grid .card-actions button{width:32px;height:32px}
+  #mobileHomeExtras .mobile-offers-grid .cart{min-height:36px;margin:0 9px 9px;font-size:.72rem}
+  #mobileHomeExtras .mobile-show-more{min-height:44px;display:block;margin:16px auto 0;padding:0 22px;border:0;border-radius:9px;background:var(--primary);color:#fff;font-weight:800}
+  #mobileHomeExtras .mobile-story,#mobileHomeExtras .mobile-community,#mobileHomeExtras .mobile-info-footer{margin-top:32px;padding-top:24px;border-top:1px solid var(--border)}
+  #mobileHomeExtras .mobile-story h2,#mobileHomeExtras .mobile-community h2{margin:0 0 10px;font-size:1.3rem}
+  #mobileHomeExtras .mobile-story h3{margin:18px 0 5px;font-size:1rem}
+  #mobileHomeExtras .mobile-story p{margin:0 0 10px;color:var(--muted);line-height:1.55}
+  #mobileHomeExtras .mobile-story-toggle{padding:6px 0;border:0;background:transparent;color:var(--primary);font-weight:800}
+  #mobileHomeExtras .mobile-socials{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:24px}
+  #mobileHomeExtras .mobile-socials .mobile-future-link{display:flex;align-items:center;justify-content:flex-start;gap:6px}
+  #mobileHomeExtras .mobile-social-mark{width:22px;height:22px;display:grid;flex:0 0 22px;place-items:center;border-radius:50%;background:var(--soft);color:var(--primary);font-size:.72rem;font-weight:900}
+  #mobileHomeExtras .mobile-apps{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  #mobileHomeExtras .mobile-future-link{min-height:42px;padding:7px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--muted)}
+  #mobileHomeExtras .mobile-info-footer{display:grid;grid-template-columns:1fr 1fr;gap:24px 14px;padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+  #mobileHomeExtras .mobile-footer-group h3{margin:0 0 10px;font-size:1rem}
+  #mobileHomeExtras .mobile-footer-links{display:grid;gap:4px}
+  #mobileHomeExtras .mobile-footer-links a,#mobileHomeExtras .mobile-footer-links button{min-height:40px;display:flex;align-items:center;padding:5px 0;border:0;background:transparent;color:var(--muted);font-size:.84rem;text-align:left}
+  #mobileHomeExtras .mobile-back-to-top{position:fixed;z-index:190;right:16px;bottom:calc(82px + env(safe-area-inset-bottom));width:46px;height:46px;border:0;border-radius:50%;background:var(--primary);color:#fff;font-size:1.3rem;box-shadow:0 8px 24px #0004}
+  #mobileHomeExtras .mobile-back-to-top[hidden],#mobileHomeExtras .mobile-show-more[hidden],#mobileHomeExtras .mobile-story-more[hidden]{display:none}
+  .product-card [data-action="compare"]{display:none!important}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;scroll-behavior:auto!important}}
