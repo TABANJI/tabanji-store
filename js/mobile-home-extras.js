@@ -86,9 +86,9 @@ function socialIcon(label) {
     svg.setAttribute("aria-hidden", "true");
     svg.setAttribute("focusable", "false");
     const path = document.createElementNS(namespace, "path"), polygon = document.createElementNS(namespace, "polygon");
-    path.setAttribute("fill", "#FF0000");
+    path.setAttribute("fill", "currentColor");
     path.setAttribute("d", "M43.2,12.5c-0.5-1.8-1.9-3.2-3.7-3.7C36.3,8,24,8,24,8s-12.3,0-15.5,0.8 c-1.8,0.5-3.2,1.9-3.7,3.7C4,15.8,4,24,4,24s0,8.2,0.8,11.5c0.5,1.8,1.9,3.2,3.7,3.7C11.7,40,24,40,24,40s12.3,0,15.5-0.8 c1.8-0.5,3.2-1.9,3.7-3.7C44,32.2,44,24,44,24S44,15.8,43.2,12.5z");
-    polygon.setAttribute("fill", "#FFFFFF");
+    polygon.setAttribute("fill", "var(--surface)");
     polygon.setAttribute("points", "19,31 31,24 19,17");
     svg.append(path, polygon);
     return svg;
@@ -199,8 +199,9 @@ export function mount({ items, card, action, e, a }) {
     { id: "x", label: "X", url: null },
     { id: "telegram", label: "Telegram", url: null }
   ];
-  socialLinks.forEach(({ label, url }) => {
+  socialLinks.forEach(({ id, label, url }) => {
     const control = url ? a("", url, "mobile-future-link") : textButton(e, label, true);
+    control.dataset.social = id;
     if (url) {
       control.target = "_blank";
       control.rel = "noopener noreferrer";
@@ -249,10 +250,21 @@ export function mount({ items, card, action, e, a }) {
 
   const footer = e("div", "mobile-info-footer");
   footer.append(
-    footerGroup(e, a, "Company Information", [["About Us", "about.html"], ["Terms of Use", "terms.html"], ["Contacts", "contact.html"], ["All Categories", "catalog.html"]]),
+    footerGroup(e, a, "Company", [["About Us", "about.html"], ["Terms of Use", "terms.html"], ["Contacts", "contact.html"], ["All Categories", "catalog.html"]]),
     footerGroup(e, a, "Help", [["Delivery and Payment", "shipping.html"], ["Warranty", ""], ["Returns", "returns.html"], ["Service Centers", ""]]),
     footerGroup(e, a, "Services", [["Bonus Account", ""], ["TABANJI Card", "account.html"], ["Gift Certificates", ""], ["Business Customers", ""]])
   );
+
+  const footerClosing = e("div", "mobile-footer-closing"), payments = e("section", "mobile-payment-methods");
+  payments.append(e("h3", "", "Payment methods"));
+  const paymentBadges = e("div", "mobile-payment-badges");
+  ["Card", "Cash on Delivery", "Bank Transfer"].forEach(label => paymentBadges.append(e("span", "", label)));
+  payments.append(paymentBadges);
+  const security = e("div", "mobile-security-row");
+  security.innerHTML = '<span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 5 6v5c0 4.5 2.8 8.2 7 10 4.2-1.8 7-5.5 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>Secure payments</span><span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>SSL protected</span>';
+  const copyright = e("div", "mobile-copyright", "© 2026 TABANJI. All rights reserved.");
+  footerClosing.append(payments, security, copyright);
+  footer.append(footerClosing);
 
   const backToTop = e("button", "mobile-back-to-top", "↑");
   backToTop.type = "button";
