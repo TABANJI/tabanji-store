@@ -3,10 +3,6 @@
 
   const CART_PATHS = [
     ["path", { d: "M6 10H12L17 21M17 21H55L50 39C49.4 41.2 47.4 42.8 45.1 43L20 45L16 52H48", stroke: "currentColor", "stroke-width": "4", "stroke-linecap": "round", "stroke-linejoin": "round" }],
-    ["path", { d: "M19 26H49", stroke: "currentColor", "stroke-width": "3", "stroke-linecap": "round" }],
-    ["path", { d: "M20 34H47", stroke: "currentColor", "stroke-width": "3", "stroke-linecap": "round" }],
-    ["path", { d: "M28 22L29 42", stroke: "currentColor", "stroke-width": "3", "stroke-linecap": "round" }],
-    ["path", { d: "M39 22L38 42", stroke: "currentColor", "stroke-width": "3", "stroke-linecap": "round" }],
     ["circle", { cx: "23", cy: "56", r: "4", fill: "currentColor" }],
     ["circle", { cx: "45", cy: "56", r: "4", fill: "currentColor" }]
   ];
@@ -30,7 +26,7 @@
   function replaceCartGlyph(link, drawer = false) {
     if (link.querySelector(".navigation-cart-icon")) return;
     [...link.childNodes].filter(node => node.nodeType === Node.TEXT_NODE).forEach(node => node.remove());
-    const legacyIcon = link.querySelector(":scope > span:first-child");
+    const legacyIcon = link.querySelector(":scope > svg:first-child, :scope > span:first-child");
     if (legacyIcon && !legacyIcon.matches("small, [data-counter]")) legacyIcon.remove();
     const icon = cartIcon();
     link.prepend(icon);
@@ -43,9 +39,15 @@
     document.querySelectorAll('.drawer a[href="cart.html"], .site-drawer a[href="cart.html"]').forEach(link => replaceCartGlyph(link, true));
   }
 
+  window.TabanjiNavigationIcons = { cartIcon, upgrade: install };
+
   const style = document.createElement("style");
   style.textContent = ".navigation-cart-icon{display:block;width:26px;height:26px;flex:0 0 26px;color:inherit}.drawer .navigation-cart-icon,.site-drawer .navigation-cart-icon{width:24px;height:24px;flex-basis:24px;margin-right:8px}";
   document.head.append(style);
+  new MutationObserver(records => {
+    if (records.some(record => [...record.addedNodes].some(node => node.nodeType === Node.ELEMENT_NODE))) install();
+  }).observe(document.documentElement, { childList: true, subtree: true });
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", install, { once: true });
   else install();
+  window.dispatchEvent(new CustomEvent("tabanji:navigation-icons-ready"));
 })();

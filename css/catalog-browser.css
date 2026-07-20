@@ -3,10 +3,11 @@
   z-index: 1200;
   inset: 0;
   display: grid;
-  padding: clamp(18px, 4vh, 44px) 18px;
+  padding: 0 18px;
   background: rgba(3, 8, 16, .78);
   color: var(--text, #172033);
-  place-items: center;
+  align-items: start;
+  justify-items: center;
   overscroll-behavior: contain;
 }
 
@@ -23,11 +24,13 @@ body.catalog-browser-open {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   width: min(1180px, 100%);
-  height: min(820px, calc(100dvh - clamp(36px, 8vh, 88px)));
-  min-height: 580px;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  max-height: none;
   overflow: hidden;
   border: 1px solid var(--border, #2c394b);
-  border-radius: 22px;
+  border-radius: 0;
   background: var(--surface, #171f2c);
   box-shadow: 0 32px 90px rgba(0, 0, 0, .48);
 }
