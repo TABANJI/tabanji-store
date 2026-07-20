@@ -43,19 +43,23 @@ section{padding-top:60px}.section-head{display:flex;align-items:end;justify-cont
   #mobileHomeExtras .mobile-best-offers{padding-top:28px}
   #mobileHomeExtras .mobile-best-offers .section-head{margin-bottom:12px}
   #mobileHomeExtras .mobile-best-offers .section-head h2{margin:0;font-size:1.35rem}
-  #mobileHomeExtras .mobile-offers-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-  #mobileHomeExtras .mobile-offers-grid .product-card{min-width:0}
+  #mobileHomeExtras .mobile-offers-grid{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:row;gap:10px;overflow:visible}
+  #mobileHomeExtras .mobile-offers-grid .product-card{width:100%;min-width:0;max-width:100%;align-self:stretch}
   #mobileHomeExtras .mobile-offers-grid .product-body{padding:10px}
   #mobileHomeExtras .mobile-offers-grid .product-body strong{min-height:38px;display:-webkit-box;overflow:hidden;font-size:.8rem;line-height:1.25;-webkit-box-orient:vertical;-webkit-line-clamp:2}
   #mobileHomeExtras .mobile-offers-grid .rating{font-size:.68rem}
   #mobileHomeExtras .mobile-offers-grid .price{font-size:1rem}
   #mobileHomeExtras .mobile-offers-grid .card-actions button{width:32px;height:32px}
   #mobileHomeExtras .mobile-offers-grid .cart{min-height:36px;margin:0 9px 9px;font-size:.72rem}
-  #mobileHomeExtras .mobile-show-more{min-height:44px;display:block;margin:16px auto 0;padding:0 22px;border:0;border-radius:9px;background:var(--primary);color:#fff;font-weight:800}
-  #mobileHomeExtras .mobile-story,#mobileHomeExtras .mobile-community,#mobileHomeExtras .mobile-info-footer{margin-top:32px;padding-top:24px;border-top:1px solid var(--border)}
+  #mobileHomeExtras .mobile-show-more{min-height:44px;display:block;margin:32px auto 0;padding:0 22px;border:0;border-radius:9px;background:var(--primary);color:#fff;font-weight:800}
+  #mobileHomeExtras .mobile-story{margin-top:60px;padding-top:24px;border-top:1px solid var(--border)}
+  #mobileHomeExtras .mobile-community,#mobileHomeExtras .mobile-info-footer{margin-top:32px;padding-top:24px;border-top:1px solid var(--border)}
   #mobileHomeExtras .mobile-story h2,#mobileHomeExtras .mobile-community h2{margin:0 0 10px;font-size:1.3rem}
   #mobileHomeExtras .mobile-story h3{margin:18px 0 5px;font-size:1rem}
   #mobileHomeExtras .mobile-story p{margin:0 0 10px;color:var(--muted);line-height:1.55}
+  #mobileHomeExtras .mobile-story-excerpt{position:relative;max-width:100%}
+  #mobileHomeExtras .mobile-story.is-collapsed .mobile-story-excerpt{max-height:9.3em;overflow:hidden}
+  #mobileHomeExtras .mobile-story.is-collapsed .mobile-story-excerpt::after{position:absolute;right:0;bottom:0;left:0;height:3.2em;background:linear-gradient(transparent,var(--bg));content:"";pointer-events:none}
   #mobileHomeExtras .mobile-story-toggle{padding:6px 0;border:0;background:transparent;color:var(--primary);font-weight:800}
   #mobileHomeExtras .mobile-socials{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:24px}
   #mobileHomeExtras .mobile-socials .mobile-future-link{display:flex;align-items:center;justify-content:flex-start;gap:6px}

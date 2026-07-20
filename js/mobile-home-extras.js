@@ -109,14 +109,14 @@ export function mount({ items, card, action, e, a }) {
   renderBatch();
   offersSection.append(offersHeading, offersGrid, showMore);
 
-  const story = e("section", "mobile-story"), storyIntro = e("p", "", "TABANJI is a modern online marketplace created to make everyday shopping simpler, faster and more convenient. Technology, home products, fashion, tools, gaming, beauty and other essentials come together in one place."), storyMore = e("div", "mobile-story-more");
+  const story = e("section", "mobile-story is-collapsed"), storyIntro = e("p", "mobile-story-excerpt", "TABANJI is a modern online marketplace created to make everyday shopping simpler, faster and more convenient. Technology, home products, fashion, tools, gaming, beauty and other essentials come together in one place."), storyMore = e("div", "mobile-story-more");
   story.append(e("h2", "", "A simpler way to shop"), storyIntro);
   [["Our Vision", "We make useful products easier to discover with clear categories, practical filters and dependable marketplace information."], ["Why TABANJI", "Transparent product details, favorites and comparisons on product pages help shoppers make confident choices."], ["We Care About Your Choice", "Our goal is to help every visitor find suitable products quickly and order through a secure, straightforward experience."], ["Shopping Made Simpler", "From discovery to delivery information, TABANJI keeps the journey organized and easy to understand."]].forEach(([title, copy]) => storyMore.append(e("h3", "", title), e("p", "", copy)));
   storyMore.hidden = true;
   const storyToggle = e("button", "mobile-story-toggle", "Read full ↓");
   storyToggle.type = "button";
   storyToggle.setAttribute("aria-expanded", "false");
-  storyToggle.addEventListener("click", () => { const expanded = storyToggle.getAttribute("aria-expanded") !== "true"; storyToggle.setAttribute("aria-expanded", String(expanded)); storyToggle.textContent = expanded ? "Collapse ↑" : "Read full ↓"; storyMore.hidden = !expanded; });
+  storyToggle.addEventListener("click", () => { const expanded = storyToggle.getAttribute("aria-expanded") !== "true"; storyToggle.setAttribute("aria-expanded", String(expanded)); storyToggle.textContent = expanded ? "Collapse ↑" : "Read full ↓"; storyMore.hidden = !expanded; story.classList.toggle("is-collapsed", !expanded); });
   story.append(storyMore, storyToggle);
 
   const community = e("section", "mobile-community");
