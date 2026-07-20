@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Browse TABANJI product departments and subcategories in one compact catalog.">
+  <meta name="tabanji-catalog-version" content="7">
   <title>Catalog of Products | TABANJI</title>
   <link rel="canonical" href="catalog.html">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23007bff'/><text x='32' y='43' text-anchor='middle' font-size='34' fill='white'>T</text></svg>">
@@ -15,62 +16,57 @@
   <meta name="theme-color" content="#007bff">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="css/catalog.css">
-  <link rel="stylesheet" href="css/catalog-browser.css">
+  <link rel="stylesheet" href="css/catalog-browser.css?v=7">
+  <link rel="stylesheet" href="css/catalog.css?v=7">
   <link rel="stylesheet" href="css/mobile-navigation.css">
   <link rel="stylesheet" href="css/pwa.css">
   <script src="data/categories.js" defer></script>
   <script src="data/products.js" defer></script>
   <script src="js/catalog-repository.js" defer></script>
   <script src="js/store.js" defer></script>
-  <script src="js/catalog-browser-core.js" defer></script>
-  <script src="js/catalog.js" defer></script>
+  <script src="js/catalog-browser-core.js?v=7" defer></script>
+  <script src="js/catalog.js?v=7" defer></script>
   <script src="js/pwa.js" defer></script>
 </head>
-<body>
+<body class="catalog-page">
   <a class="skip-link" href="#catalogDepartments">Skip to departments</a>
 
-  <main class="catalog-stage" id="mainContent">
-    <section class="catalog-browser" aria-labelledby="catalogTitle">
-      <header class="catalog-topbar">
-        <div>
-          <a class="catalog-logo" href="index.html" aria-label="TABANJI home">TABANJI</a>
-          <h1 id="catalogTitle">Catalog of products</h1>
+  <div class="catalog-page-shell">
+    <header class="catalog-mobile-header" data-catalog-ui-version="7">
+      <button class="catalog-page-close" id="closeCatalog" type="button" aria-label="Back from catalog">‹</button>
+      <h1>Catalog of products</h1>
+      <span class="catalog-header-spacer" aria-hidden="true"></span>
+    </header>
+
+    <main class="catalog-browser-layout" id="mainContent">
+      <nav class="catalog-department-rail" id="catalogDepartments" aria-label="Product departments">
+        <div class="catalog-browser-departments" id="departmentList" role="tablist" aria-orientation="vertical">
+          <button class="catalog-browser-department" type="button" aria-selected="true" disabled>Loading catalog</button>
+          <button class="catalog-browser-department" type="button" aria-selected="false" disabled>Departments</button>
         </div>
-        <button class="catalog-close" id="closeCatalog" type="button" aria-label="Close catalog">
-          <span aria-hidden="true">×</span>
-        </button>
-      </header>
+      </nav>
 
-      <div class="catalog-search">
-        <label class="sr-only" for="catalogSearch">Search departments and categories</label>
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <circle cx="11" cy="11" r="7"></circle>
-          <path d="m20 20-4-4"></path>
-        </svg>
-        <input id="catalogSearch" type="search" placeholder="Search categories" autocomplete="off">
-        <button id="clearCatalogSearch" type="button" aria-label="Clear category search" hidden>×</button>
-      </div>
-
-      <div class="catalog-columns">
-        <nav class="department-rail" id="catalogDepartments" aria-label="Product departments">
-          <div class="department-list" id="departmentList" role="tablist" aria-orientation="vertical"></div>
-        </nav>
-
-        <section class="subcategory-pane" id="subcategoryPane" tabindex="-1" aria-live="polite">
-          <div id="subcategoryContent"></div>
-          <div class="catalog-empty" id="catalogEmpty" hidden>
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <circle cx="11" cy="11" r="7"></circle>
-              <path d="m20 20-4-4"></path>
-            </svg>
-            <h2>No categories found</h2>
-            <p>Try a different category name.</p>
+      <section class="catalog-subcategory-pane catalog-browser-content" id="subcategoryPane" tabindex="-1" aria-live="polite">
+        <div id="subcategoryContent">
+          <header class="catalog-browser-content-header">
+            <p>Department</p>
+            <h2>Loading catalog…</h2>
+          </header>
+          <div class="catalog-static-loading" role="status">
+            <span>Preparing categories</span>
+            <span>Loading subcategories</span>
+            <span>Checking available products</span>
           </div>
-        </section>
-      </div>
-    </section>
-  </main>
+          <noscript>
+            <div class="catalog-load-failure">
+              <strong>Catalog could not be loaded</strong>
+              <a href="catalog.html">Reload</a>
+            </div>
+          </noscript>
+        </div>
+      </section>
+    </main>
+  </div>
 
   <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
     <a href="index.html">Home</a>

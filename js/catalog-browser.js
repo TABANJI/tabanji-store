@@ -1,7 +1,7 @@
 (() => {
   "use strict";
   if (window.TabanjiCatalogBrowser) return;
-  const VERSION = "v6";
+  const VERSION = "7";
   const debug = window.__TABANJI_CATALOG_DEBUG__ || null;
   const log = (message, error = null) => {
     if (!debug) return;
@@ -17,7 +17,7 @@
   };
   const stylesheet = document.createElement("link");
   stylesheet.rel = "stylesheet";
-  stylesheet.href = `css/catalog-browser.css?${VERSION}`;
+  stylesheet.href = `css/catalog-browser.css?v=${VERSION}`;
   stylesheet.dataset.catalogBrowserStyles = "";
   if (!document.querySelector("link[data-catalog-browser-styles]")) document.head.append(stylesheet);
 
@@ -42,7 +42,7 @@
       await ensureScript("data/categories.js", () => false);
       await ensureScript("data/products.js", () => false);
       await ensureScript("js/catalog-repository.js", () => Boolean(window.TabanjiCatalog));
-      await ensureScript(`js/catalog-browser-core.js?${VERSION}`, () => Boolean(window.TabanjiCatalogBrowserCore));
+      await ensureScript(`js/catalog-browser-core.js?v=${VERSION}`, () => Boolean(window.TabanjiCatalogBrowserCore));
       if (!window.TabanjiCatalog || !window.TabanjiCatalogBrowserCore) throw new Error("Catalog dependencies unavailable");
     })();
     return state.loading;

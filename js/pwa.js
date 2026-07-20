@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   "use strict";
-  import("./mobile-navigation.js?v=6").catch(() => {});
+  import("./mobile-navigation.js?v=7").catch(() => {});
   if (!["http:", "https:"].includes(location.protocol) || !("serviceWorker" in navigator)) return;
   let installEvent = null, refreshRequested = false, reloading = false, primaryHandler = () => {};
   const notice = document.createElement("div"), message = document.createElement("span"), primary = document.createElement("button"), dismiss = document.createElement("button");

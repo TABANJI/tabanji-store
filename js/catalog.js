@@ -6,7 +6,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const search = document.getElementById("catalogSearch");
   const clear = document.getElementById("clearCatalogSearch");
   const close = document.getElementById("closeCatalog");
-  if (!departments || !content || !window.TabanjiCatalogBrowserCore) return;
+  if (!departments || !content) return;
+  if (!window.TabanjiCatalogBrowserCore || !window.TabanjiCatalog) {
+    const failure = document.createElement("div");
+    failure.className = "catalog-load-failure";
+    const message = document.createElement("strong");
+    message.textContent = "Catalog could not be loaded";
+    const reload = document.createElement("button");
+    reload.type = "button";
+    reload.textContent = "Reload";
+    reload.addEventListener("click", () => location.reload());
+    failure.append(message, reload);
+    departments.replaceChildren();
+    content.replaceChildren(failure);
+    return;
+  }
   departments.classList.add("catalog-browser-departments");
   pane.classList.add("catalog-browser-content");
   const controller = window.TabanjiCatalogBrowserCore.mount({
