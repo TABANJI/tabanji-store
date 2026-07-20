@@ -21,23 +21,23 @@ section{padding-top:60px}.section-head{display:flex;align-items:end;justify-cont
   .dots button,.dots button.active{position:relative;width:24px;height:24px;padding:0;border:0;border-radius:50%;background:transparent;opacity:1;transform:none}
   .dots button::before{position:absolute;top:50%;left:50%;width:10px;height:10px;border:2px solid #fff;border-radius:50%;background:transparent;content:"";transform:translate(-50%,-50%);transition:background-color .2s ease,opacity .2s ease;opacity:.62}
   .dots button.active::before{background:#fff;opacity:1}
-  .mobile-benefits{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding-top:14px}
-  .mobile-benefit-card{min-width:0;min-height:70px;display:flex;align-items:center;gap:9px;padding:10px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}
-  .mobile-benefit-card svg{width:28px;height:28px;flex:0 0 28px;color:var(--primary)}
-  .mobile-benefit-card>span{min-width:0;display:grid;gap:2px}
-  .mobile-benefit-card strong,.mobile-benefit-card small{overflow:hidden;text-overflow:ellipsis}
-  .mobile-benefit-card strong{display:-webkit-box;font-size:.78rem;line-height:1.15;white-space:normal;-webkit-box-orient:vertical;-webkit-line-clamp:2}
-  .mobile-benefit-card small{color:var(--muted);font-size:.66rem;line-height:1.2;white-space:normal}
-  .mobile-view-recommendations{padding-top:24px}
-  .mobile-view-recommendations .section-head{margin-bottom:12px}
-  .mobile-view-recommendations .section-head h2{margin:0;font-size:1.28rem;line-height:1.15}
-  .mobile-view-recommendations .product-row{gap:10px;padding-bottom:4px;overscroll-behavior-inline:contain}
-  .mobile-view-recommendations .product-card{width:150px;min-width:150px}
-  .mobile-view-recommendations .product-body{padding:10px}
-  .mobile-view-recommendations .product-body strong{min-height:38px;display:-webkit-box;overflow:hidden;font-size:.78rem;line-height:1.25;-webkit-box-orient:vertical;-webkit-line-clamp:2}
-  .mobile-view-recommendations .rating{font-size:.68rem}
-  .mobile-view-recommendations .price{font-size:1rem}
-  .mobile-view-recommendations .card-actions button{width:32px;height:32px}
-  .mobile-view-recommendations .cart{min-height:36px;margin:0 9px 9px;font-size:.72rem}
+  #mobileHomeExtras .mobile-benefits{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding-top:14px}
+  #mobileHomeExtras .mobile-benefit-card{min-width:0;min-height:70px;display:flex;align-items:center;gap:9px;padding:10px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}
+  #mobileHomeExtras .mobile-benefit-card svg{width:28px;height:28px;flex:0 0 28px;color:var(--primary)}
+  #mobileHomeExtras .mobile-benefit-card>span{min-width:0;display:grid;gap:2px}
+  #mobileHomeExtras .mobile-benefit-card strong,#mobileHomeExtras .mobile-benefit-card small{overflow:hidden;text-overflow:ellipsis}
+  #mobileHomeExtras .mobile-benefit-card strong{display:-webkit-box;font-size:.78rem;line-height:1.15;white-space:normal;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+  #mobileHomeExtras .mobile-benefit-card small{color:var(--muted);font-size:.66rem;line-height:1.2;white-space:normal}
+  #mobileHomeExtras .mobile-view-recommendations{padding-top:24px}
+  #mobileHomeExtras .mobile-view-recommendations .section-head{margin-bottom:12px}
+  #mobileHomeExtras .mobile-view-recommendations .section-head h2{margin:0;font-size:1.28rem;line-height:1.15}
+  #mobileHomeExtras .mobile-view-recommendations .product-row{gap:10px;padding-bottom:4px;overscroll-behavior-inline:contain}
+  #mobileHomeExtras .mobile-view-recommendations .product-card{width:150px;min-width:150px}
+  #mobileHomeExtras .mobile-view-recommendations .product-body{padding:10px}
+  #mobileHomeExtras .mobile-view-recommendations .product-body strong{min-height:38px;display:-webkit-box;overflow:hidden;font-size:.78rem;line-height:1.25;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+  #mobileHomeExtras .mobile-view-recommendations .rating{font-size:.68rem}
+  #mobileHomeExtras .mobile-view-recommendations .price{font-size:1rem}
+  #mobileHomeExtras .mobile-view-recommendations .card-actions button{width:32px;height:32px}
+  #mobileHomeExtras .mobile-view-recommendations .cart{min-height:36px;margin:0 9px 9px;font-size:.72rem}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;scroll-behavior:auto!important}}
