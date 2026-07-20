@@ -94,6 +94,16 @@ export function mount({ items, card, action, e, a }) {
   if (!matchMedia(MOBILE_QUERY).matches || document.getElementById(ROOT_ID)) return;
   const root = e("div", "mobile-home-extras");
   root.id = ROOT_ID;
+  const legacyNodes = [
+    "popularCategories",
+    "deals",
+    "recommended",
+    "newArrivals",
+    "brands",
+    "shopByCategory"
+  ].map(id => document.getElementById(id)?.closest("section")).filter(Boolean);
+  document.querySelectorAll("main > .container > .why, main > .container > .newsletter, body > footer").forEach(node => legacyNodes.push(node));
+  legacyNodes.forEach(node => node.classList.add("mobile-legacy-home-section"));
 
   const benefits = e("section", "mobile-benefits");
   [["card", "TABANJI Card", "Shopping with benefits"], ["delivery", "Smart Subscription", "Free delivery"]].forEach(([icon, title, subtitle]) => {
@@ -177,7 +187,10 @@ export function mount({ items, card, action, e, a }) {
   root.append(benefits, recommendationSection, offersSection, story, accentDivider, community, footer, backToTop);
   document.querySelector(".hero-layout")?.after(root);
   updateBackToTop();
-  cleanup = () => removeEventListener("scroll", updateBackToTop);
+  cleanup = () => {
+    removeEventListener("scroll", updateBackToTop);
+    legacyNodes.forEach(node => node.classList.remove("mobile-legacy-home-section"));
+  };
 }
 
 window.TabanjiMobileHomeExtras = { remove };
