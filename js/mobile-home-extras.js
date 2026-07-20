@@ -62,6 +62,28 @@ function footerGroup(e, a, title, entries) {
   return group;
 }
 
+function socialIcon(label) {
+  const namespace = "http://www.w3.org/2000/svg", svg = document.createElementNS(namespace, "svg");
+  svg.setAttribute("viewBox", "0 0 32 32");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  const circle = document.createElementNS(namespace, "circle"), mark = document.createElementNS(namespace, "text");
+  Object.entries({ cx: 16, cy: 16, r: 13, fill: "none", stroke: "currentColor", "stroke-width": 2 }).forEach(([key, value]) => circle.setAttribute(key, value));
+  Object.entries({ x: 16, y: 20, "text-anchor": "middle", fill: "currentColor", "font-size": 12, "font-weight": 800 }).forEach(([key, value]) => mark.setAttribute(key, value));
+  mark.textContent = label === "YouTube" ? "Y" : label.slice(0, 1);
+  svg.append(circle, mark);
+  return svg;
+}
+
+function appControl(e, label) {
+  const control = e("button", "mobile-app-control");
+  control.type = "button";
+  control.disabled = true;
+  control.setAttribute("aria-label", `${label}, coming soon`);
+  control.append(e("small", "", "Coming soon"), e("strong", "", label));
+  return control;
+}
+
 export function remove() {
   cleanup?.();
   cleanup = null;
@@ -109,35 +131,39 @@ export function mount({ items, card, action, e, a }) {
   renderBatch();
   offersSection.append(offersHeading, offersGrid, showMore);
 
-  const story = e("section", "mobile-story is-collapsed"), storyIntro = e("p", "mobile-story-excerpt", "TABANJI is a modern online marketplace created to make everyday shopping simpler, faster and more convenient. Technology, home products, fashion, tools, gaming, beauty and other essentials come together in one place."), storyMore = e("div", "mobile-story-more");
-  story.append(e("h2", "", "A simpler way to shop"), storyIntro);
+  const story = e("section", "mobile-story is-collapsed"), storyIntro = e("p", "mobile-story-excerpt", "TABANJI is a modern online marketplace created to make everyday shopping simpler, faster and more convenient. Since the beginning, our goal has been to bring useful products, fair choices and a clear shopping experience together in one place. From technology, home products and fashion to tools, gaming, beauty and everyday essentials, TABANJI supports convenient product discovery and simple ordering."), storyMore = e("div", "mobile-story-more");
+  storyMore.id = "mobileStoryMore";
+  story.append(storyIntro);
   [["Our Vision", "We make useful products easier to discover with clear categories, practical filters and dependable marketplace information."], ["Why TABANJI", "Transparent product details, favorites and comparisons on product pages help shoppers make confident choices."], ["We Care About Your Choice", "Our goal is to help every visitor find suitable products quickly and order through a secure, straightforward experience."], ["Shopping Made Simpler", "From discovery to delivery information, TABANJI keeps the journey organized and easy to understand."]].forEach(([title, copy]) => storyMore.append(e("h3", "", title), e("p", "", copy)));
   storyMore.hidden = true;
   const storyToggle = e("button", "mobile-story-toggle", "Read full ↓");
   storyToggle.type = "button";
   storyToggle.setAttribute("aria-expanded", "false");
+  storyToggle.setAttribute("aria-controls", storyMore.id);
   storyToggle.addEventListener("click", () => { const expanded = storyToggle.getAttribute("aria-expanded") !== "true"; storyToggle.setAttribute("aria-expanded", String(expanded)); storyToggle.textContent = expanded ? "Collapse ↑" : "Read full ↓"; storyMore.hidden = !expanded; story.classList.toggle("is-collapsed", !expanded); });
   story.append(storyMore, storyToggle);
+
+  const accentDivider = e("div", "mobile-accent-divider");
+  accentDivider.setAttribute("aria-hidden", "true");
 
   const community = e("section", "mobile-community");
   community.append(e("h2", "", "Follow us"));
   const social = e("div", "mobile-socials");
-  ["Instagram", "Facebook", "YouTube", "Telegram", "X", "TikTok"].forEach(label => {
-    const control = textButton(e, label, true), mark = e("span", "mobile-social-mark", label.slice(0, 1));
-    mark.setAttribute("aria-hidden", "true");
-    control.prepend(mark);
+  ["TikTok", "Telegram", "Facebook", "YouTube", "Instagram", "X", "Viber"].forEach(label => {
+    const control = textButton(e, label, true);
+    control.replaceChildren(socialIcon(label));
     social.append(control);
   });
   community.append(social, e("h2", "", "Download our apps"));
   const apps = e("div", "mobile-apps");
-  apps.append(textButton(e, "App Store — Coming soon", true), textButton(e, "Google Play — Coming soon", true));
+  apps.append(appControl(e, "App Store"), appControl(e, "Google Play"));
   community.append(apps);
 
   const footer = e("div", "mobile-info-footer");
   footer.append(
     footerGroup(e, a, "Company", [["About TABANJI", "about.html"], ["Terms of Use", "terms.html"], ["Careers", ""], ["Contacts", "contact.html"], ["All Categories", "catalog.html"]]),
-    footerGroup(e, a, "Help", [["Delivery and Payment", "shipping.html"], ["Warranty", ""], ["Returns", "returns.html"], ["Track Order", "track-order.html"], ["Customer Support", "chat.html"]]),
-    footerGroup(e, a, "Services", [["TABANJI Card", "account.html"], ["Smart Subscription", "account.html"], ["Gift Cards", ""], ["Promotions", "products.html?discount=1"], ["Business Customers", ""]])
+    footerGroup(e, a, "Help", [["Delivery and Payment", "shipping.html"], ["Credit", ""], ["Warranty", ""], ["Returns", "returns.html"], ["Service Centers", ""]]),
+    footerGroup(e, a, "Services", [["Bonus Account", ""], ["TABANJI Card", "account.html"], ["Gift Cards", ""], ["TABANJI Exchange", ""], ["Business Customers", ""]])
   );
 
   const backToTop = e("button", "mobile-back-to-top", "↑");
@@ -148,7 +174,7 @@ export function mount({ items, card, action, e, a }) {
   backToTop.addEventListener("click", () => scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }));
   addEventListener("scroll", updateBackToTop, { passive: true });
 
-  root.append(benefits, recommendationSection, offersSection, story, community, footer, backToTop);
+  root.append(benefits, recommendationSection, offersSection, story, accentDivider, community, footer, backToTop);
   document.querySelector(".hero-layout")?.after(root);
   updateBackToTop();
   cleanup = () => removeEventListener("scroll", updateBackToTop);

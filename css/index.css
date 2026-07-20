@@ -52,21 +52,27 @@ section{padding-top:60px}.section-head{display:flex;align-items:end;justify-cont
   #mobileHomeExtras .mobile-offers-grid .card-actions button{width:32px;height:32px}
   #mobileHomeExtras .mobile-offers-grid .cart{min-height:36px;margin:0 9px 9px;font-size:.72rem}
   #mobileHomeExtras .mobile-show-more{min-height:44px;display:block;margin:32px auto 0;padding:0 22px;border:0;border-radius:9px;background:var(--primary);color:#fff;font-weight:800}
-  #mobileHomeExtras .mobile-story{margin-top:60px;padding-top:24px;border-top:1px solid var(--border)}
-  #mobileHomeExtras .mobile-community,#mobileHomeExtras .mobile-info-footer{margin-top:32px;padding-top:24px;border-top:1px solid var(--border)}
-  #mobileHomeExtras .mobile-story h2,#mobileHomeExtras .mobile-community h2{margin:0 0 10px;font-size:1.3rem}
+  #mobileHomeExtras .mobile-story{margin-top:64px}
+  #mobileHomeExtras .mobile-community{padding-top:20px}
+  #mobileHomeExtras .mobile-community h2{margin:0 0 10px;font-size:1.15rem}
   #mobileHomeExtras .mobile-story h3{margin:18px 0 5px;font-size:1rem}
   #mobileHomeExtras .mobile-story p{margin:0 0 10px;color:var(--muted);line-height:1.55}
   #mobileHomeExtras .mobile-story-excerpt{position:relative;max-width:100%}
   #mobileHomeExtras .mobile-story.is-collapsed .mobile-story-excerpt{max-height:9.3em;overflow:hidden}
   #mobileHomeExtras .mobile-story.is-collapsed .mobile-story-excerpt::after{position:absolute;right:0;bottom:0;left:0;height:3.2em;background:linear-gradient(transparent,var(--bg));content:"";pointer-events:none}
+  #mobileHomeExtras .mobile-story-more:not([hidden]){animation:mobile-story-reveal .2s ease}
+  @keyframes mobile-story-reveal{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
   #mobileHomeExtras .mobile-story-toggle{padding:6px 0;border:0;background:transparent;color:var(--primary);font-weight:800}
-  #mobileHomeExtras .mobile-socials{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:24px}
-  #mobileHomeExtras .mobile-socials .mobile-future-link{display:flex;align-items:center;justify-content:flex-start;gap:6px}
-  #mobileHomeExtras .mobile-social-mark{width:22px;height:22px;display:grid;flex:0 0 22px;place-items:center;border-radius:50%;background:var(--soft);color:var(--primary);font-size:.72rem;font-weight:900}
+  #mobileHomeExtras .mobile-accent-divider{width:100%;height:5px;margin-top:24px;border-radius:3px;background:var(--primary)}
+  #mobileHomeExtras .mobile-socials{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin-bottom:24px}
+  #mobileHomeExtras .mobile-socials .mobile-future-link{min-width:0;display:grid;place-items:center;padding:4px}
+  #mobileHomeExtras .mobile-socials svg{width:26px;height:26px}
   #mobileHomeExtras .mobile-apps{display:grid;grid-template-columns:1fr 1fr;gap:9px}
   #mobileHomeExtras .mobile-future-link{min-height:42px;padding:7px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--muted)}
-  #mobileHomeExtras .mobile-info-footer{display:grid;grid-template-columns:1fr 1fr;gap:24px 14px;padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+  #mobileHomeExtras .mobile-app-control{min-height:54px;display:grid;align-content:center;justify-items:start;padding:7px 12px;border:1px solid var(--border);border-radius:9px;background:var(--surface);color:var(--muted);text-align:left}
+  #mobileHomeExtras .mobile-app-control small{font-size:.65rem}
+  #mobileHomeExtras .mobile-app-control strong{font-size:.88rem}
+  #mobileHomeExtras .mobile-info-footer{display:grid;grid-template-columns:1fr;gap:24px;margin-top:24px;padding-top:24px;padding-bottom:calc(104px + env(safe-area-inset-bottom));border-top:1px solid var(--border)}
   #mobileHomeExtras .mobile-footer-group h3{margin:0 0 10px;font-size:1rem}
   #mobileHomeExtras .mobile-footer-links{display:grid;gap:4px}
   #mobileHomeExtras .mobile-footer-links a,#mobileHomeExtras .mobile-footer-links button{min-height:40px;display:flex;align-items:center;padding:5px 0;border:0;background:transparent;color:var(--muted);font-size:.84rem;text-align:left}
