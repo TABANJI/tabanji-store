@@ -74,12 +74,15 @@ section{padding-top:60px}.section-head{display:flex;align-items:end;justify-cont
   #mobileHomeExtras .mobile-install-button{width:100%;min-height:50px;display:flex;align-items:center;justify-content:center;gap:9px;padding:10px 14px;border:0;border-radius:9px;background:var(--primary);color:#fff;font-weight:800}
   #mobileHomeExtras .mobile-install-button svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   #mobileHomeExtras .mobile-install-button:disabled{border:1px solid color-mix(in srgb,var(--primary) 35%,var(--border));background:var(--soft);color:var(--primary);cursor:default}
-  #mobileHomeExtras .mobile-info-footer{display:grid;grid-template-columns:1fr;gap:14px;margin-top:22px;padding-top:22px;padding-bottom:calc(84px + env(safe-area-inset-bottom));border-top:1px solid var(--border)}
-  #mobileHomeExtras .mobile-footer-group{padding-top:0}
-  #mobileHomeExtras .mobile-footer-group h3,#mobileHomeExtras .mobile-payment-methods h3{margin:0 0 7px;font-size:1.125rem;line-height:1.25}
-  #mobileHomeExtras .mobile-footer-links{display:grid;gap:0}
-  #mobileHomeExtras .mobile-footer-links a,#mobileHomeExtras .mobile-footer-links button{min-height:0;display:flex;align-items:center;padding:4px 0;border:0;background:transparent;color:var(--muted);font-size:1rem;line-height:1.35;text-align:left}
-  #mobileHomeExtras .mobile-footer-closing{display:grid;gap:12px}
+  #mobileHomeExtras .mobile-install-status{margin-top:8px;padding:8px 10px;border:1px solid var(--border);border-radius:7px;background:var(--surface);color:var(--muted);font-size:.82rem}
+  #mobileHomeExtras .mobile-install-status[hidden]{display:none}
+  #mobileHomeExtras .mobile-info-footer{display:grid;grid-template-columns:1fr;gap:0;margin-top:22px;padding-top:22px;padding-bottom:calc(84px + env(safe-area-inset-bottom));border-top:1px solid var(--border)}
+  #mobileHomeExtras .mobile-footer-group{min-height:0;margin:0;padding:0}
+  #mobileHomeExtras .mobile-footer-group+.mobile-footer-group{margin-top:12px}
+  #mobileHomeExtras .mobile-footer-group h3,#mobileHomeExtras .mobile-payment-methods h3{margin:0 0 6px;padding:0;font-size:1.125rem;line-height:1.25}
+  #mobileHomeExtras .mobile-footer-links{display:grid;gap:0;margin:0;padding:0}
+  #mobileHomeExtras .mobile-footer-links a,#mobileHomeExtras .mobile-footer-links button{min-height:0;margin:0;padding:3px 0;border:0;background:transparent;color:var(--muted);font-size:1rem;line-height:1.35;text-align:left}
+  #mobileHomeExtras .mobile-footer-closing{display:grid;gap:12px;margin-top:14px}
   #mobileHomeExtras .mobile-payment-methods{padding-top:0}
   #mobileHomeExtras .mobile-payment-badges{display:flex;flex-wrap:wrap;gap:7px}
   #mobileHomeExtras .mobile-payment-badges span{min-height:30px;display:inline-flex;align-items:center;padding:4px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--muted);font-size:.76rem;font-weight:750}

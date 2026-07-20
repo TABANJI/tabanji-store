@@ -215,15 +215,26 @@ export function mount({ items, card, action, e, a }) {
   const installButton = e("button", "mobile-install-button");
   installButton.type = "button";
   installButton.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 19h14"/></svg><span>Install TABANJI</span>';
-  const installLabel = installButton.querySelector("span");
+  const installLabel = installButton.querySelector("span"), installStatus = e("div", "mobile-install-status");
+  installStatus.hidden = true;
+  installStatus.setAttribute("role", "status");
+  installStatus.setAttribute("aria-live", "polite");
+  let installStatusTimer;
+  const showInstallStatus = () => {
+    installStatus.textContent = "Install TABANJI from your browser menu.";
+    installStatus.hidden = false;
+    clearTimeout(installStatusTimer);
+    installStatusTimer = setTimeout(() => { installStatus.hidden = true; }, 3200);
+  };
   const updateInstallButton = state => {
-    const unavailable = state === "unavailable";
-    installHeading.hidden = unavailable;
-    installButton.hidden = unavailable;
     installButton.disabled = state === "installed";
     installLabel.textContent = state === "installed" ? "TABANJI is installed" : "Install TABANJI";
   };
-  installButton.addEventListener("click", () => window.TabanjiPWAInstall?.install());
+  installButton.addEventListener("click", () => {
+    const installAPI = window.TabanjiPWAInstall;
+    if (installAPI?.getState() === "available") installAPI.install();
+    else showInstallStatus();
+  });
   let unsubscribeInstall;
   const connectInstall = () => { if (!unsubscribeInstall) unsubscribeInstall = window.TabanjiPWAInstall?.subscribe(updateInstallButton); };
   connectInstall();
@@ -231,7 +242,7 @@ export function mount({ items, card, action, e, a }) {
     updateInstallButton(matchMedia("(display-mode: standalone)").matches ? "installed" : "unavailable");
     addEventListener("tabanji:pwa-install-ready", connectInstall, { once: true });
   }
-  community.append(installButton);
+  community.append(installButton, installStatus);
 
   const footer = e("div", "mobile-info-footer");
   footer.append(
@@ -265,6 +276,7 @@ export function mount({ items, card, action, e, a }) {
   cleanup = () => {
     removeEventListener("scroll", updateBackToTop);
     removeEventListener("tabanji:pwa-install-ready", connectInstall);
+    clearTimeout(installStatusTimer);
     unsubscribeInstall?.();
     legacyNodes.forEach(node => node.classList.remove("mobile-legacy-home-section"));
   };
