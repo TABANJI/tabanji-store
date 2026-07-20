@@ -3,6 +3,7 @@
 
   const CART_PATHS = [
     ["path", { d: "M6 10H12L17 21M17 21H55L50 39C49.4 41.2 47.4 42.8 45.1 43L20 45L16 52H48", stroke: "currentColor", "stroke-width": "4", "stroke-linecap": "round", "stroke-linejoin": "round" }],
+    ["path", { d: "M17 21L20 45", stroke: "currentColor", "stroke-width": "4", "stroke-linecap": "round", "stroke-linejoin": "round" }],
     ["circle", { cx: "23", cy: "56", r: "4", fill: "currentColor" }],
     ["circle", { cx: "45", cy: "56", r: "4", fill: "currentColor" }]
   ];
