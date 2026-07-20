@@ -72,11 +72,17 @@ section{padding-top:60px}.section-head{display:flex;align-items:end;justify-cont
   #mobileHomeExtras .mobile-future-link{min-height:42px;padding:7px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--muted)}
   #mobileHomeExtras .mobile-install-button{width:100%;min-height:50px;display:flex;align-items:center;justify-content:center;gap:9px;padding:10px 14px;border:0;border-radius:9px;background:var(--primary);color:#fff;font-weight:800}
   #mobileHomeExtras .mobile-install-button svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  #mobileHomeExtras .mobile-install-button:disabled{border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:default}
-  #mobileHomeExtras .mobile-info-footer{display:grid;grid-template-columns:1fr;gap:24px;margin-top:24px;padding-top:24px;padding-bottom:calc(104px + env(safe-area-inset-bottom));border-top:1px solid var(--border)}
-  #mobileHomeExtras .mobile-footer-group h3{margin:0 0 10px;font-size:1rem}
-  #mobileHomeExtras .mobile-footer-links{display:grid;gap:4px}
-  #mobileHomeExtras .mobile-footer-links a,#mobileHomeExtras .mobile-footer-links button{min-height:40px;display:flex;align-items:center;padding:5px 0;border:0;background:transparent;color:var(--muted);font-size:.84rem;text-align:left}
+  #mobileHomeExtras .mobile-install-button:disabled{border:1px solid color-mix(in srgb,var(--primary) 35%,var(--border));background:var(--soft);color:var(--primary);cursor:default}
+  #mobileHomeExtras .mobile-install-help{margin-top:10px;padding:12px 14px;border:1px solid var(--border);border-radius:9px;background:var(--surface);color:var(--muted)}
+  #mobileHomeExtras .mobile-install-help ol{margin:0;padding-left:20px}
+  #mobileHomeExtras .mobile-install-help li+li{margin-top:6px}
+  #mobileHomeExtras .mobile-install-help-close{min-height:36px;margin-top:10px;padding:4px 12px;border:1px solid var(--border);border-radius:7px;background:var(--surface);color:var(--text);font-weight:700}
+  #mobileHomeExtras .mobile-install-help[hidden]{display:none}
+  #mobileHomeExtras .mobile-info-footer{display:grid;grid-template-columns:1fr;gap:30px;margin-top:28px;padding-top:30px;padding-bottom:calc(88px + env(safe-area-inset-bottom));border-top:1px solid var(--border)}
+  #mobileHomeExtras .mobile-footer-group{padding-top:0}
+  #mobileHomeExtras .mobile-footer-group h3{margin:0 0 16px;font-size:1rem}
+  #mobileHomeExtras .mobile-footer-links{display:grid;gap:2px}
+  #mobileHomeExtras .mobile-footer-links a,#mobileHomeExtras .mobile-footer-links button{min-height:0;display:flex;align-items:center;padding:7px 0;border:0;background:transparent;color:var(--muted);font-size:.88rem;line-height:1.25;text-align:left}
   #mobileHomeExtras .mobile-back-to-top{position:fixed;z-index:190;right:16px;bottom:calc(82px + env(safe-area-inset-bottom));width:46px;height:46px;border:0;border-radius:50%;background:var(--primary);color:#fff;font-size:1.3rem;box-shadow:0 8px 24px #0004}
   #mobileHomeExtras .mobile-back-to-top[hidden],#mobileHomeExtras .mobile-show-more[hidden],#mobileHomeExtras .mobile-story-more[hidden]{display:none}
   .product-card [data-action="compare"]{display:none!important}
