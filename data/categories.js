@@ -1,6 +1,7 @@
 const categories = [
   {
     id: "computers",
+    slug: "laptops-computers",
     title: "Laptops & Computers",
     icon: "💻",
     description: "Computers, components and accessories for work, study and play.",
@@ -17,7 +18,8 @@ const categories = [
   },
   {
     id: "electronics",
-    title: "Smartphones & Electronics",
+    slug: "smartphones-tv-electronics",
+    title: "Smartphones, TV & Electronics",
     icon: "📱",
     description: "Phones, entertainment and connected devices for modern life.",
     groups: [
@@ -33,6 +35,7 @@ const categories = [
   },
   {
     id: "gaming",
+    slug: "gaming",
     title: "Gaming",
     icon: "🎮",
     description: "Consoles, gaming machines and gear for every kind of player.",
@@ -49,6 +52,7 @@ const categories = [
   },
   {
     id: "appliances",
+    slug: "home-appliances",
     title: "Home Appliances",
     icon: "❄️",
     description: "Reliable appliances that make everyday routines simpler.",
@@ -65,6 +69,7 @@ const categories = [
   },
   {
     id: "home",
+    slug: "home-living",
     title: "Home & Living",
     icon: "🏠",
     description: "Furniture, décor and practical details for a comfortable home.",
@@ -81,6 +86,7 @@ const categories = [
   },
   {
     id: "auto",
+    slug: "auto-moto",
     title: "Auto & Moto",
     icon: "🚗",
     description: "Accessories, maintenance products and equipment for the road.",
@@ -97,6 +103,7 @@ const categories = [
   },
   {
     id: "tools",
+    slug: "tools-equipment",
     title: "Tools & Equipment",
     icon: "🛠️",
     description: "Dependable tools for repairs, workshops and ambitious projects.",
@@ -112,7 +119,15 @@ const categories = [
     offer: "Power tool bundles available"
   },
   {
+    id: "plumbing-renovation",
+    title: "Plumbing & Renovation",
+    icon: "",
+    description: "Fixtures and renovation essentials for practical home projects.",
+    groups: [], brands: [], featured: [], popular: false
+  },
+  {
     id: "garden",
+    slug: "garden-outdoors",
     title: "Garden & Outdoors",
     icon: "🌿",
     description: "Everything for growing, relaxing and spending time outdoors.",
@@ -128,8 +143,16 @@ const categories = [
     offer: "Outdoor season offers"
   },
   {
+    id: "sports-hobbies",
+    title: "Sports & Hobbies",
+    icon: "",
+    description: "Sports, recreation and hobby essentials for active free time.",
+    groups: [], brands: [], featured: [], popular: false
+  },
+  {
     id: "fashion",
-    title: "Clothing & Accessories",
+    slug: "clothing-shoes-jewelry",
+    title: "Clothing, Shoes & Jewelry",
     icon: "👕",
     description: "Everyday clothing and accessories for a confident personal style.",
     groups: [
@@ -145,7 +168,8 @@ const categories = [
   },
   {
     id: "beauty",
-    title: "Health & Beauty",
+    slug: "beauty-health",
+    title: "Beauty & Health",
     icon: "💄",
     description: "Beauty, wellness and personal care for daily routines.",
     groups: [
@@ -160,8 +184,30 @@ const categories = [
     offer: "Beauty favorites at lower prices"
   },
   {
+    id: "kids-baby",
+    title: "Kids & Baby",
+    icon: "",
+    description: "Products for children, babies and growing families.",
+    groups: [], brands: [], featured: [], popular: false
+  },
+  {
+    id: "pet-supplies",
+    title: "Pet Supplies",
+    icon: "",
+    description: "Everyday care and supplies for pets.",
+    groups: [], brands: [], featured: [], popular: false
+  },
+  {
+    id: "office-school-books",
+    title: "Office, School & Books",
+    icon: "",
+    description: "Supplies and reading for work, school and study.",
+    groups: [], brands: [], featured: [], popular: false
+  },
+  {
     id: "food",
-    title: "Food & Beverages",
+    slug: "alcohol-groceries",
+    title: "Alcoholic Beverages & Groceries",
     icon: "🍷",
     description: "Drinks, pantry favorites and treats for the whole household.",
     groups: [
@@ -176,8 +222,16 @@ const categories = [
     offer: "Multi-buy pantry savings"
   },
   {
+    id: "household-cleaning",
+    title: "Household Cleaning",
+    icon: "",
+    description: "Cleaning products and household care essentials.",
+    groups: [], brands: [], featured: [], popular: false
+  },
+  {
     id: "energy",
-    title: "Energy Solutions",
+    slug: "energy-independence",
+    title: "Energy Independence",
     icon: "⚡",
     description: "Independent power, storage and solar solutions for home and work.",
     groups: [
@@ -190,5 +244,39 @@ const categories = [
     banner: { eyebrow: "Power anywhere", title: "Energy when you need it", text: "Flexible solutions for home and travel.", accent: "#ca8a04" },
     popular: true,
     offer: "Special prices on power stations"
+  },
+  {
+    id: "gifts-souvenirs",
+    title: "Gifts & Souvenirs",
+    icon: "",
+    description: "Thoughtful gifts and keepsakes for every occasion.",
+    groups: [], brands: [], featured: [], popular: false
+  },
+  {
+    id: "summer-marathon",
+    title: "Summer Marathon",
+    icon: "",
+    description: "Seasonal offers selected for summer.",
+    destination: "products.html?category=electronics&discount=1",
+    destinationLabel: "View Summer Marathon offers",
+    groups: [], brands: [], featured: [], popular: false
+  },
+  {
+    id: "best-sellers",
+    title: "Best Sellers",
+    icon: "",
+    description: "Popular products carrying the existing Bestseller badge.",
+    destination: "products.html?badge=Bestseller&sort=popular",
+    destinationLabel: "View best sellers",
+    groups: [], brands: [], featured: [], popular: false
+  },
+  {
+    id: "all-promotions",
+    title: "All Promotions",
+    icon: "",
+    description: "Browse products with current marketplace discounts.",
+    destination: "products.html?discount=1&sort=discount",
+    destinationLabel: "View all promotions",
+    groups: [], brands: [], featured: [], popular: false
   }
 ];

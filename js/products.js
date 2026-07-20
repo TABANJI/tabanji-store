@@ -18,10 +18,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!els.grid) return;
 
   const params = new URLSearchParams(location.search);
+  const requestedCategory = params.get("category") || "";
+  const matchedCategory = categoryData.find(item=>item.id===requestedCategory||item.slug===requestedCategory);
   const csvSet = (name) => new Set((params.get(name) || "").split(",").map(v => v.trim()).filter(Boolean));
   const allowedPageSizes = [12,24,48];
   const state = {
-    category:params.get("category") || "", subcategory:params.get("subcategory") || "", search:params.get("search") || "",
+    category:matchedCategory?.id || requestedCategory, subcategory:params.get("subcategory") || "", search:params.get("search") || "",
     brands:csvSet("brand"), badges:csvSet("badge"), sellers:csvSet("seller"),
     minPrice:Number(params.get("minPrice")) || null, maxPrice:Number(params.get("maxPrice")) || null,
     rating:Number(params.get("rating")) || 0, inStock:params.get("inStock")==="1", discount:params.get("discount")==="1",
@@ -41,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return categoryData.find(item=>item.id===state.category) || null;
   }
   function invalidRoute(){
-    if(state.category && !data.some(p=>p.categoryId===state.category)) return true;
+    if(state.category && !categoryData.some(category=>category.id===state.category)) return true;
     if(state.subcategory && !state.category) return true;
     if(state.subcategory && !data.some(p=>p.categoryId===state.category&&p.subcategorySlug===state.subcategory)) return true;
     return false;
@@ -169,6 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const all=sortedProducts(filteredProducts());const pages=Math.max(1,Math.ceil(all.length/state.pageSize));state.page=Math.min(state.page,pages);
     const start=(state.page-1)*state.pageSize;const shown=all.slice(start,start+state.pageSize);els.count.textContent=String(all.length);
     els.grid.classList.toggle("list-view",state.view==="list");els.grid.hidden=!shown.length;els.empty.hidden=shown.length>0;
+    if(!shown.length){const heading=els.empty.querySelector("h2"),message=els.empty.querySelector("p"),button=els.empty.querySelector("button");const comingSoon=Boolean(state.category&&!invalidRoute()&&!routeProducts().length);heading.textContent=comingSoon?"Products are coming soon":"No products found";message.textContent=comingSoon?"We’re preparing products and offers for this department.":"Try clearing filters or using a broader search.";button.textContent=comingSoon?"View all products":"Clear filters"}
     els.grid.replaceChildren(...shown.map(productCard));renderPagination(pages);renderChips();
   }
   function renderPagination(pages){
@@ -195,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
   fillForm();renderFilterOptions();renderHeading();initTheme();if(store)store.updateHeaderCounters();
   els.form.addEventListener("change",()=>{if(innerWidth>900){readForm();renderAll()}});
   els.form.addEventListener("submit",event=>{event.preventDefault();readForm();renderAll();closeLayer(els.panel,els.filterOverlay,els.openFilters)});
-  els.clear.addEventListener("click",clearFilters);els.emptyClear.addEventListener("click",clearFilters);
+  els.clear.addEventListener("click",clearFilters);els.emptyClear.addEventListener("click",()=>{if(state.category&&!invalidRoute()&&!routeProducts().length)location.href="products.html";else clearFilters()});
   els.chips.addEventListener("click",event=>{const button=event.target.closest("[data-remove-filter]");if(button)removeChip(button.dataset.removeFilter,button.dataset.value)});
   els.sort.addEventListener("change",()=>{state.sort=els.sort.value;state.page=1;renderAll()});
   els.pageSize.addEventListener("change",()=>{state.pageSize=Number(els.pageSize.value);state.page=1;renderAll()});

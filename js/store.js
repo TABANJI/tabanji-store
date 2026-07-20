@@ -74,3 +74,10 @@
   window.TabanjiStore = api;
   Object.assign(window, api);
 })();
+
+(() => {
+  const navigationIcons = document.createElement("script");
+  navigationIcons.src = "js/navigation-icons.js";
+  navigationIcons.async = true;
+  document.head.append(navigationIcons);
+})();

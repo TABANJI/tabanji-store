@@ -23,11 +23,10 @@
   function mount({ departments, content, idPrefix = "catalogBrowser", query = "", activeId = "" }) {
     const repository = window.TabanjiCatalog;
     const products = repository?.getProducts?.() || [];
-    const productCategoryIds = new Set(products.map((product) => String(product.categoryId)));
-    const categories = (repository?.getCategories?.() || []).filter((category) => productCategoryIds.has(String(category.id)));
+    const categories = repository?.getCategories?.() || [];
     const scroll = new Map();
     let currentQuery = String(query).trim().toLocaleLowerCase();
-    let currentId = categories.some((category) => category.id === activeId) ? activeId : categories[0]?.id || "";
+    let currentId = categories.find((category) => category.id === activeId || category.slug === activeId)?.id || categories[0]?.id || "";
 
     const groupsFor = (category) => {
       const available = new Set(products.filter((product) => String(product.categoryId) === String(category.id))
@@ -52,6 +51,26 @@
       }
       const heading = make("header", "catalog-browser-content-header");
       heading.append(make("p", "", "Department"), make("h3", "", category.title));
+      const categoryProducts = products.filter((product) => String(product.categoryId) === String(category.id));
+      if (category.destination) {
+        const destination = link(category.destinationLabel || `View ${category.title}`, category.destination, "catalog-browser-destination");
+        content.replaceChildren(heading, destination);
+        content.setAttribute("aria-labelledby", `${idPrefix}Department-${category.id}`);
+        content.scrollTop = scroll.get(category.id) || 0;
+        return;
+      }
+      if (!categoryProducts.length) {
+        const empty = make("div", "catalog-browser-empty");
+        empty.append(
+          make("h3", "", "Products are coming soon"),
+          make("p", "", "We’re preparing products and offers for this department."),
+          link("View all products", "products.html", "catalog-browser-destination")
+        );
+        content.replaceChildren(heading, empty);
+        content.setAttribute("aria-labelledby", `${idPrefix}Department-${category.id}`);
+        content.scrollTop = scroll.get(category.id) || 0;
+        return;
+      }
       const groups = make("div", "catalog-browser-groups");
       groupsFor(category).forEach((group) => {
         const section = make("section", "catalog-browser-group");
