@@ -86,15 +86,6 @@ function socialIcon(label) {
   return svg;
 }
 
-function appControl(e, label) {
-  const control = e("button", "mobile-app-control");
-  control.type = "button";
-  control.disabled = true;
-  control.setAttribute("aria-label", `${label}, coming soon`);
-  control.append(e("small", "", "Coming soon"), e("strong", "", label));
-  return control;
-}
-
 export function remove() {
   cleanup?.();
   cleanup = null;
@@ -170,22 +161,50 @@ export function mount({ items, card, action, e, a }) {
   const community = e("section", "mobile-community");
   community.append(e("h2", "", "We’re on social media"));
   const social = e("div", "mobile-socials");
-  ["TikTok", "WhatsApp", "Facebook", "YouTube", "Instagram", "X", "Telegram"].forEach(label => {
-    const control = textButton(e, label, true);
-    control.setAttribute("aria-label", `${label} — Coming soon`);
+  const socialLinks = [
+    { id: "tiktok", label: "TikTok", url: null },
+    { id: "whatsapp", label: "WhatsApp", url: null },
+    { id: "facebook", label: "Facebook", url: null },
+    { id: "youtube", label: "YouTube", url: null },
+    { id: "instagram", label: "Instagram", url: null },
+    { id: "x", label: "X", url: null },
+    { id: "telegram", label: "Telegram", url: null }
+  ];
+  socialLinks.forEach(({ label, url }) => {
+    const control = url ? a("", url, "mobile-future-link") : textButton(e, label, true);
+    if (url) {
+      control.target = "_blank";
+      control.rel = "noopener noreferrer";
+      control.setAttribute("aria-label", `Open TABANJI on ${label}`);
+    } else control.setAttribute("aria-label", `${label} — Coming soon`);
     control.replaceChildren(socialIcon(label));
     social.append(control);
   });
-  community.append(social, e("h2", "", "Download our apps"));
-  const apps = e("div", "mobile-apps");
-  apps.append(appControl(e, "App Store"), appControl(e, "Google Play"));
-  community.append(apps);
+  community.append(social, e("h2", "", "Download TABANJI"));
+  const installButton = e("button", "mobile-install-button");
+  installButton.type = "button";
+  installButton.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 19h14"/></svg><span>Install option unavailable</span>';
+  const installLabel = installButton.querySelector("span");
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const updateInstallButton = state => {
+    installButton.disabled = state !== "available";
+    installLabel.textContent = state === "available" ? "Download TABANJI" : state === "installed" ? "TABANJI is installed" : isIOS ? "Add TABANJI from the Share menu" : "Add TABANJI from your browser menu";
+  };
+  installButton.addEventListener("click", () => window.TabanjiPWAInstall?.install());
+  let unsubscribeInstall;
+  const connectInstall = () => { if (!unsubscribeInstall) unsubscribeInstall = window.TabanjiPWAInstall?.subscribe(updateInstallButton); };
+  connectInstall();
+  if (!unsubscribeInstall) {
+    updateInstallButton(matchMedia("(display-mode: standalone)").matches ? "installed" : "unavailable");
+    addEventListener("tabanji:pwa-install-ready", connectInstall, { once: true });
+  }
+  community.append(installButton);
 
   const footer = e("div", "mobile-info-footer");
   footer.append(
-    footerGroup(e, a, "Company", [["About TABANJI", "about.html"], ["Terms of Use", "terms.html"], ["Careers", ""], ["Contacts", "contact.html"], ["All Categories", "catalog.html"]]),
-    footerGroup(e, a, "Help", [["Delivery and Payment", "shipping.html"], ["Credit", ""], ["Warranty", ""], ["Returns", "returns.html"], ["Service Centers", ""]]),
-    footerGroup(e, a, "Services", [["Bonus Account", ""], ["TABANJI Card", "account.html"], ["Gift Cards", ""], ["TABANJI Exchange", ""], ["Business Customers", ""]])
+    footerGroup(e, a, "Company Information", [["About Us", "about.html"], ["Terms of Use", "terms.html"], ["Contacts", "contact.html"], ["All Categories", "catalog.html"]]),
+    footerGroup(e, a, "Help", [["Delivery and Payment", "shipping.html"], ["Warranty", ""], ["Returns", "returns.html"], ["Service Centers", ""]]),
+    footerGroup(e, a, "Services", [["Bonus Account", ""], ["TABANJI Card", "account.html"], ["Gift Certificates", ""], ["Business Customers", ""]])
   );
 
   const backToTop = e("button", "mobile-back-to-top", "↑");
@@ -201,6 +220,8 @@ export function mount({ items, card, action, e, a }) {
   updateBackToTop();
   cleanup = () => {
     removeEventListener("scroll", updateBackToTop);
+    removeEventListener("tabanji:pwa-install-ready", connectInstall);
+    unsubscribeInstall?.();
     legacyNodes.forEach(node => node.classList.remove("mobile-legacy-home-section"));
   };
 }

@@ -3,6 +3,22 @@ document.addEventListener("DOMContentLoaded", () => {
   import("./mobile-navigation.js?v=7").catch(() => {});
   if (!["http:", "https:"].includes(location.protocol) || !("serviceWorker" in navigator)) return;
   let installEvent = null, refreshRequested = false, reloading = false, primaryHandler = () => {};
+  const installSubscribers = new Set();
+  const installState = () => matchMedia("(display-mode: standalone)").matches ? "installed" : installEvent ? "available" : "unavailable";
+  const notifyInstallState = () => installSubscribers.forEach(subscriber => subscriber(installState()));
+  async function installTABANJI() {
+    if (!installEvent) return false;
+    const prompt = installEvent;
+    installEvent = null;
+    notifyInstallState();
+    try { await prompt.prompt(); await prompt.userChoice; return true; } catch { return false; }
+  }
+  window.TabanjiPWAInstall = {
+    getState: installState,
+    install: installTABANJI,
+    subscribe(subscriber) { installSubscribers.add(subscriber); subscriber(installState()); return () => installSubscribers.delete(subscriber); }
+  };
+  window.dispatchEvent(new Event("tabanji:pwa-install-ready"));
   const notice = document.createElement("div"), message = document.createElement("span"), primary = document.createElement("button"), dismiss = document.createElement("button");
   notice.className = "pwa-notice";
   notice.hidden = true;
@@ -25,15 +41,13 @@ document.addEventListener("DOMContentLoaded", () => {
     event.preventDefault();
     if (matchMedia("(display-mode: standalone)").matches) return;
     installEvent = event;
+    notifyInstallState();
     show("Install TABANJI for quick access.", "Install app", async () => {
-      if (!installEvent) return;
-      const prompt = installEvent;
-      installEvent = null;
       hide();
-      try { await prompt.prompt(); await prompt.userChoice; } catch {}
+      await installTABANJI();
     });
   });
-  window.addEventListener("appinstalled", () => { installEvent = null; hide(); });
+  window.addEventListener("appinstalled", () => { installEvent = null; hide(); notifyInstallState(); });
   navigator.serviceWorker.addEventListener("controllerchange", () => { if (refreshRequested && !reloading) { reloading = true; location.reload(); } });
   navigator.serviceWorker.register("./service-worker.js").then(registration => {
     function offerUpdate(worker) { show("New version available", "Reload", () => { refreshRequested = true; hide(); worker.postMessage({ type: "SKIP_WAITING" }); }); }
