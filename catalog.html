@@ -2,141 +2,79 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore the TABANJI marketplace catalog: technology, home, fashion, tools and more.">
-  <title>Catalog | TABANJI</title><link rel="canonical" href="catalog.html"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23007bff'/><text x='32' y='43' text-anchor='middle' font-size='34' fill='white'>T</text></svg>"><meta property="og:type" content="website"><meta property="og:title" content="Catalog | TABANJI"><meta property="og:description" content="Browse TABANJI product categories and discover popular brands and offers."><meta property="og:url" content="catalog.html"><meta property="og:image" content="images/og-tabanji-placeholder.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browse TABANJI product departments and subcategories in one compact catalog.">
+  <title>Catalog of Products | TABANJI</title>
+  <link rel="canonical" href="catalog.html">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23007bff'/><text x='32' y='43' text-anchor='middle' font-size='34' fill='white'>T</text></svg>">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Catalog of Products | TABANJI">
+  <meta property="og:description" content="Browse TABANJI departments and find the right product category.">
+  <meta property="og:url" content="catalog.html">
+  <meta property="og:image" content="images/og-tabanji-placeholder.jpg">
+  <meta name="theme-color" content="#007bff">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
   <link rel="stylesheet" href="css/catalog.css">
-<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#007bff"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png"><link rel="stylesheet" href="css/pwa.css"><script src="js/pwa.js" defer></script></head>
+  <link rel="stylesheet" href="css/mobile-navigation.css">
+  <link rel="stylesheet" href="css/pwa.css">
+  <script src="data/categories.js" defer></script>
+  <script src="data/products.js" defer></script>
+  <script src="js/catalog-repository.js" defer></script>
+  <script src="js/store.js" defer></script>
+  <script src="js/catalog.js" defer></script>
+  <script src="js/pwa.js" defer></script>
+</head>
 <body>
-  <a class="skip-link" href="#mainContent">Skip to main content</a>
+  <a class="skip-link" href="#catalogDepartments">Skip to departments</a>
 
-  <div class="drawer-overlay" id="drawerOverlay" hidden></div>
-  <aside class="site-drawer" id="siteDrawer" aria-label="Main navigation" aria-hidden="true">
-    <div class="drawer-header">
-      <a class="logo" href="index.html" aria-label="TABANJI home">TABANJI</a>
-      <button class="icon-button" id="closeMenuButton" type="button" aria-label="Close menu">×</button>
-    </div>
-    <nav class="drawer-nav">
-      <a href="index.html">🏠 Home</a>
-      <a class="is-current" href="catalog.html" aria-current="page">📦 Catalog</a>
-      <a href="products.html?sort=newest">🆕 New Arrivals</a>
-      <a href="cart.html">🛒 Cart</a>
-      <a href="track-order.html">📍 Track Order</a>
-      <a href="chat.html">💬 Chat with TABANJI</a>
-      <a href="contact.html">☎ Contacts</a>
-      <a href="about.html">ℹ About Us</a>
-      <a href="shipping.html">🚚 Shipping & Payment</a>
-      <a href="returns.html">↩ Returns Policy</a>
-      <a href="compare.html">⇄ Compare</a>
-      <a href="login.html">👤 Account</a>
-    </nav>
-    <button class="drawer-theme-button" id="drawerThemeButton" type="button">🌙 Dark theme</button>
-  </aside>
+  <main class="catalog-stage" id="mainContent">
+    <section class="catalog-browser" aria-labelledby="catalogTitle">
+      <header class="catalog-topbar">
+        <div>
+          <a class="catalog-logo" href="index.html" aria-label="TABANJI home">TABANJI</a>
+          <h1 id="catalogTitle">Catalog of products</h1>
+        </div>
+        <button class="catalog-close" id="closeCatalog" type="button" aria-label="Close catalog">
+          <span aria-hidden="true">×</span>
+        </button>
+      </header>
 
-  <header class="site-header">
-    <div class="header-inner">
-      <button class="menu-button" id="openMenuButton" type="button" aria-label="Open navigation menu" aria-controls="siteDrawer" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <a class="logo" href="index.html" aria-label="TABANJI home">TABANJI</a>
-      <a class="catalog-link" href="catalog.html" aria-current="page">Catalog</a>
-
-      <div class="search-shell">
-        <label class="sr-only" for="catalogSearch">Search catalog</label>
-        <span class="search-icon" aria-hidden="true">⌕</span>
-        <input id="catalogSearch" type="search" placeholder="Search categories and products" autocomplete="off" aria-label="Search catalog" aria-controls="searchResults" aria-expanded="false">
-        <div class="search-results" id="searchResults" role="listbox" hidden></div>
+      <div class="catalog-search">
+        <label class="sr-only" for="catalogSearch">Search departments and categories</label>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-4-4"></path>
+        </svg>
+        <input id="catalogSearch" type="search" placeholder="Search categories" autocomplete="off">
+        <button id="clearCatalogSearch" type="button" aria-label="Clear category search" hidden>×</button>
       </div>
 
-      <nav class="header-actions" aria-label="Account actions">
-        <button class="icon-button theme-toggle" id="themeButton" type="button" aria-label="Switch to dark theme" aria-pressed="false">☾</button>
-        <a class="header-action" href="compare.html" aria-label="Compare products">⇄<span>Compare</span><b data-counter="compare">0</b></a>
-        <a class="header-action" href="favorites.html" aria-label="Favorites">♡<span>Favorites</span><b data-counter="favorites">0</b></a>
-        <a class="header-action" href="login.html" aria-label="Your account">◯<span>Account</span></a>
-        <a class="header-action cart-action" href="cart.html" aria-label="Shopping cart">🛒<span>Cart</span><b data-counter="cart">0</b></a>
-      </nav>
-    </div>
-  </header>
+      <div class="catalog-columns">
+        <nav class="department-rail" id="catalogDepartments" aria-label="Product departments">
+          <div class="department-list" id="departmentList" role="tablist" aria-orientation="vertical"></div>
+        </nav>
 
-  <main id="mainContent">
-    <div class="page-container">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Catalog</span>
-      </nav>
-
-      <section class="page-intro" aria-labelledby="pageTitle">
-        <div>
-          <p class="eyebrow">TABANJI marketplace</p>
-          <h1 id="pageTitle">Explore our catalog</h1>
-          <p>Find everyday essentials, technology and products for every part of your life—all in one clear catalog.</p>
-        </div>
-        <div class="trust-note"><span>✓</span> Secure shopping<br><small>Clear categories and trusted products</small></div>
-      </section>
-
-      <section class="desktop-catalog" aria-label="Product categories">
-        <div class="category-sidebar">
-          <div class="category-sidebar-title">
-            <span>All categories</span>
-            <small>Browse departments</small>
+        <section class="subcategory-pane" id="subcategoryPane" tabindex="-1" aria-live="polite">
+          <div id="subcategoryContent"></div>
+          <div class="catalog-empty" id="catalogEmpty" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="m20 20-4-4"></path>
+            </svg>
+            <h2>No categories found</h2>
+            <p>Try a different category name.</p>
           </div>
-          <div class="desktop-category-list" id="desktopCategoryList" role="list"></div>
-        </div>
-        <article class="mega-panel" id="megaPanel" aria-live="polite"></article>
-      </section>
-
-      <section class="mobile-catalog" aria-labelledby="mobileCatalogTitle">
-        <div class="section-heading">
-          <div><p class="eyebrow">Browse departments</p><h2 id="mobileCatalogTitle">All categories</h2></div>
-        </div>
-        <div class="accordion-list" id="mobileCategoryList"></div>
-      </section>
-
-      <section class="content-section" aria-labelledby="popularCategoriesTitle">
-        <div class="section-heading">
-          <div><p class="eyebrow">Quick access</p><h2 id="popularCategoriesTitle">Popular Categories</h2></div>
-          <a href="catalog.html">View catalog <span aria-hidden="true">→</span></a>
-        </div>
-        <div class="category-card-grid" id="popularCategories"></div>
-      </section>
-
-      <section class="content-section brands-section" aria-labelledby="popularBrandsTitle">
-        <div class="section-heading">
-          <div><p class="eyebrow">Names you know</p><h2 id="popularBrandsTitle">Popular Brands</h2></div>
-        </div>
-        <div class="brand-grid" id="popularBrands"></div>
-      </section>
-
-      <section class="content-section" aria-labelledby="specialOffersTitle">
-        <div class="section-heading">
-          <div><p class="eyebrow">Worth a look</p><h2 id="specialOffersTitle">Special Offers</h2></div>
-        </div>
-        <div class="offer-grid" id="specialOffers"></div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="page-container footer-inner">
-      <a class="logo" href="index.html">TABANJI</a>
-      <p>Everything you need, thoughtfully organized.</p>
-      <nav aria-label="Footer navigation">
-        <a href="shipping.html">Shipping</a>
-        <a href="returns.html">Returns</a>
-        <a href="contact.html">Contacts</a>
-      </nav>
-    </div>
-  <nav aria-label="Information links"><a href="about.html">About</a><a href="faq.html">FAQ</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></footer>
-
   <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
-    <a href="index.html"><span aria-hidden="true">⌂</span>Home</a>
-    <a class="is-active" href="catalog.html" aria-current="page"><span aria-hidden="true">▦</span>Catalog</a>
-    <a href="cart.html"><span aria-hidden="true">🛒</span>Cart</a>
-    <a href="chat.html"><span aria-hidden="true">◌</span>Chat</a>
+    <a href="index.html">Home</a>
+    <a href="catalog.html" aria-current="page">Catalog</a>
+    <a href="compare.html">Compare</a>
+    <a href="favorites.html">Favorites</a>
   </nav>
-
-  <script src="data/categories.js"></script>
-<script src="js/catalog-repository.js"></script>
-<script src="js/store.js"></script>
-<script src="js/catalog.js"></script>
 </body>
 </html>

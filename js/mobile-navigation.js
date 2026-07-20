@@ -20,3 +20,5 @@ document.querySelectorAll("[data-counter]").forEach(capCounter);
 const counterObserver=new MutationObserver(records=>records.forEach(record=>{const badge=record.target;if(badge.matches?.("[data-counter]"))capCounter(badge)}));
 document.querySelectorAll("[data-counter]").forEach(badge=>counterObserver.observe(badge,{childList:true,characterData:true,subtree:true}));
 mobileMedia.addEventListener("change",event=>document.querySelectorAll("[data-counter]").forEach(badge=>{if(event.matches)capCounter(badge);else if(badge.textContent.trim().endsWith("+")&&badge.dataset.actualCount)badge.textContent=badge.dataset.actualCount}));
+import("./catalog-browser.js").catch(()=>{});
+import("./search-browser.js").catch(()=>{});
